@@ -37,7 +37,10 @@ on:
       upload-artifacts:
         description: "Upload run results as GitHub artifacts"
         required: false
-        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 jobs:
   benchmarkoor:
@@ -59,9 +62,9 @@ jobs:
           git-ref: ${{ inputs.git-ref }}
           upload-artifacts: ${{ inputs.upload-artifacts }}
           run-config-urls: >-
-            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/global.yaml,
-            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/resource-limits-eip-7870-fullnode.yaml,
-            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
-            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/test-source-${{ inputs.test-type }}.yaml,
-            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/test-source-${{ inputs.test-type }}.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
           run-args: --limit-instance-client=${{ matrix.client }}
