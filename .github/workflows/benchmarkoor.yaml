@@ -53,6 +53,17 @@ jobs:
       labels: snapshot-${{ matrix.client }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
+      - name: Print input variables
+        run: |
+          echo "clients: ${{ inputs.clients }}"
+          echo "matrix.client: ${{ matrix.client }}"
+          echo "snapshot: ${{ inputs.snapshot }}"
+          echo "test-type: ${{ inputs.test-type }}"
+          echo "run-timeout-minutes: ${{ inputs.run-timeout-minutes }}"
+          echo "image: ${{ inputs.image }}"
+          echo "git-ref: ${{ inputs.git-ref }}"
+          echo "upload-artifacts: ${{ inputs.upload-artifacts }}"
+
       - uses: actions/checkout@v4
 
       - uses: ethpandaops/benchmarkoor@master
