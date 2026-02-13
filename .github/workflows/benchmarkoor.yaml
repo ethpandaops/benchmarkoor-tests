@@ -1,0 +1,48 @@
+name: benchmarkoor
+
+on:
+  workflow_dispatch:
+    inputs:
+      run-timeout-minutes:
+        description: "Timeout for the benchmark run (minutes)"
+        required: false
+        default: "180"
+      image:
+        description: "Benchmarkoor docker image"
+        required: false
+        default: "ghcr.io/ethpandaops/benchmarkoor:master"
+      git-ref:
+        description: "Git reference to checkout for benchmarkoor"
+        required: false
+        default: ""
+      upload-artifacts:
+        description: "Upload run results as GitHub artifacts"
+        required: false
+        default: "false"
+      run-config-urls:
+        description: "Comma-separated URLs for config files (merged in order)"
+        required: true
+      runs-on:
+        description: "Runner label(s) for the job (JSON string, e.g. '\"ubuntu-latest\"' or '[\"self-hosted\",\"linux\"]')"
+        required: true
+      run-args:
+        description: "Extra flags passed to benchmarkoor run command"
+        required: false
+        default: ""
+
+jobs:
+  benchmarkoor:
+    runs-on: >-
+      ${{ fromJSON(inputs.runs-on) }}
+    timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ethpandaops/benchmarkoor@master
+        with:
+          image: ${{ inputs.image }}
+          git-ref: ${{ inputs.git-ref }}
+          upload-artifacts: ${{ inputs.upload-artifacts }}
+          run-config-urls: ${{ inputs.run-config-urls }}
+          run-args: ${{ inputs.run-args }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
