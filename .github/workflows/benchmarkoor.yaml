@@ -3,10 +3,29 @@ name: benchmarkoor
 on:
   workflow_dispatch:
     inputs:
+      client:
+        description: "Ethereum execution client to benchmark"
+        required: false
+        default: "geth"
+      snapshot:
+        description: "Snapshot path (network/block)"
+        required: false
+        type: choice
+        options:
+          - "mainnet/24350000"
+          - "perf-devnet-2/24350000"
+      test-type:
+        description: "Test type to run"
+        required: false
+        type: choice
+        options:
+          - "stateful"
+          - "compute"
+        default: "stateful"
       run-timeout-minutes:
         description: "Timeout for the benchmark run (minutes)"
         required: false
-        default: "180"
+        default: "210"
       image:
         description: "Benchmarkoor docker image"
         required: false
@@ -19,30 +38,26 @@ on:
         description: "Upload run results as GitHub artifacts"
         required: false
         default: "false"
-      run-config-urls:
-        description: "Comma-separated URLs for config files (merged in order)"
-        required: true
-      runs-on:
-        description: "Runner label(s) for the job (JSON string, e.g. '\"ubuntu-latest\"' or '[\"self-hosted\",\"linux\"]')"
-        required: true
-      run-args:
-        description: "Extra flags passed to benchmarkoor run command"
-        required: false
-        default: ""
 
 jobs:
   benchmarkoor:
-    runs-on: >-
-      ${{ fromJSON(inputs.runs-on) }}
+    runs-on:
+      group: gasbenchmark
+      labels: snapshot-${{ inputs.client }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
       - uses: actions/checkout@v4
 
       - uses: ethpandaops/benchmarkoor@master
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ inputs.image }}
           git-ref: ${{ inputs.git-ref }}
           upload-artifacts: ${{ inputs.upload-artifacts }}
-          run-config-urls: ${{ inputs.run-config-urls }}
-          run-args: ${{ inputs.run-args }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-config-urls: >-
+            configs/global.yaml,
+            configs/resource-limits-eip-7870-fullnode.yaml,
+            configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
+            configs/repricings/${{ inputs.snapshot }}/test-source-${{ inputs.test-type }}.yaml,
+            configs/repricings/${{ inputs.snapshot }}/clients.yaml
+          run-args: --limit-instance-client=${{ inputs.client }}
