@@ -1,0 +1,17 @@
+client:
+  datadirs:
+    besu:
+      source_dir: /data/snapshots/besu/mainnet/24350000/besu/
+      method: overlayfs
+    geth:
+      source_dir: /data/snapshots/geth/mainnet/24350000/geth/
+      method: overlayfs
+    nethermind:
+      source_dir: /data/snapshots/nethermind/mainnet/24350000/nethermind/
+      method: overlayfs
+    reth:
+      source_dir: /data-zfs/snapshots/reth/mainnet/24350000/reth/
+      method: zfs
+    erigon:
+      source_dir: /data-zfs/snapshots/erigon/mainnet/24350000/erigon/
+      method: zfs

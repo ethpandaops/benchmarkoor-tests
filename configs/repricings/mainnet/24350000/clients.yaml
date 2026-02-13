@@ -1,0 +1,47 @@
+client:
+  instances:
+    # Besu
+    - id: besu
+      client: besu
+      image: ethpandaops/besu:performance
+
+    # Geth
+    - id: geth
+      client: geth
+      image: ethpandaops/geth:MariusVanDerWijden-filtermaps-race-nofix # fix for debug_setHead panic
+      extra_args:
+        - --debug.logslowblock=0
+
+    # Nethermind
+    - id: nethermind
+      client: nethermind
+      image: ethpandaops/nethermind:performance
+      extra_args:
+        - --config=mainnet.cfg
+
+    # Reth
+    - id: reth
+      client: reth
+      image: ethpandaops/reth:main
+      # Reth mainnet snapshot is 2 blocks behind for some reason.
+      # So we block using a FCU to the required block and wait for it to get the missing blocks via p2p
+      bootstrap_fcu:
+        enabled: true
+        head_block_hash: "0x6aadde478df4f485c2cf91cd48038f918ef6ff97b19eec9cdd0cd1ca45476eb4"
+        max_retries: 60
+        backoff: 30s
+
+    # Erigon
+    - id: erigon
+      client: erigon
+      #image: erigontech/erigon:main-latest
+      image: erigontech/erigon:fix_accepted_issue_in_benchmarks
+      environment:
+        MAX_REORG_DEPTH: "512"
+      extra_args:
+        - --log.console.verbosity=debug
+        - --fcu.background.commit=false
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 60
+        backoff: 30s
