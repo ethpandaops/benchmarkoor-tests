@@ -53,7 +53,7 @@ jobs:
       labels: snapshot-${{ matrix.client }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
-      - name: "Print input variables: ${{ matrix.client }}"
+      - name: "Infos: Client=${{ matrix.client }} | Snapshot=${{ inputs.snapshot }} | TestType=${{ inputs.test-type }}"
         run: |
           echo "client: ${{ matrix.client }}"
           echo "snapshot: ${{ inputs.snapshot }}"
