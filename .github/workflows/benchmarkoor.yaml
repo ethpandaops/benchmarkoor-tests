@@ -50,7 +50,7 @@ jobs:
         client: ${{ fromJSON(inputs.clients) }}
     runs-on:
       group: gasbenchmark
-      labels: snapshot-${{ matrix.client }}
+      labels: [snapshot-${{ matrix.client }}]
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
       - uses: actions/checkout@v4
