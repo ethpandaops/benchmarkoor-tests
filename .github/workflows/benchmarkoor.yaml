@@ -3,10 +3,10 @@ name: benchmarkoor
 on:
   workflow_dispatch:
     inputs:
-      client:
-        description: "Ethereum execution client to benchmark"
+      clients:
+        description: "JSON array of execution clients to benchmark"
         required: false
-        default: "geth"
+        default: '["besu", "erigon", "geth", "nethermind", "reth"]'
       snapshot:
         description: "Snapshot path (network/block)"
         required: false
@@ -41,9 +41,13 @@ on:
 
 jobs:
   benchmarkoor:
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJSON(inputs.clients) }}
     runs-on:
       group: gasbenchmark
-      labels: snapshot-${{ inputs.client }}
+      labels: snapshot-${{ matrix.client }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
       - uses: actions/checkout@v4
@@ -55,9 +59,9 @@ jobs:
           git-ref: ${{ inputs.git-ref }}
           upload-artifacts: ${{ inputs.upload-artifacts }}
           run-config-urls: >-
-            configs/global.yaml,
-            configs/resource-limits-eip-7870-fullnode.yaml,
-            configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
-            configs/repricings/${{ inputs.snapshot }}/test-source-${{ inputs.test-type }}.yaml,
-            configs/repricings/${{ inputs.snapshot }}/clients.yaml
-          run-args: --limit-instance-client=${{ inputs.client }}
+            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/global.yaml,
+            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/resource-limits-eip-7870-fullnode.yaml,
+            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
+            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/test-source-${{ inputs.test-type }}.yaml,
+            https://github.com/ethpandaops/benchmarkoor-tests/raw/refs/heads/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
+          run-args: --limit-instance-client=${{ matrix.client }}
