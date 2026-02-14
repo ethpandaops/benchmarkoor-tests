@@ -75,6 +75,7 @@ jobs:
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/genesis.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
           run-args: --limit-instance-client=${{ matrix.client }}
