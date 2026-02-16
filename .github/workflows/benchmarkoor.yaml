@@ -71,6 +71,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         with:
+          docker-env: |
+            S3_ENDPOINT_URL
+            AWS_ACCESS_KEY_ID
+            AWS_SECRET_ACCESS_KEY
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ inputs.image }}
           git-ref: ${{ inputs.git-ref }}
