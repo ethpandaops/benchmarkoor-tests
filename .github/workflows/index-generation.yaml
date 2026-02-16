@@ -17,7 +17,7 @@ on:
         default: ""
 
 jobs:
-  benchmarkoor:
+  index:
     runs-on: ubuntu-latest
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
