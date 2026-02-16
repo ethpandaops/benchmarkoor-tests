@@ -1,0 +1,6 @@
+benchmark:
+  skip_test_run: true
+  generate_results_index: true
+  generate_results_index_method: s3
+  generate_suite_stats: true
+  generate_suite_stats_method: s3

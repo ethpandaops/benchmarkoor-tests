@@ -66,6 +66,10 @@ jobs:
       - uses: actions/checkout@v4
 
       - uses: ethpandaops/benchmarkoor@master
+        env:
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ inputs.image }}
@@ -74,6 +78,7 @@ jobs:
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/s3-upload.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/genesis.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
