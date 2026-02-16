@@ -1,0 +1,37 @@
+name: generate-index
+
+on:
+  workflow_dispatch:
+    inputs:
+      run-timeout-minutes:
+        description: "Timeout for the benchmark run (minutes)"
+        required: false
+        default: "210"
+      image:
+        description: "Benchmarkoor docker image"
+        required: false
+        default: "ghcr.io/ethpandaops/benchmarkoor:master"
+      git-ref:
+        description: "Git reference to checkout for benchmarkoor"
+        required: false
+        default: ""
+
+jobs:
+  benchmarkoor:
+    runs-on: ubuntu-latest
+    timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
+    steps:
+      - uses: ethpandaops/benchmarkoor@master
+        env:
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ inputs.image }}
+          git-ref: ${{ inputs.git-ref }}
+          upload-artifacts: ${{ inputs.upload-artifacts }}
+          run-config-urls: >-
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-indexing.yaml
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/s3-upload.yaml
