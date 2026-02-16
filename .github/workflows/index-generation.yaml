@@ -33,5 +33,5 @@ jobs:
           upload-artifacts: ${{ inputs.upload-artifacts }}
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-indexing.yaml
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-indexing.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/s3-upload.yaml
