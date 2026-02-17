@@ -1,10 +1,11 @@
-client:
-  config:
-    # Limits as per: https://eips.ethereum.org/EIPS/eip-7870
-    resource_limits:
-      cpuset_count: 4
-      cpu_freq: "3600MHz"
-      cpu_turboboost: false
-      cpu_freq_governor: performance
-      memory: "32g" # Note: the EIP mentions 32GB for EL + CL... so allocating 32GB for the EL is already a "bonus"
-      swap_disabled: true
+runner:
+  client:
+    config:
+      # Limits as per: https://eips.ethereum.org/EIPS/eip-7870
+      resource_limits:
+        cpuset_count: 4
+        cpu_freq: "3600MHz"
+        cpu_turboboost: false
+        cpu_freq_governor: performance
+        memory: "32g" # Note: the EIP mentions 32GB for EL + CL... so allocating 32GB for the EL is already a "bonus"
+        swap_disabled: true

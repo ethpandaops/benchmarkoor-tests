@@ -1,16 +1,17 @@
-benchmark:
-  tests:
-    source:
-      git:
-        repo: https://github.com/nethermindeth/gas-benchmarks.git
-        version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
-        pre_run_steps:
-          - repricings_stateful/mainnet/gas-bump.txt
-          - repricings_stateful/mainnet/funding.txt
-        steps:
-          setup:
-            - repricings_stateful/mainnet/setup/*
-          test:
-            - repricings_stateful/mainnet/testing/*
-          cleanup:
-            - repricings_stateful/mainnet/cleanup/*
+runner:
+  benchmark:
+    tests:
+      source:
+        git:
+          repo: https://github.com/nethermindeth/gas-benchmarks.git
+          version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
+          pre_run_steps:
+            - repricings_stateful/mainnet/gas-bump.txt
+            - repricings_stateful/mainnet/funding.txt
+          steps:
+            setup:
+              - repricings_stateful/mainnet/setup/*
+            test:
+              - repricings_stateful/mainnet/testing/*
+            cleanup:
+              - repricings_stateful/mainnet/cleanup/*

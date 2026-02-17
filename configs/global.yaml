@@ -1,9 +1,10 @@
 global:
   log_level: info
+
+runner:
   client_logs_to_stdout: true
   docker_network: benchmarkoor
   cleanup_on_start: true
-
-client:
-  config:
-    drop_memory_caches: "steps"
+  client:
+    config:
+      drop_memory_caches: "steps"

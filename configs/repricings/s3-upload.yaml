@@ -1,10 +1,17 @@
-benchmark:
-  results_upload:
-    s3:
-      enabled: true
-      endpoint_url: ${S3_ENDPOINT_URL}
-      region: us-east-1
-      bucket: benchmarkoor-results
-      access_key_id: ${AWS_ACCESS_KEY_ID}
-      secret_access_key: ${AWS_SECRET_ACCESS_KEY}
-      prefix: repricings/results
+runner:
+  benchmark:
+    results_upload:
+      s3:
+        enabled: true
+        endpoint_url: ${S3_ENDPOINT_URL}
+        region: us-east-1
+        bucket: benchmarkoor-results
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}
+        prefix: repricings/results
+
+        endpoint_url: https://539bc53131934672bf85e7260ec0b218.r2.cloudflarestorage.com
+        region: us-east-1
+        bucket: benchmarkoor-results
+        access_key_id: ${AWS_ACCESS_KEY_ID}
+        secret_access_key: ${AWS_SECRET_ACCESS_KEY}

@@ -1,17 +1,18 @@
-client:
-  datadirs:
-    besu:
-      source_dir: /data/snapshots/besu/perf-devnet-2/23861500/
-      method: overlayfs
-    geth:
-      source_dir: /data/snapshots/geth/perf-devnet-2/23861500/
-      method: overlayfs
-    nethermind:
-      source_dir: /data/snapshots/nethermind/perf-devnet-2/23861500/
-      method: overlayfs
-    reth:
-      source_dir: /data-zfs/snapshots/reth/perf-devnet-2/23861500/
-      method: zfs
-    erigon:
-      source_dir: /data-zfs/snapshots/erigon/perf-devnet-2/23861500/
-      method: zfs
+runner:
+  client:
+    datadirs:
+      besu:
+        source_dir: /data/snapshots/besu/perf-devnet-2/23861500/
+        method: overlayfs
+      geth:
+        source_dir: /data/snapshots/geth/perf-devnet-2/23861500/
+        method: overlayfs
+      nethermind:
+        source_dir: /data/snapshots/nethermind/perf-devnet-2/23861500/
+        method: overlayfs
+      reth:
+        source_dir: /data-zfs/snapshots/reth/perf-devnet-2/23861500/
+        method: zfs
+      erigon:
+        source_dir: /data-zfs/snapshots/erigon/perf-devnet-2/23861500/
+        method: zfs

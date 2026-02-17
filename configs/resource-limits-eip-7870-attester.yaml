@@ -1,10 +1,11 @@
-client:
-  config:
-    # Limits as per: https://eips.ethereum.org/EIPS/eip-7870
-    resource_limits:
-      cpuset_count: 8
-      cpu_freq: "3600MHz"
-      cpu_turboboost: false
-      cpu_freq_governor: performance
-      memory: "55g" # Our machines are limited to 64GB. So let's allocate a bit less.
-      swap_disabled: true
+runner:
+  client:
+    config:
+      # Limits as per: https://eips.ethereum.org/EIPS/eip-7870
+      resource_limits:
+        cpuset_count: 8
+        cpu_freq: "3600MHz"
+        cpu_turboboost: false
+        cpu_freq_governor: performance
+        memory: "55g" # Our machines are limited to 64GB. So let's allocate a bit less.
+        swap_disabled: true

@@ -1,15 +1,16 @@
-benchmark:
-  tests:
-    source:
-      git:
-        repo: https://github.com/nethermindeth/gas-benchmarks.git
-        version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
-        pre_run_steps:
-          - repricings_stateful/perf-devnet-2/funding.txt
-        steps:
-          setup:
-            - repricings_stateful/perf-devnet-2/setup/*
-          test:
-            - repricings_stateful/perf-devnet-2/testing/*
-          cleanup:
-            - repricings_stateful/perf-devnet-2/cleanup/*
+runner:
+  benchmark:
+    tests:
+      source:
+        git:
+          repo: https://github.com/nethermindeth/gas-benchmarks.git
+          version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
+          pre_run_steps:
+            - repricings_stateful/perf-devnet-2/funding.txt
+          steps:
+            setup:
+              - repricings_stateful/perf-devnet-2/setup/*
+            test:
+              - repricings_stateful/perf-devnet-2/testing/*
+            cleanup:
+              - repricings_stateful/perf-devnet-2/cleanup/*
