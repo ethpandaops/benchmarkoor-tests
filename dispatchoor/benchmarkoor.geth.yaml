@@ -1,0 +1,71 @@
+- id: benchmarkoor-geth-mainnet-24350000-stateful
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    test-type: "stateful"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    test-type: "stateful"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-geth-mainnet-24350000-compute
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    test-type: "compute"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    test-type: "compute"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-geth-perf-devnet-2-23861500-stateful
+  name: "Benchmarkoor (Geth) - Perf-devnet-2(23861500) - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-2"
+    block: "23861500"
+    test-type: "stateful"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-2/23861500"
+    test-type: "stateful"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-geth-perf-devnet-2-23861500-compute
+  name: "Benchmarkoor (Geth) - Perf-devnet-2(23861500) - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-2"
+    block: "23861500"
+    test-type: "compute"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-2/23861500"
+    test-type: "compute"
+    upload-artifacts: "false"

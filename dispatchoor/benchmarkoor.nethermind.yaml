@@ -1,0 +1,71 @@
+- id: benchmarkoor-nethermind-mainnet-24350000-stateful
+  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "mainnet"
+    block: "24350000"
+    test-type: "stateful"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "mainnet/24350000"
+    test-type: "stateful"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-nethermind-mainnet-24350000-compute
+  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "mainnet"
+    block: "24350000"
+    test-type: "compute"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "mainnet/24350000"
+    test-type: "compute"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-nethermind-perf-devnet-2-23861500-stateful
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-2(23861500) - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "perf-devnet-2"
+    block: "23861500"
+    test-type: "stateful"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "perf-devnet-2/23861500"
+    test-type: "stateful"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-nethermind-perf-devnet-2-23861500-compute
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-2(23861500) - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "perf-devnet-2"
+    block: "23861500"
+    test-type: "compute"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "perf-devnet-2/23861500"
+    test-type: "compute"
+    upload-artifacts: "false"
