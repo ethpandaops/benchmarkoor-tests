@@ -1,6 +1,8 @@
 name: generate-index
 
 on:
+  schedule:
+    - cron: "55 */3 * * *"
   workflow_dispatch:
     inputs:
       run-timeout-minutes:
@@ -19,7 +21,7 @@ on:
 jobs:
   index:
     runs-on: ubuntu-latest
-    timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
+    timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes || '210') }}
     steps:
       - uses: ethpandaops/benchmarkoor@master
         env:
@@ -32,9 +34,9 @@ jobs:
             AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          image: ${{ inputs.image }}
-          git-ref: ${{ inputs.git-ref }}
-          upload-artifacts: ${{ inputs.upload-artifacts }}
+          image: ${{ inputs.image || 'ghcr.io/ethpandaops/benchmarkoor:master' }}
+          git-ref: ${{ inputs.git-ref || '' }}
+          upload-artifacts: ${{ inputs.upload-artifacts || 'false' }}
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-indexing.yaml,
