@@ -28,7 +28,7 @@
     block: "24350000"
     test-type: "compute"
   inputs:
-    run-timeout-minutes: "360"
+    run-timeout-minutes: "720"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     test-type: "compute"
@@ -64,7 +64,7 @@
     block: "23861500"
     test-type: "compute"
   inputs:
-    run-timeout-minutes: "360"
+    run-timeout-minutes: "720"
     clients: '["erigon"]'
     snapshot: "perf-devnet-2/23861500"
     test-type: "compute"
