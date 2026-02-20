@@ -34,10 +34,9 @@ runner:
     # Erigon
     - id: erigon
       client: erigon
-      #image: erigontech/erigon:main-latest
-      image: erigontech/erigon:fix_accepted_issue_in_benchmarks
+      image: erigontech/erigon:main-latest
       environment:
-        MAX_REORG_DEPTH: "512"
+        ERIGON_MAX_REORG_DEPTH: "512"
       extra_args:
         - --log.console.verbosity=debug
         - --fcu.background.commit=false
