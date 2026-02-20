@@ -8,7 +8,7 @@ runner:
     # Geth
     - id: geth
       client: geth
-      image: ethpandaops/geth:MariusVanDerWijden-filtermaps-race-nofix # fix for debug_setHead panic
+      image: ethpandaops/geth:master
       extra_args:
         - --debug.logslowblock=0
 

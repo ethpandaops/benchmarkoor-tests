@@ -10,7 +10,7 @@ runner:
     # Geth
     - id: geth
       client: geth
-      image: ethpandaops/geth:MariusVanDerWijden-filtermaps-race-nofix # fix for debug_setHead panic
+      image: ethpandaops/geth:master
       extra_args:
         - --cache=4096 # Geth sets this for mainnet, but not on perf-devnet-2
         - --networkid=12159
