@@ -1,6 +1,12 @@
 runner:
   benchmark:
     tests:
+      metadata:
+        labels:
+          name: mainnet-24350000-compute
+          chain: mainnet
+          block: "24350000"
+          test-type: compute
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
