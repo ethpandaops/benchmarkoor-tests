@@ -3,7 +3,7 @@ runner:
     tests:
       metadata:
         labels:
-          name: perf-devnet-2-24350000-compute
+          name: perf-devnet-2-23861500-compute
           chain: perf-devnet-2
           block: "23861500"
           test-type: compute
