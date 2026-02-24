@@ -41,6 +41,10 @@ on:
         options:
           - "false"
           - "true"
+      run-config:
+        description: 'Raw YAML config content to pass via --config (appended after URL config)'
+        required: false
+        default: ''
 
 jobs:
   benchmarkoor:
@@ -88,3 +92,4 @@ jobs:
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
           run-args: --limit-instance-client=${{ matrix.client }}
+          run-config: ${{ inputs.run-config }}
