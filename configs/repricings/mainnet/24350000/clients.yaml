@@ -15,7 +15,7 @@ runner:
     # Nethermind
     - id: nethermind
       client: nethermind
-      image: ethpandaops/nethermind:performance
+      image: nethermindeth/nethermind:performance
       extra_args:
         - --config=mainnet.cfg
 
