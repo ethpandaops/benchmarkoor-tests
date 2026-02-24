@@ -1,6 +1,12 @@
 runner:
   benchmark:
     tests:
+      metadata:
+        labels:
+          name: perf-devnet-2-23861500-stateful
+          chain: perf-devnet-2
+          block: "23861500"
+          test-type: stateful
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
