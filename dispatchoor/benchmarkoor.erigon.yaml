@@ -15,6 +15,17 @@
     snapshot: "mainnet/24350000"
     test-type: "stateful"
     upload-artifacts: "false"
+    run-config: |
+      runner:
+        container_runtime: podman
+        client:
+          config:
+            rollback_strategy: container-checkpoint-restore
+            checkpoint_restore_strategy_options:
+              tmpfs_threshold: "10g"
+              tmpfs_max_size: "15g"
+              wait_after_tcp_drop_connections: 10s
+              restart_container: true
 
 - id: benchmarkoor-erigon-mainnet-24350000-compute
   name: "Benchmarkoor (Erigon) - Mainnet(24350000) - Compute"
@@ -51,6 +62,17 @@
     snapshot: "perf-devnet-2/23861500"
     test-type: "stateful"
     upload-artifacts: "false"
+    run-config: |
+      runner:
+        container_runtime: podman
+        client:
+          config:
+            rollback_strategy: container-checkpoint-restore
+            checkpoint_restore_strategy_options:
+              tmpfs_threshold: "10g"
+              tmpfs_max_size: "15g"
+              wait_after_tcp_drop_connections: 10s
+              restart_container: true
 
 - id: benchmarkoor-erigon-perf-devnet-2-23861500-compute
   name: "Benchmarkoor (Erigon) - Perf-devnet-2(23861500) - Compute"
