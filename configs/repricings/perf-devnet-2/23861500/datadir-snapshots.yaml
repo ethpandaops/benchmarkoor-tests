@@ -2,14 +2,14 @@ runner:
   client:
     datadirs:
       besu:
-        source_dir: /data/snapshots/besu/perf-devnet-2/23861500/
-        method: overlayfs
+        source_dir: /data-zfs/snapshots/besu/perf-devnet-2/23861500/
+        method: zfs
       geth:
-        source_dir: /data/snapshots/geth/perf-devnet-2/23861500/
-        method: overlayfs
+        source_dir: /data-zfs/snapshots/geth/perf-devnet-2/23861500/
+        method: zfs
       nethermind:
-        source_dir: /data/snapshots/nethermind/perf-devnet-2/23861500/
-        method: overlayfs
+        source_dir: /data-zfs/snapshots/nethermind/perf-devnet-2/23861500/
+        method: zfs
       reth:
         source_dir: /data-zfs/snapshots/reth/perf-devnet-2/23861500/
         method: zfs
