@@ -10,7 +10,7 @@ runner:
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
-          version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
+          version: 4b421c294811ab9593d2f053ddfb4fd1fcba9aa0
           pre_run_steps:
             - repricings_compute/perf-devnet-2/funding.txt
           steps:
