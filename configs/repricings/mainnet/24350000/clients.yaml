@@ -25,11 +25,11 @@ runner:
       image: ethpandaops/reth:main
       # Reth mainnet snapshot is 2 blocks behind for some reason.
       # So we block using a FCU to the required block and wait for it to get the missing blocks via p2p
-      bootstrap_fcu:
-        enabled: true
-        head_block_hash: "0x6aadde478df4f485c2cf91cd48038f918ef6ff97b19eec9cdd0cd1ca45476eb4"
-        max_retries: 60
-        backoff: 30s
+      #bootstrap_fcu:
+      # enabled: true
+      # head_block_hash: "0x6aadde478df4f485c2cf91cd48038f918ef6ff97b19eec9cdd0cd1ca45476eb4"
+      # max_retries: 60
+      # backoff: 30s
 
     # Erigon
     - id: erigon
