@@ -25,7 +25,7 @@ on:
       run-timeout-minutes:
         description: "Timeout for the benchmark run (minutes)"
         required: false
-        default: "210"
+        default: "240"
       image:
         description: "Benchmarkoor docker image"
         required: false
@@ -74,11 +74,13 @@ jobs:
           S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+          BENCHMARKOOR_RUNNER_CLIENT_CONFIG_RUN_TIMEOUT: "${{ fromJSON(inputs.run-timeout-minutes) - 30 }}m"
         with:
           docker-env: |
             S3_ENDPOINT_URL
             AWS_ACCESS_KEY_ID
             AWS_SECRET_ACCESS_KEY
+            BENCHMARKOOR_RUNNER_CLIENT_CONFIG_RUN_TIMEOUT
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ inputs.image }}
           git-ref: ${{ inputs.git-ref }}
