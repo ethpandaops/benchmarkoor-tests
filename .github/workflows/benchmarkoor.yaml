@@ -14,6 +14,7 @@ on:
         options:
           - "mainnet/24350000"
           - "perf-devnet-2/23861500"
+          - "perf-devnet-3/24188300"
       test-type:
         description: "Test type to run"
         required: false
