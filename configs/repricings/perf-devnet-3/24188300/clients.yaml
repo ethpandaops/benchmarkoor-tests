@@ -1,0 +1,47 @@
+runner:
+  instances:
+    # Besu
+    - id: besu
+      client: besu
+      image: ethpandaops/besu:performance
+      extra_args:
+        - --network-id=12159
+
+    # Geth
+    - id: geth
+      client: geth
+      image: ethpandaops/geth:master
+      extra_args:
+        - --cache=4096 # Geth sets this for mainnet, but not on perf-devnet-2
+        - --networkid=12159
+        - --debug.logslowblock=0
+
+    # Nethermind
+    - id: nethermind
+      client: nethermind
+      image: nethermindeth/nethermind:performance
+      extra_args:
+        - --config=mainnet.cfg
+        - --Init.NetworkId=12159
+
+    # Reth
+    - id: reth
+      client: reth
+      image: ethpandaops/reth:main
+      extra_args:
+        - --network-id=12159
+
+    # Erigon
+    - id: erigon
+      client: erigon
+      image: erigontech/erigon:main-latest
+      environment:
+        ERIGON_MAX_REORG_DEPTH: "512"
+      extra_args:
+        - --networkid=12159
+        - --log.console.verbosity=debug
+        - --fcu.background.commit=false
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 60
+        backoff: 30s

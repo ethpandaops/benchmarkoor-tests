@@ -1,0 +1,23 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: perf-devnet-3-24188300-compute
+          chain: perf-devnet-3
+          block: "24188300"
+          test-type: compute
+      source:
+        git:
+          repo: https://github.com/nethermindeth/gas-benchmarks.git
+          version: 08bcd9df6fd510d963baac9a0135b6cd82c87125 # refs/heads/fix/stateful-repricing-mode
+          pre_run_steps:
+            #- repricings_compute/perf-devnet-3/gas-bump.txt
+            - repricings_compute/perf-devnet-3/funding.txt
+          steps:
+            setup:
+              - repricings_compute/perf-devnet-3/setup/*
+            test:
+              - repricings_compute/perf-devnet-3/testing/*
+            cleanup:
+              - repricings_compute/perf-devnet-3/cleanup/*

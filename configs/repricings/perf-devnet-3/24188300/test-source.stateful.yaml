@@ -1,0 +1,34 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: perf-devnet-3-24188300-stateful
+          chain: perf-devnet-3
+          block: "24188300"
+          test-type: stateful
+      source:
+        git:
+          repo: https://github.com/nethermindeth/gas-benchmarks.git
+          version: 08bcd9df6fd510d963baac9a0135b6cd82c87125 # refs/heads/fix/stateful-repricing-mode
+          pre_run_steps:
+            - repricings_stateful/perf-devnet-3/gas-bump.txt
+            - repricings_stateful/perf-devnet-3/funding.txt
+          steps:
+            setup:
+              - repricings_stateful/perf-devnet-3/setup/*
+            test:
+              - repricings_stateful/perf-devnet-3/testing/*
+            cleanup:
+              - repricings_stateful/perf-devnet-3/cleanup/*
+
+  # Use podman + checkpoint/restore via CRIU
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-checkpoint-restore
+      checkpoint_restore_strategy_options:
+        tmpfs_threshold: "10g"
+        tmpfs_max_size: "15g"
+        wait_after_tcp_drop_connections: 10s
+        restart_container: true
