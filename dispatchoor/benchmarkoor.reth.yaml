@@ -10,7 +10,7 @@
     block: "24350000"
     test-type: "stateful"
   inputs:
-    run-timeout-minutes: "360"
+    run-timeout-minutes: "780"
     clients: '["reth"]'
     snapshot: "mainnet/24350000"
     test-type: "stateful"

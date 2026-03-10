@@ -28,10 +28,10 @@ for client in "${CLIENTS[@]}"; do
     for test_type in "${TEST_TYPES[@]}"; do
       test_type_display="$(tr '[:lower:]' '[:upper:]' <<< "${test_type:0:1}")${test_type:1}"
 
-      # 13h timeout for perf-devnet-3/24188300 stateful runs,
+      # 13h timeout for perf-devnet-3 and mainnet stateful runs,
       # 12h timeout for erigon/reth compute tests, 6h for everything else
       timeout="360"
-      if [[ "$test_type" == "stateful" && "$snapshot" == "perf-devnet-3/24188300" ]]; then
+      if [[ "$test_type" == "stateful" && ("$network" == "perf-devnet-3" || "$network" == "mainnet") ]]; then
         timeout="780"
       elif [[ "$test_type" == "compute" && ("$client" == "erigon" || "$client" == "reth") ]]; then
         timeout="720"
