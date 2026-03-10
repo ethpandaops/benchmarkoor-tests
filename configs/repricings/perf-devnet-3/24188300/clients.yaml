@@ -19,10 +19,11 @@ runner:
     # Nethermind
     - id: nethermind
       client: nethermind
-      image: nethermindeth/nethermind:performance
+      image: nethermindeth/nethermind:flat # Nethermind snapshot was done with FlatDB
       extra_args:
         - --config=mainnet.cfg
         - --Init.NetworkId=12159
+        - --FlatDb.Enabled=true # Enable FlatDB
 
     # Reth
     - id: reth
