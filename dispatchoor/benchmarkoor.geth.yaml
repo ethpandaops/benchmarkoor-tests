@@ -69,3 +69,39 @@
     snapshot: "perf-devnet-2/23861500"
     test-type: "compute"
     upload-artifacts: "false"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-stateful
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    test-type: "stateful"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    test-type: "stateful"
+    upload-artifacts: "false"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-compute
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    test-type: "compute"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    test-type: "compute"
+    upload-artifacts: "false"
