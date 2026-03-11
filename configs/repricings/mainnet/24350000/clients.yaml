@@ -25,7 +25,6 @@ runner:
       image: ghcr.io/paradigmxyz/reth:nightly
       extra_args:
         - --engine.slow-block-threshold=0
-        - --engine.persistence-threshold=0
 
     # Erigon
     - id: erigon

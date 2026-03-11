@@ -31,7 +31,6 @@ runner:
       extra_args:
         - --network-id=12159
         - --engine.slow-block-threshold=0
-        - --engine.persistence-threshold=0
 
     # Erigon
     - id: erigon
