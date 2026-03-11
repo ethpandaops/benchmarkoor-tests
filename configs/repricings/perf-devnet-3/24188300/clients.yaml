@@ -21,7 +21,7 @@ runner:
       client: nethermind
       image: nethermindeth/nethermind:flat # Nethermind snapshot was done with FlatDB
       extra_args:
-        - --config=mainnet.cfg
+        - --config=mainnet
         - --Init.NetworkId=12159
         - --FlatDb.Enabled=true # Enable FlatDB
 

@@ -15,9 +15,10 @@ runner:
     # Nethermind
     - id: nethermind
       client: nethermind
-      image: nethermindeth/nethermind:performance
+      image: nethermindeth/nethermind:flat
       extra_args:
-        - --config=mainnet.cfg
+        - --config=mainnet
+        - --FlatDb.Enabled=true # Enable FlatDB
 
     # Reth
     - id: reth
