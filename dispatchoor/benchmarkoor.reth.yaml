@@ -82,7 +82,7 @@
     block: "24188300"
     test-type: "stateful"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "1560"
     clients: '["reth"]'
     snapshot: "perf-devnet-3/24188300"
     test-type: "stateful"
