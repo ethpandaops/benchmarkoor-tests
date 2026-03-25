@@ -10,7 +10,7 @@ runner:
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
-          version: 4b421c294811ab9593d2f053ddfb4fd1fcba9aa0
+          version: 7171589086b81960fcc8b1d76fa17203d4189334 # main
           pre_run_steps:
             - repricings_compute/mainnet/gas-bump.txt
             - repricings_compute/mainnet/funding.txt
