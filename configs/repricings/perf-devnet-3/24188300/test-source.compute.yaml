@@ -10,9 +10,9 @@ runner:
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
-          version: 08bcd9df6fd510d963baac9a0135b6cd82c87125 # refs/heads/fix/stateful-repricing-mode
+          version: dd29a422a757e08e8a7eae28be076254cba519ba # main
           pre_run_steps:
-            #- repricings_compute/perf-devnet-3/gas-bump.txt
+            - repricings_compute/perf-devnet-3/gas-bump.txt
             - repricings_compute/perf-devnet-3/funding.txt
           steps:
             setup:
