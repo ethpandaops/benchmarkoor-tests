@@ -19,7 +19,7 @@ runner:
     # Nethermind
     - id: nethermind
       client: nethermind
-      image: nethermindeth/nethermind:flat # Nethermind snapshot was done with FlatDB
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --Init.NetworkId=12159
