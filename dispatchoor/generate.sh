@@ -7,7 +7,6 @@ CLIENTS=(geth erigon nethermind besu reth)
 
 SNAPSHOTS=(
   "mainnet/24350000"
-  "perf-devnet-2/23861500"
   "perf-devnet-3/24188300"
 )
 

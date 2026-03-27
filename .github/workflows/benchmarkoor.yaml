@@ -13,7 +13,6 @@ on:
         type: choice
         options:
           - "mainnet/24350000"
-          - "perf-devnet-2/23861500"
           - "perf-devnet-3/24188300"
       context:
         description: "Test context"
