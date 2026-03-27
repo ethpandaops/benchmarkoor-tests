@@ -10,8 +10,8 @@ runner:
           context: bloating
       source:
         git:
-          repo: https://github.com/ethpandaops/benchmarkoor-tests.git
-          version: raw-tests
+          repo: https://github.com/skylenet/benchmarkoor-raw-tests.git
+          version: master
           pre_run_steps:
             - bloating_stateful/perf-devnet-3/gas-bump.txt
             - bloating_stateful/perf-devnet-3/funding.txt
