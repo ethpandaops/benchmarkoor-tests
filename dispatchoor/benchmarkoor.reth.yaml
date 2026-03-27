@@ -1,5 +1,5 @@
-- id: benchmarkoor-reth-mainnet-24350000-stateful
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Stateful"
+- id: benchmarkoor-reth-mainnet-24350000-stateful-repricing
+  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Stateful - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -9,15 +9,17 @@
     network: "mainnet"
     block: "24350000"
     test-type: "stateful"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "780"
     clients: '["reth"]'
     snapshot: "mainnet/24350000"
     test-type: "stateful"
     upload-artifacts: "false"
+    context: "repricing"
 
-- id: benchmarkoor-reth-mainnet-24350000-compute
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Compute"
+- id: benchmarkoor-reth-mainnet-24350000-compute-repricing
+  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Compute - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -27,15 +29,37 @@
     network: "mainnet"
     block: "24350000"
     test-type: "compute"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "720"
     clients: '["reth"]'
     snapshot: "mainnet/24350000"
     test-type: "compute"
     upload-artifacts: "false"
+    context: "repricing"
 
-- id: benchmarkoor-reth-perf-devnet-2-23861500-stateful
-  name: "Benchmarkoor (Reth) - Perf-devnet-2(23861500) - Stateful"
+- id: benchmarkoor-reth-mainnet-24350000-stateful-bloating
+  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Stateful - Bloating"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "mainnet"
+    block: "24350000"
+    test-type: "stateful"
+    context: "bloating"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["reth"]'
+    snapshot: "mainnet/24350000"
+    test-type: "stateful"
+    upload-artifacts: "false"
+    context: "bloating"
+
+- id: benchmarkoor-reth-perf-devnet-2-23861500-stateful-repricing
+  name: "Benchmarkoor (Reth) - Perf-devnet-2(23861500) - Stateful - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -45,15 +69,17 @@
     network: "perf-devnet-2"
     block: "23861500"
     test-type: "stateful"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "360"
     clients: '["reth"]'
     snapshot: "perf-devnet-2/23861500"
     test-type: "stateful"
     upload-artifacts: "false"
+    context: "repricing"
 
-- id: benchmarkoor-reth-perf-devnet-2-23861500-compute
-  name: "Benchmarkoor (Reth) - Perf-devnet-2(23861500) - Compute"
+- id: benchmarkoor-reth-perf-devnet-2-23861500-compute-repricing
+  name: "Benchmarkoor (Reth) - Perf-devnet-2(23861500) - Compute - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -63,15 +89,37 @@
     network: "perf-devnet-2"
     block: "23861500"
     test-type: "compute"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "720"
     clients: '["reth"]'
     snapshot: "perf-devnet-2/23861500"
     test-type: "compute"
     upload-artifacts: "false"
+    context: "repricing"
 
-- id: benchmarkoor-reth-perf-devnet-3-24188300-stateful
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24188300) - Stateful"
+- id: benchmarkoor-reth-perf-devnet-2-23861500-stateful-bloating
+  name: "Benchmarkoor (Reth) - Perf-devnet-2(23861500) - Stateful - Bloating"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "perf-devnet-2"
+    block: "23861500"
+    test-type: "stateful"
+    context: "bloating"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["reth"]'
+    snapshot: "perf-devnet-2/23861500"
+    test-type: "stateful"
+    upload-artifacts: "false"
+    context: "bloating"
+
+- id: benchmarkoor-reth-perf-devnet-3-24188300-stateful-repricing
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24188300) - Stateful - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -81,15 +129,17 @@
     network: "perf-devnet-3"
     block: "24188300"
     test-type: "stateful"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "1560"
     clients: '["reth"]'
     snapshot: "perf-devnet-3/24188300"
     test-type: "stateful"
     upload-artifacts: "false"
+    context: "repricing"
 
-- id: benchmarkoor-reth-perf-devnet-3-24188300-compute
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24188300) - Compute"
+- id: benchmarkoor-reth-perf-devnet-3-24188300-compute-repricing
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24188300) - Compute - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -99,9 +149,31 @@
     network: "perf-devnet-3"
     block: "24188300"
     test-type: "compute"
+    context: "repricing"
   inputs:
     run-timeout-minutes: "720"
     clients: '["reth"]'
     snapshot: "perf-devnet-3/24188300"
     test-type: "compute"
     upload-artifacts: "false"
+    context: "repricing"
+
+- id: benchmarkoor-reth-perf-devnet-3-24188300-stateful-bloating
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24188300) - Stateful - Bloating"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    test-type: "stateful"
+    context: "bloating"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["reth"]'
+    snapshot: "perf-devnet-3/24188300"
+    test-type: "stateful"
+    upload-artifacts: "false"
+    context: "bloating"
