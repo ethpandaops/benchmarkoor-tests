@@ -41,7 +41,7 @@ runner:
         ERIGON_MAX_REORG_DEPTH: "512"
       extra_args:
         - --networkid=12159
-        - --log.console.verbosity=debug
+        #- --log.console.verbosity=debug
         - --fcu.background.commit=false
       bootstrap_fcu:
         enabled: true
