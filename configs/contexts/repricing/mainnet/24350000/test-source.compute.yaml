@@ -7,6 +7,7 @@ runner:
           chain: mainnet
           block: "24350000"
           test-type: compute
+          context: repricing
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
@@ -19,5 +20,3 @@ runner:
               - repricings_compute/mainnet/setup/*
             test:
               - repricings_compute/mainnet/testing/*
-            cleanup:
-              - repricings_compute/mainnet/cleanup/*

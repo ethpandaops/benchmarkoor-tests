@@ -15,6 +15,13 @@ on:
           - "mainnet/24350000"
           - "perf-devnet-2/23861500"
           - "perf-devnet-3/24188300"
+      context:
+        description: "Test context"
+        required: false
+        type: choice
+          - "repricing"
+          - "bloating"
+        default: "repricing"
       test-type:
         description: "Test type to run"
         required: false
@@ -94,10 +101,10 @@ jobs:
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/s3-upload.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/datadir-snapshots.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/genesis.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/repricings/${{ inputs.snapshot }}/clients.yaml
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-upload.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/datadirs/${{ inputs.snapshot }}/datadir.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/genesis.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/clients.yaml
           run-args: --limit-instance-client=${{ matrix.client }}
           run-config: ${{ inputs.run-config }}

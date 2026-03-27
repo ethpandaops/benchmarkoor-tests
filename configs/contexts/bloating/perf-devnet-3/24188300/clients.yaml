@@ -3,9 +3,10 @@ runner:
     # Besu
     - id: besu
       client: besu
-      image: ethpandaops/besu:performance
+      image: ethpandaops/besu:macfarla-feature-execution-metrics-standardization-rebased
       extra_args:
         - --network-id=12159
+        - --slow-block-threshold=0
 
     # Geth
     - id: geth
@@ -19,30 +20,19 @@ runner:
     # Nethermind
     - id: nethermind
       client: nethermind
-      image: nethermindeth/nethermind:performance
+      image: nethermindeth/nethermind:feature-execution-metrics
       extra_args:
         - --config=mainnet
         - --Init.NetworkId=12159
+        - --FlatDb.Enabled=true # Enable FlatDB
+        - --Blocks.SlowBlockThresholdMs=0
 
     # Reth
     - id: reth
       client: reth
-      image: ghcr.io/paradigmxyz/reth:nightly
+      #image: ghcr.io/paradigmxyz/reth:nightly
+      image: ethpandaops/reth:main
       extra_args:
         - --network-id=12159
         - --engine.slow-block-threshold=0
-
-    # Erigon
-    - id: erigon
-      client: erigon
-      image: erigontech/erigon:main-latest
-      environment:
-        ERIGON_MAX_REORG_DEPTH: "512"
-      extra_args:
-        - --networkid=12159
-        - --log.console.verbosity=debug
-        - --fcu.background.commit=false
-      bootstrap_fcu:
-        enabled: true
-        max_retries: 60
-        backoff: 30s
+        - --engine.persistence-threshold=0

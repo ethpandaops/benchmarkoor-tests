@@ -3,24 +3,23 @@ runner:
     tests:
       metadata:
         labels:
-          name: perf-devnet-3-24188300-stateful
-          chain: perf-devnet-3
-          block: "24188300"
+          name: mainnet-24350000-stateful
+          chain: mainnet
+          block: "24350000"
           test-type: stateful
+          context: repricing
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
           version: 1ba94997ab652eaa3e39577eac3b9ef9e05a2e6c # main
           pre_run_steps:
-            - repricings_stateful/perf-devnet-3/gas-bump.txt
-            - repricings_stateful/perf-devnet-3/funding.txt
+            - repricings_stateful/mainnet/gas-bump.txt
+            - repricings_stateful/mainnet/funding.txt
           steps:
             setup:
-              - repricings_stateful/perf-devnet-3/setup/*
+              - repricings_stateful/mainnet/setup/*
             test:
-              - repricings_stateful/perf-devnet-3/testing/*
-            cleanup:
-              - repricings_stateful/perf-devnet-3/cleanup/*
+              - repricings_stateful/mainnet/testing/*
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

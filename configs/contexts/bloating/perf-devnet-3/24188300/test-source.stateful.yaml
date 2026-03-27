@@ -1,0 +1,33 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: perf-devnet-3-24188300-stateful-bloat
+          chain: perf-devnet-3
+          block: "24188300"
+          test-type: stateful
+          context: bloating
+      source:
+        git:
+          repo: https://github.com/ethpandaops/benchmarkoor-tests.git
+          version: raw-tests
+          pre_run_steps:
+            - bloating_stateful/perf-devnet-3/gas-bump.txt
+            - bloating_stateful/perf-devnet-3/funding.txt
+          steps:
+            setup:
+              - bloating_stateful/perf-devnet-3/setup/*
+            test:
+              - bloating_stateful/perf-devnet-3/testing/*
+
+  # Use podman + checkpoint/restore via CRIU
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-checkpoint-restore
+      checkpoint_restore_strategy_options:
+        tmpfs_threshold: "10g"
+        tmpfs_max_size: "15g"
+        wait_after_tcp_drop_connections: 10s
+        restart_container: true

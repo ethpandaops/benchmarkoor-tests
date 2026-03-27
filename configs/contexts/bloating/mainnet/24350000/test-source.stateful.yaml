@@ -3,23 +3,23 @@ runner:
     tests:
       metadata:
         labels:
-          name: perf-devnet-2-23861500-stateful
-          chain: perf-devnet-2
-          block: "23861500"
+          name: mainnet-24350000-stateful-bloat
+          chain: mainnet
+          block: "24350000"
           test-type: stateful
+          context: bloating
       source:
         git:
-          repo: https://github.com/nethermindeth/gas-benchmarks.git
-          version: e5011aa5f75d7a1722481f25408347fadfb7fd3c
+          repo: https://github.com/ethpandaops/benchmarkoor-tests.git
+          version: raw-tests
           pre_run_steps:
-            - repricings_stateful/perf-devnet-2/funding.txt
+            - bloating_stateful/mainnet/gas-bump.txt
+            - bloating_stateful/mainnet/funding.txt
           steps:
             setup:
-              - repricings_stateful/perf-devnet-2/setup/*
+              - bloating_stateful/mainnet/setup/*
             test:
-              - repricings_stateful/perf-devnet-2/testing/*
-            cleanup:
-              - repricings_stateful/perf-devnet-2/cleanup/*
+              - bloating_stateful/mainnet/testing/*
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

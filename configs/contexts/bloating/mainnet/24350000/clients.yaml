@@ -1,0 +1,34 @@
+runner:
+  instances:
+    # Besu
+    - id: besu
+      client: besu
+      image: ethpandaops/besu:macfarla-feature-execution-metrics-standardization-rebased
+      extra_args:
+        - --slow-block-threshold=0
+
+    # Geth
+    - id: geth
+      client: geth
+      image: ethpandaops/geth:master
+      extra_args:
+        - --debug.logslowblock=0
+
+    # Nethermind
+    - id: nethermind
+      client: nethermind
+      #image: nethermindeth/nethermind:master
+      image: nethermindeth/nethermind:feature-execution-metrics
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true # Enable FlatDB
+        - --Blocks.SlowBlockThresholdMs=0
+
+    # Reth
+    - id: reth
+      client: reth
+      #image: ghcr.io/paradigmxyz/reth:nightly
+      image: ethpandaops/reth:main
+      extra_args:
+        - --engine.slow-block-threshold=0
+        - --engine.persistence-threshold=0
