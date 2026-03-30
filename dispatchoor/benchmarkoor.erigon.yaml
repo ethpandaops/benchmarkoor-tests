@@ -31,7 +31,7 @@
     test-type: "compute"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "720"
+    run-timeout-minutes: "900"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     test-type: "compute"
@@ -91,7 +91,7 @@
     test-type: "compute"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "720"
+    run-timeout-minutes: "900"
     clients: '["erigon"]'
     snapshot: "perf-devnet-3/24188300"
     test-type: "compute"

@@ -44,7 +44,7 @@ for client in "${CLIENTS[@]}"; do
         elif [[ "$test_type" == "stateful" && "$network" == "mainnet" ]]; then
           timeout="780"
         elif [[ "$test_type" == "compute" && ("$client" == "erigon" || "$client" == "reth") ]]; then
-          timeout="720"
+          timeout="900"
         fi
 
         entries+=("- id: benchmarkoor-${client}-${slug}-${test_type}-${context}
