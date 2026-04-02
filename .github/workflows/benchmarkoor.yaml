@@ -14,6 +14,7 @@ on:
         options:
           - "mainnet/24350000"
           - "perf-devnet-3/24188300"
+          - "perf-devnet-3/24358000"
       context:
         description: "Test context"
         required: false
@@ -21,6 +22,12 @@ on:
           - "repricing"
           - "bloating"
         default: "repricing"
+      fork:
+        description: "Test Fork"
+        required: false
+        type: choice
+          - "osaka"
+          - "amsterdam"
       test-type:
         description: "Test type to run"
         required: false
@@ -41,13 +48,6 @@ on:
         description: "Git reference to checkout for benchmarkoor"
         required: false
         default: ""
-      upload-artifacts:
-        description: "Upload run results as GitHub artifacts"
-        required: false
-        type: choice
-        options:
-          - "false"
-          - "true"
       run-config:
         description: 'Raw YAML config content to pass via --config (appended after URL config)'
         required: false
@@ -64,15 +64,15 @@ jobs:
       labels: snapshot-${{ matrix.client }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
-      - name: "Infos: Client=${{ matrix.client }} | Snapshot=${{ inputs.snapshot }} | TestType=${{ inputs.test-type }}"
+      - name: "Infos: Client=${{ matrix.client }} | Snapshot=${{ inputs.snapshot }} | TestType=${{ inputs.test-type }} | Context=${{ inputs.context }} | Fork=${{ inputs.fork }}"
         run: |
           echo "client: ${{ matrix.client }}"
           echo "snapshot: ${{ inputs.snapshot }}"
           echo "test-type: ${{ inputs.test-type }}"
+          echo "fork: ${{ inputs.fork }}"
           echo "run-timeout-minutes: ${{ inputs.run-timeout-minutes }}"
           echo "image: ${{ inputs.image }}"
           echo "git-ref: ${{ inputs.git-ref }}"
-          echo "upload-artifacts: ${{ inputs.upload-artifacts }}"
 
       - uses: actions/checkout@v4
 
@@ -96,14 +96,14 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           image: ${{ inputs.image }}
           git-ref: ${{ inputs.git-ref }}
-          upload-artifacts: ${{ inputs.upload-artifacts }}
+          upload-artifacts: "false"
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-upload.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/datadirs/${{ inputs.snapshot }}/datadir.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/genesis.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/test-source.${{ inputs.test-type }}.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/clients.yaml
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/genesis.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/test-source.${{ inputs.test-type }}.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/clients.yaml
           run-args: --limit-instance-client=${{ matrix.client }}
           run-config: ${{ inputs.run-config }}

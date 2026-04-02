@@ -1,0 +1,18 @@
+runner:
+  client:
+    datadirs:
+      besu:
+        source_dir: /data-zfs/snapshots/besu/perf-devnet-3/24358000/
+        method: zfs
+      geth:
+        source_dir: /data-zfs/snapshots/geth/perf-devnet-3/24358000/
+        method: zfs
+      nethermind:
+        source_dir: /data-zfs/snapshots/nethermind/perf-devnet-3/24358000/
+        method: zfs
+      reth:
+        source_dir: /data-zfs/snapshots/reth/perf-devnet-3/24358000/
+        method: zfs
+      erigon:
+        source_dir: /data-zfs/snapshots/erigon/perf-devnet-3/24358000/
+        method: zfs

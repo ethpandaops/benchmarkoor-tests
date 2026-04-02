@@ -1,5 +1,5 @@
-- id: benchmarkoor-geth-mainnet-24350000-stateful-repricing
-  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Stateful - Repricing"
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-repricing
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -8,18 +8,19 @@
     el-client: "geth"
     network: "mainnet"
     block: "24350000"
+    fork: "amsterdam"
     test-type: "stateful"
     context: "repricing"
   inputs:
     run-timeout-minutes: "780"
     clients: '["geth"]'
     snapshot: "mainnet/24350000"
+    fork: "amsterdam"
     test-type: "stateful"
-    upload-artifacts: "false"
     context: "repricing"
 
-- id: benchmarkoor-geth-mainnet-24350000-compute-repricing
-  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Compute - Repricing"
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-compute-repricing
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Compute - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -28,18 +29,19 @@
     el-client: "geth"
     network: "mainnet"
     block: "24350000"
+    fork: "amsterdam"
     test-type: "compute"
     context: "repricing"
   inputs:
     run-timeout-minutes: "360"
     clients: '["geth"]'
     snapshot: "mainnet/24350000"
+    fork: "amsterdam"
     test-type: "compute"
-    upload-artifacts: "false"
     context: "repricing"
 
-- id: benchmarkoor-geth-mainnet-24350000-stateful-bloating
-  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Stateful - Bloating"
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-bloating
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -48,18 +50,82 @@
     el-client: "geth"
     network: "mainnet"
     block: "24350000"
+    fork: "amsterdam"
     test-type: "stateful"
     context: "bloating"
   inputs:
     run-timeout-minutes: "780"
     clients: '["geth"]'
     snapshot: "mainnet/24350000"
+    fork: "amsterdam"
     test-type: "stateful"
-    upload-artifacts: "false"
     context: "bloating"
 
-- id: benchmarkoor-geth-perf-devnet-3-24188300-stateful-repricing
-  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Stateful - Repricing"
+- id: benchmarkoor-geth-mainnet-24350000-osaka-stateful-repricing
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Osaka - Stateful - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+
+- id: benchmarkoor-geth-mainnet-24350000-osaka-compute-repricing
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Osaka - Compute - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+
+- id: benchmarkoor-geth-mainnet-24350000-osaka-stateful-bloating
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Osaka - Stateful - Bloating"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "bloating"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "bloating"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-repricing
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -68,18 +134,19 @@
     el-client: "geth"
     network: "perf-devnet-3"
     block: "24188300"
+    fork: "amsterdam"
     test-type: "stateful"
     context: "repricing"
   inputs:
     run-timeout-minutes: "1560"
     clients: '["geth"]'
     snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
     test-type: "stateful"
-    upload-artifacts: "false"
     context: "repricing"
 
-- id: benchmarkoor-geth-perf-devnet-3-24188300-compute-repricing
-  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Compute - Repricing"
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-compute-repricing
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Compute - Repricing"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -88,18 +155,19 @@
     el-client: "geth"
     network: "perf-devnet-3"
     block: "24188300"
+    fork: "amsterdam"
     test-type: "compute"
     context: "repricing"
   inputs:
     run-timeout-minutes: "360"
     clients: '["geth"]'
     snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
     test-type: "compute"
-    upload-artifacts: "false"
     context: "repricing"
 
-- id: benchmarkoor-geth-perf-devnet-3-24188300-stateful-bloating
-  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Stateful - Bloating"
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-bloating
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Bloating"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -108,12 +176,76 @@
     el-client: "geth"
     network: "perf-devnet-3"
     block: "24188300"
+    fork: "amsterdam"
     test-type: "stateful"
     context: "bloating"
   inputs:
     run-timeout-minutes: "1560"
     clients: '["geth"]'
     snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
     test-type: "stateful"
-    upload-artifacts: "false"
+    context: "bloating"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-osaka-stateful-repricing
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Osaka - Stateful - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-osaka-compute-repricing
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Osaka - Compute - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-osaka-stateful-bloating
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Osaka - Stateful - Bloating"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "bloating"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "osaka"
+    test-type: "stateful"
     context: "bloating"

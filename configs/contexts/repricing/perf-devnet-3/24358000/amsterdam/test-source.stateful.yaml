@@ -1,0 +1,37 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: perf-devnet-3-24358000-compute
+          chain: perf-devnet-3
+          block: "24358000"
+          test-type: stateful
+          context: bal
+          fork: amsterdam
+      source:
+      #  # TODO: Needs to be generated
+      #  archive:
+      #    file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/23847558369/artifacts/6222084759
+      #    pre_run_steps:
+      #      - "perf-devnet-3/gas-bump.txt"
+      #      - "perf-devnet-3/funding.txt"
+      #    steps:
+      #      setup:
+      #        - "perf-devnet-3/setup/*.txt"
+      #      test:
+      #        - "perf-devnet-3/testing/*.txt"
+      #    opcodes_file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/23847558369/artifacts/6222074312
+      #    opcodes: "opcodes_tracing.json"
+
+
+  # Use podman + checkpoint/restore via CRIU
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-checkpoint-restore
+      checkpoint_restore_strategy_options:
+        tmpfs_threshold: "10g"
+        tmpfs_max_size: "15g"
+        wait_after_tcp_drop_connections: 10s
+        restart_container: true

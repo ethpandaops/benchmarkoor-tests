@@ -10,6 +10,7 @@ SNAPSHOTS=(
   "perf-devnet-3/24188300"
 )
 
+FORKS=(amsterdam osaka)
 CONTEXTS=(repricing bloating)
 REPRICING_TEST_TYPES=(stateful compute)
 BLOATING_TEST_TYPES=(stateful)
@@ -26,29 +27,32 @@ for client in "${CLIENTS[@]}"; do
     slug="${network}-${block}"
     network_display="$(tr '[:lower:]' '[:upper:]' <<< "${network:0:1}")${network:1}"
 
-    for context in "${CONTEXTS[@]}"; do
-      # Resolve test types for this context
-      test_types_var="${context^^}_TEST_TYPES[@]"
-      test_types=("${!test_types_var}")
+    for fork in "${FORKS[@]}"; do
+      fork_display="$(tr '[:lower:]' '[:upper:]' <<< "${fork:0:1}")${fork:1}"
 
-      for test_type in "${test_types[@]}"; do
-        test_type_display="$(tr '[:lower:]' '[:upper:]' <<< "${test_type:0:1}")${test_type:1}"
-        context_display="$(tr '[:lower:]' '[:upper:]' <<< "${context:0:1}")${context:1}"
+      for context in "${CONTEXTS[@]}"; do
+        # Resolve test types for this context
+        test_types_var="${context^^}_TEST_TYPES[@]"
+        test_types=("${!test_types_var}")
 
-        # 26h timeout for perf-devnet-3 stateful runs,
-        # 13h timeout for mainnet stateful runs,
-        # 12h timeout for erigon/reth compute tests, 6h for everything else
-        timeout="360"
-        if [[ "$test_type" == "stateful" && "$network" == "perf-devnet-3" ]]; then
-          timeout="1560"
-        elif [[ "$test_type" == "stateful" && "$network" == "mainnet" ]]; then
-          timeout="780"
-        elif [[ "$test_type" == "compute" && ("$client" == "erigon" || "$client" == "reth") ]]; then
-          timeout="900"
-        fi
+        for test_type in "${test_types[@]}"; do
+          test_type_display="$(tr '[:lower:]' '[:upper:]' <<< "${test_type:0:1}")${test_type:1}"
+          context_display="$(tr '[:lower:]' '[:upper:]' <<< "${context:0:1}")${context:1}"
 
-        entries+=("- id: benchmarkoor-${client}-${slug}-${test_type}-${context}
-  name: \"Benchmarkoor (${client_display}) - ${network_display}(${block}) - ${test_type_display} - ${context_display}\"
+          # 26h timeout for perf-devnet-3 stateful runs,
+          # 13h timeout for mainnet stateful runs,
+          # 12h timeout for erigon/reth compute tests, 6h for everything else
+          timeout="360"
+          if [[ "$test_type" == "stateful" && "$network" == "perf-devnet-3" ]]; then
+            timeout="1560"
+          elif [[ "$test_type" == "stateful" && "$network" == "mainnet" ]]; then
+            timeout="780"
+          elif [[ "$test_type" == "compute" && ("$client" == "erigon" || "$client" == "reth") ]]; then
+            timeout="900"
+          fi
+
+          entries+=("- id: benchmarkoor-${client}-${slug}-${fork}-${test_type}-${context}
+  name: \"Benchmarkoor (${client_display}) - ${network_display}(${block}) - ${fork_display} - ${test_type_display} - ${context_display}\"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -57,15 +61,17 @@ for client in "${CLIENTS[@]}"; do
     el-client: \"${client}\"
     network: \"${network}\"
     block: \"${block}\"
+    fork: \"${fork}\"
     test-type: \"${test_type}\"
     context: \"${context}\"
   inputs:
     run-timeout-minutes: \"${timeout}\"
     clients: '[\"${client}\"]'
     snapshot: \"${snapshot}\"
+    fork: \"${fork}\"
     test-type: \"${test_type}\"
-    upload-artifacts: \"false\"
     context: \"${context}\"")
+        done
       done
     done
   done

@@ -1,0 +1,9 @@
+runner:
+  client:
+    config:
+      genesis:
+        besu: https://gist.githubusercontent.com/skylenet/084442292102172a9bd305635b193eba/raw/333dda5932ce415c5d8b36f226ec58f5c291cb9d/genesis-perf-devnet-3-24358000-osaka-besu.json
+        erigon: https://gist.githubusercontent.com/skylenet/85704e26f3e833a02a760f623aeaaf9b/raw/1b1dcf664b6cb6db997ba77cd869a51176b6ee06/genesis-perf-devnet-3-24358000-osaka-genesis.json
+        geth: https://gist.githubusercontent.com/skylenet/85704e26f3e833a02a760f623aeaaf9b/raw/1b1dcf664b6cb6db997ba77cd869a51176b6ee06/genesis-perf-devnet-3-24358000-osaka-genesis.json
+        nethermind: https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/network-configs/devnet-2/metadata/chainspec.json
+        reth: https://gist.githubusercontent.com/skylenet/85704e26f3e833a02a760f623aeaaf9b/raw/1b1dcf664b6cb6db997ba77cd869a51176b6ee06/genesis-perf-devnet-3-24358000-osaka-genesis.json

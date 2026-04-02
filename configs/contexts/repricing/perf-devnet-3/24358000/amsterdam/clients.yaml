@@ -1,0 +1,95 @@
+runner:
+  instances:
+    # Geth
+    - id: geth-bal-sequential
+      client: geth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/geth:bal-devnet-2
+      extra_args:
+        - --bal.executionmode=sequential
+
+    - id: geth-bal-full
+      client: geth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/geth:bal-devnet-2
+      extra_args:
+        - --bal.executionmode=full
+
+    - id: geth-bal-nobatchio
+      client: geth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/geth:bal-devnet-2
+      extra_args:
+        - --bal.executionmode=nobatchio
+
+    # Besu
+    - id: besu-bal-sequential
+      client: besu
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      extra_args:
+        - --Xbal-optimization-enabled=false
+        - --Xbal-perfect-parallelization-enabled=false
+        - --Xbal-trust-state-root=false
+
+    - id: besu-bal-full
+      client: besu
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      extra_args:
+        - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-perfect-parallelization-enabled=true
+
+    - id: besu-bal-nobatchio
+      client: besu
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      extra_args:
+        - --Xbal-prefetch-reading-enabled=false
+        - --bonsai-cache-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-perfect-parallelization-enabled=true
+
+    # Reth
+
+    # TODO: Feature flags don't work on bal-devnet-2 branch
+    #- id: reth-bal-sequential
+    #  client: reth
+    #  metadata:
+    #    labels:
+    #      bal-mode: sequential
+    #  image: ethpandaops/reth:bal-devnet-2
+    #  extra_args:
+    #    - --engine.disable-bal-parallel-execution
+    #    - --engine.disable-bal-parallel-state-root
+    #    - --engine.disable-bal-batch-io
+
+    - id: reth-bal-full
+      client: reth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/reth:bal-devnet-2
+
+    # TODO: Feature flags don't work on bal-devnet-2 branch
+    # - id: reth-bal-nobatchio
+    #   client: reth
+    #   metadata:
+    #     labels:
+    #       bal-mode: nobatchio
+    #   image: ethpandaops/reth:bal-devnet-2
+    #   extra_args:
+    #     - --engine.disable-bal-batch-io

@@ -8,6 +8,7 @@ runner:
           block: "24350000"
           test-type: compute
           context: repricing
+          fork: osaka
       source:
         git:
           repo: https://github.com/nethermindeth/gas-benchmarks.git
