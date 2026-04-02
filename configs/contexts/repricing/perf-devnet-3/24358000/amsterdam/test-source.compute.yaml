@@ -3,11 +3,11 @@ runner:
     tests:
       metadata:
         labels:
-          name: perf-devnet-3-24358000-compute
+          name: perf-devnet-3-24358000-amsterdam-compute
           chain: perf-devnet-3
           block: "24358000"
           test-type: compute
-          context: bal
+          context: repricing
           fork: amsterdam
       source:
         archive:
