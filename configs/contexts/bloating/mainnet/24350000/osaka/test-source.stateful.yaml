@@ -8,6 +8,7 @@ runner:
           block: "24350000"
           test-type: stateful
           context: bloating
+          fork: osaka
       source:
         git:
           repo: https://github.com/skylenet/benchmarkoor-raw-tests.git
