@@ -7,6 +7,10 @@ on:
         description: "JSON array of execution clients to benchmark"
         required: false
         default: '["besu", "erigon", "geth", "nethermind", "reth"]'
+      instance-id:
+        description: "Set this if you have multiple configurations for the same client but just want to run one of them"
+        required: false
+        default: ""
       snapshot:
         description: "Snapshot path (network/block)"
         required: false
@@ -105,5 +109,7 @@ jobs:
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/genesis.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/test-source.${{ inputs.test-type }}.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.fork }}/clients.yaml
-          run-args: --limit-instance-client=${{ matrix.client }}
+          run-args: >-
+            --limit-instance-client=${{ matrix.client }}
+            --limit-instance-id=${{ inputs.instance-id }}
           run-config: ${{ inputs.run-config }}
