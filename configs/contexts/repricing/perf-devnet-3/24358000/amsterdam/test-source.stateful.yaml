@@ -10,19 +10,16 @@ runner:
           context: repricing
           fork: amsterdam
       source:
-      #  # TODO: Needs to be generated
-      #  archive:
-      #    file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/23847558369/artifacts/6222084759
-      #    pre_run_steps:
-      #      - "perf-devnet-3/gas-bump.txt"
-      #      - "perf-devnet-3/funding.txt"
-      #    steps:
-      #      setup:
-      #        - "perf-devnet-3/setup/*.txt"
-      #      test:
-      #        - "perf-devnet-3/testing/*.txt"
-      #    opcodes_file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/23847558369/artifacts/6222074312
-      #    opcodes: "opcodes_tracing.json"
+        archive:
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.0.0/generated-tests-stateful-perf-devnet-3.tar.gz
+          pre_run_steps:
+            - "repricings_stateful/perf-devnet-3/gas-bump.txt"
+            - "repricings_stateful/perf-devnet-3/funding.txt"
+          steps:
+            setup:
+              - "repricings_stateful/perf-devnet-3/setup/*.txt"
+            test:
+              - "repricings_stateful/perf-devnet-3/testing/*.txt"
 
 
   # Use podman + checkpoint/restore via CRIU

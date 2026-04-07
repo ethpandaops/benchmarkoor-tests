@@ -10,15 +10,13 @@ runner:
           context: repricing
           fork: osaka
       source:
-        # TODO: Needs to be generated
-        # git:
-        #   repo: https://github.com/nethermindeth/gas-benchmarks.git
-        #   version: dd29a422a757e08e8a7eae28be076254cba519ba # main
-        #   pre_run_steps:
-        #     - repricings_compute/perf-devnet-3/gas-bump.txt
-        #     - repricings_compute/perf-devnet-3/funding.txt
-        #   steps:
-        #     setup:
-        #       - repricings_compute/perf-devnet-3/setup/*
-        #     test:
-        #       - repricings_compute/perf-devnet-3/testing/*
+        archive:
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.0.0/generated-tests-compute-perf-devnet-3.tar.gz
+          pre_run_steps:
+            - "repricings_compute/perf-devnet-3/gas-bump.txt"
+            - "repricings_compute/perf-devnet-3/funding.txt"
+          steps:
+            setup:
+              - "repricings_compute/perf-devnet-3/setup/*.txt"
+            test:
+              - "repricings_compute/perf-devnet-3/testing/*.txt"
