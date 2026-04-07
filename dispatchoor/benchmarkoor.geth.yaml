@@ -19,6 +19,75 @@
     test-type: "stateful"
     context: "repricing"
 
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-repricing-bal-full
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-repricing-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-repricing-bal-sequential
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-sequential"
+
 - id: benchmarkoor-geth-mainnet-24350000-amsterdam-compute-repricing
   name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Compute - Repricing"
   owner: ethpandaops
@@ -40,6 +109,75 @@
     test-type: "compute"
     context: "repricing"
 
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-compute-repricing-bal-full
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Compute - Repricing - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-compute-repricing-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Compute - Repricing - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-compute-repricing-bal-sequential
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Compute - Repricing - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-sequential"
+
 - id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-bloating
   name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating"
   owner: ethpandaops
@@ -60,6 +198,75 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bloating"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-bloating-bal-full
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-bloating-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-mainnet-24350000-amsterdam-stateful-bloating-bal-sequential
+  name: "Benchmarkoor (Geth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "780"
+    clients: '["geth"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-sequential"
 
 - id: benchmarkoor-geth-mainnet-24350000-osaka-stateful-repricing
   name: "Benchmarkoor (Geth) - Mainnet(24350000) - Osaka - Stateful - Repricing"
@@ -145,6 +352,75 @@
     test-type: "stateful"
     context: "repricing"
 
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-repricing-bal-full
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Repricing - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-repricing-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Repricing - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-repricing-bal-sequential
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Repricing - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "bal-sequential"
+
 - id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-compute-repricing
   name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Compute - Repricing"
   owner: ethpandaops
@@ -166,6 +442,75 @@
     test-type: "compute"
     context: "repricing"
 
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-compute-repricing-bal-full
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Compute - Repricing - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-compute-repricing-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Compute - Repricing - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-compute-repricing-bal-sequential
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Compute - Repricing - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "bal-sequential"
+
 - id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-bloating
   name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Bloating"
   owner: ethpandaops
@@ -186,6 +531,75 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bloating"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-bloating-bal-full
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Bloating - bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-full"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-full"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-bloating-bal-nobatchio
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Bloating - bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-nobatchio"
+
+- id: benchmarkoor-geth-perf-devnet-3-24188300-amsterdam-stateful-bloating-bal-sequential
+  name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Amsterdam - Stateful - Bloating - bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "perf-devnet-3"
+    block: "24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-sequential"
+  inputs:
+    run-timeout-minutes: "1560"
+    clients: '["geth"]'
+    snapshot: "perf-devnet-3/24188300"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bloating"
+    instance-id: "bal-sequential"
 
 - id: benchmarkoor-geth-perf-devnet-3-24188300-osaka-stateful-repricing
   name: "Benchmarkoor (Geth) - Perf-devnet-3(24188300) - Osaka - Stateful - Repricing"
