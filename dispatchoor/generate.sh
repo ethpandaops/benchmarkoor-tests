@@ -51,8 +51,27 @@ for client in "${CLIENTS[@]}"; do
             timeout="900"
           fi
 
-          entries+=("- id: benchmarkoor-${client}-${slug}-${fork}-${test_type}-${context}
-  name: \"Benchmarkoor (${client_display}) - ${network_display}(${block}) - ${fork_display} - ${test_type_display} - ${context_display}\"
+          instance_ids=("")
+          if [[ "$fork" == "amsterdam" ]]; then
+            instance_ids=("" "bal-full" "bal-nobatchio" "bal-sequential")
+          fi
+
+          for instance_id in "${instance_ids[@]}"; do
+            id_suffix=""
+            name_suffix=""
+            instance_label=""
+            instance_input=""
+            if [[ -n "$instance_id" ]]; then
+              id_suffix="-${instance_id}"
+              name_suffix=" - ${instance_id}"
+              instance_label="
+    instance-id: \"${instance_id}\""
+              instance_input="
+    instance-id: \"${instance_id}\""
+            fi
+
+            entries+=("- id: benchmarkoor-${client}-${slug}-${fork}-${test_type}-${context}${id_suffix}
+  name: \"Benchmarkoor (${client_display}) - ${network_display}(${block}) - ${fork_display} - ${test_type_display} - ${context_display}${name_suffix}\"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -63,14 +82,15 @@ for client in "${CLIENTS[@]}"; do
     block: \"${block}\"
     fork: \"${fork}\"
     test-type: \"${test_type}\"
-    context: \"${context}\"
+    context: \"${context}\"${instance_label}
   inputs:
     run-timeout-minutes: \"${timeout}\"
     clients: '[\"${client}\"]'
     snapshot: \"${snapshot}\"
     fork: \"${fork}\"
     test-type: \"${test_type}\"
-    context: \"${context}\"")
+    context: \"${context}\"${instance_input}")
+          done
         done
       done
     done
