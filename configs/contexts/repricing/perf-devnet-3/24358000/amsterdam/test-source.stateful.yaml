@@ -11,7 +11,7 @@ runner:
           fork: amsterdam
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.0.0/generated-tests-stateful-perf-devnet-3.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-stateful-perf-devnet-3.tar.gz
           pre_run_steps:
             - "repricings_stateful/perf-devnet-3/gas-bump.txt"
             - "repricings_stateful/perf-devnet-3/funding.txt"
