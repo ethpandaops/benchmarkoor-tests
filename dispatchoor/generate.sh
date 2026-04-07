@@ -53,7 +53,7 @@ for client in "${CLIENTS[@]}"; do
 
           instance_ids=("")
           if [[ "$fork" == "amsterdam" ]]; then
-            instance_ids=("" "bal-full" "bal-nobatchio" "bal-sequential")
+            instance_ids=("bal-full" "bal-nobatchio" "bal-sequential")
           fi
 
           for instance_id in "${instance_ids[@]}"; do
