@@ -7,7 +7,7 @@ CLIENTS=(geth erigon nethermind besu reth)
 
 SNAPSHOTS=(
   "mainnet/24350000"
-  "perf-devnet-3/24188300"
+  "perf-devnet-3/24358000"
 )
 
 FORKS=(amsterdam osaka)
