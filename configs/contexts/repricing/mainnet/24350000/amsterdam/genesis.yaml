@@ -2,8 +2,8 @@ runner:
   client:
     config:
       genesis:
-        besu: https://gist.githubusercontent.com/skylenet/880ec31d447b7580e476c3534df2b980/raw/af7d57855d0fd2e3c51cb3aa968b9a03fe9a71c6/genesis-perf-devnet-3-24358000-amsterdam-besu.json
-        erigon: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
-        geth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
+        besu: https://gist.githubusercontent.com/skylenet/4b133e10e3c5743752c7006a31d938d3/raw/23d5fcb536f2527c583eab93573558f2c60aeef7/genesis-mainnet-24350000-amsterdam-besu.json
+        erigon: https://gist.githubusercontent.com/skylenet/83d6a3c1c8847badbabe6254fc286e45/raw/4546381a22e6c14a5c6fe0445106d8e31a91506f/genesis-mainnet-24350000-amsterdam-genesis.json
+        geth: https://gist.githubusercontent.com/skylenet/83d6a3c1c8847badbabe6254fc286e45/raw/4546381a22e6c14a5c6fe0445106d8e31a91506f/genesis-mainnet-24350000-amsterdam-genesis.json
         nethermind: https://raw.githubusercontent.com/ethpandaops/perf-devnets/refs/heads/master/network-configs/devnet-2/metadata/chainspec.json
-        reth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
+        reth: https://gist.githubusercontent.com/skylenet/83d6a3c1c8847badbabe6254fc286e45/raw/4546381a22e6c14a5c6fe0445106d8e31a91506f/genesis-mainnet-24350000-amsterdam-genesis.json
