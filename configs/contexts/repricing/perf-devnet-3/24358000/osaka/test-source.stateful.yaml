@@ -13,13 +13,13 @@ runner:
         archive:
           file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-stateful-perf-devnet-3.tar.gz
           pre_run_steps:
-            - "repricings_compute/perf-devnet-3/gas-bump.txt"
-            - "repricings_compute/perf-devnet-3/funding.txt"
+            - "repricings_stateful/perf-devnet-3/gas-bump.txt"
+            - "repricings_stateful/perf-devnet-3/funding.txt"
           steps:
             setup:
-              - "repricings_compute/perf-devnet-3/setup/*.txt"
+              - "repricings_stateful/perf-devnet-3/setup/*.txt"
             test:
-              - "repricings_compute/perf-devnet-3/testing/*.txt"
+              - "repricings_stateful/perf-devnet-3/testing/*.txt"
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman
