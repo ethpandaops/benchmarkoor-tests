@@ -13,7 +13,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-full"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -36,7 +36,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -59,7 +59,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-sequential"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -151,7 +151,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-full"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -174,7 +174,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -197,7 +197,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-sequential"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -219,7 +219,7 @@
     test-type: "stateful"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "osaka"
@@ -261,7 +261,7 @@
     test-type: "stateful"
     context: "bloating"
   inputs:
-    run-timeout-minutes: "780"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "mainnet/24350000"
     fork: "osaka"
@@ -283,7 +283,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-full"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -306,7 +306,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -329,7 +329,7 @@
     context: "repricing"
     instance-id: "nethermind-bal-sequential"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -421,7 +421,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-full"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -444,7 +444,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -467,7 +467,7 @@
     context: "bloating"
     instance-id: "nethermind-bal-sequential"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -489,7 +489,7 @@
     test-type: "stateful"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "osaka"
@@ -531,7 +531,7 @@
     test-type: "stateful"
     context: "bloating"
   inputs:
-    run-timeout-minutes: "1560"
+    run-timeout-minutes: "2160"
     clients: '["nethermind"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "osaka"
