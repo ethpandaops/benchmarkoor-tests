@@ -36,6 +36,8 @@ runner:
           bal-mode: sequential
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
         - --Xbal-optimization-enabled=false
         - --Xbal-perfect-parallelization-enabled=false
         - --Xbal-trust-state-root=false
@@ -47,6 +49,8 @@ runner:
           bal-mode: full
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
         - --Xbal-prefetch-reading-enabled=true
         - --Xbal-trust-state-root=true
         - --Xbal-perfect-parallelization-enabled=true
@@ -58,6 +62,8 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
         - --Xbal-prefetch-reading-enabled=false
         - --bonsai-cache-enabled=true
         - --Xbal-trust-state-root=true
