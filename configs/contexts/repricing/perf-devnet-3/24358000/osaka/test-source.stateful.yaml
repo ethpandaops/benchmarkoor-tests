@@ -11,15 +11,25 @@ runner:
           fork: osaka
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-stateful-perf-devnet-3.tar.gz
+          # file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-stateful-perf-devnet-3.tar.gz
+          # pre_run_steps:
+          #   - "repricings_stateful/perf-devnet-3/gas-bump.txt"
+          #   - "repricings_stateful/perf-devnet-3/funding.txt"
+          # steps:
+          #   setup:
+          #     - "repricings_stateful/perf-devnet-3/setup/*.txt"
+          #   test:
+          #     - "repricings_stateful/perf-devnet-3/testing/*.txt"
+
+          file: https://data.ethpandaops.io/benchmarkoor/osaka-repricings-stateful-jochem.tar.gz
           pre_run_steps:
-            - "repricings_stateful/perf-devnet-3/gas-bump.txt"
-            - "repricings_stateful/perf-devnet-3/funding.txt"
+            - "merged/gas-bump.txt"
+            - "merged/funding.txt"
           steps:
             setup:
-              - "repricings_stateful/perf-devnet-3/setup/*.txt"
+              - "merged/setup/*.txt"
             test:
-              - "repricings_stateful/perf-devnet-3/testing/*.txt"
+              - "merged/testing/*.txt"
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

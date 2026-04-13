@@ -11,24 +11,15 @@ runner:
           fork: osaka
       source:
         archive:
-          #file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-stateful-mainnet.tar.gz
-          #pre_run_steps:
-          #  - "repricings_stateful/mainnet/gas-bump.txt"
-          #  - "repricings_stateful/mainnet/funding.txt"
-          #steps:
-          #  setup:
-          #    - "repricings_stateful/mainnet/setup/*.txt"
-          #  test:
-          #    - "repricings_stateful/mainnet/testing/*.txt"
-          file: https://data.ethpandaops.io/benchmarkoor/osaka-repricings-stateful-jochem.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-stateful-mainnet.tar.gz
           pre_run_steps:
-            - "merged/gas-bump.txt"
-            - "merged/funding.txt"
+            - "repricings_stateful/mainnet/gas-bump.txt"
+            - "repricings_stateful/mainnet/funding.txt"
           steps:
             setup:
-              - "merged/setup/*.txt"
+              - "repricings_stateful/mainnet/setup/*.txt"
             test:
-              - "merged/testing/*.txt"
+              - "repricings_stateful/mainnet/testing/*.txt"
 
 
   # Use podman + checkpoint/restore via CRIU
