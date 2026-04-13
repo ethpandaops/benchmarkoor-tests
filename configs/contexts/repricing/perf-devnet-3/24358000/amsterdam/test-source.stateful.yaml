@@ -20,7 +20,8 @@ runner:
               - "repricings_stateful/perf-devnet-3/setup/*.txt"
             test:
               - "repricings_stateful/perf-devnet-3/testing/*.txt"
-
+      opcode_source:
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-stateful-perf-devnet-3.json
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

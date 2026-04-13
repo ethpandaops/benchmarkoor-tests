@@ -20,7 +20,8 @@ runner:
               - "repricings_stateful/mainnet/setup/*.txt"
             test:
               - "repricings_stateful/mainnet/testing/*.txt"
-
+      opcode_source:
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

@@ -30,6 +30,8 @@ runner:
               - "merged/setup/*.txt"
             test:
               - "merged/testing/*.txt"
+      opcode_source:
+        file: https://data.ethpandaops.io/benchmarkoor/opcode_trace_results.json
 
   # Use podman + checkpoint/restore via CRIU
   container_runtime: podman

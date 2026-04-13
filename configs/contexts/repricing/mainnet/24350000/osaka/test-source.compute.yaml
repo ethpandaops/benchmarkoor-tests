@@ -20,6 +20,9 @@ runner:
               - "repricings_compute/mainnet/setup/*.txt"
             test:
               - "repricings_compute/mainnet/testing/*.txt"
+        opcode_source:
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
+
   client:
     config:
       rollback_strategy: none

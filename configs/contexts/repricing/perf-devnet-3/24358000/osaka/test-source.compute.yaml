@@ -20,6 +20,9 @@ runner:
               - "repricings_compute/perf-devnet-3/setup/*.txt"
             test:
               - "repricings_compute/perf-devnet-3/testing/*.txt"
+      opcode_source:
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/opcodes_tracing-compute-perf-devnet-3.json
+
   client:
     config:
       rollback_strategy: none
