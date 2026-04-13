@@ -21,3 +21,6 @@ runner:
               - "repricings_compute/mainnet/setup/*.txt"
             test:
               - "repricings_compute/mainnet/testing/*.txt"
+  client:
+    config:
+      rollback_strategy: none
