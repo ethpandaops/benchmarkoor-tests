@@ -109,7 +109,10 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/nethermind:bal-devnet-2
+      image: nethermindeth/nethermind:testing_build_block_with_opcode_tracing
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
 
     # Erigon
 
