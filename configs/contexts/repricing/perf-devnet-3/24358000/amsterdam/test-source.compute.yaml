@@ -11,7 +11,7 @@ runner:
           fork: amsterdam
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.0.0/generated-tests-compute-perf-devnet-3.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-compute-perf-devnet-3.tar.gz
           pre_run_steps:
             - "repricings_compute/perf-devnet-3/gas-bump.txt"
             - "repricings_compute/perf-devnet-3/funding.txt"
@@ -21,7 +21,7 @@ runner:
             test:
               - "repricings_compute/perf-devnet-3/testing/*.txt"
       opcode_source:
-        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.0.0/opcodes_tracing-compute-perf-devnet-3.json
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-compute-perf-devnet-3.json
 
   container_runtime: podman
   client:

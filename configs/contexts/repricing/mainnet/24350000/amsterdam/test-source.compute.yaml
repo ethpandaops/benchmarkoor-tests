@@ -11,7 +11,6 @@ runner:
           fork: amsterdam
       source:
         archive:
-          # NOTE: 1.0.0 mainnet tests are broken and 1.1.0 has no tests
           file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-compute-mainnet.tar.gz
           pre_run_steps:
             - "repricings_compute/mainnet/gas-bump.txt"
