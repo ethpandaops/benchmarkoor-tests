@@ -8,3 +8,11 @@ runner:
   client:
     config:
       drop_memory_caches: "steps"
+
+  live_reporting:
+    enabled: true
+    endpoint: https://benchmarkoor-api.core.ethpandaops.io
+    token: ${API_INGEST_TOKEN}
+    discovery_path: repricings/results
+    interval: 1m
+    timeout: 10s
