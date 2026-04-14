@@ -99,3 +99,25 @@ runner:
     #   image: ethpandaops/reth:bal-devnet-2
     #   extra_args:
     #     - --engine.disable-bal-batch-io
+
+    # Nethermind
+
+    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
+
+    - id: nethermind-bal-full
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/nethermind:bal-devnet-2
+
+    # Erigon
+
+    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
+
+    - id: erigon-bal-full
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/erigon:bal-devnet-2
