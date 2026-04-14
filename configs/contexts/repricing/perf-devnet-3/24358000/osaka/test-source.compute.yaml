@@ -23,6 +23,7 @@ runner:
       opcode_source:
         file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/opcodes_tracing-compute-perf-devnet-3.json
 
+  container_runtime: podman
   client:
     config:
       rollback_strategy: none

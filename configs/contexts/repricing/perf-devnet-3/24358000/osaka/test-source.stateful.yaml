@@ -33,13 +33,13 @@ runner:
       opcode_source:
         file: https://data.ethpandaops.io/benchmarkoor/opcode_trace_results.json
 
-  # Use podman + checkpoint/restore via CRIU
   container_runtime: podman
   client:
     config:
-      rollback_strategy: container-checkpoint-restore
-      checkpoint_restore_strategy_options:
-        tmpfs_threshold: "10g"
-        tmpfs_max_size: "15g"
-        wait_after_tcp_drop_connections: 10s
-        restart_container: true
+      rollback_strategy: container-recreate
+      #rollback_strategy: container-checkpoint-restore
+      #checkpoint_restore_strategy_options:
+      #  tmpfs_threshold: "10g"
+      #  tmpfs_max_size: "15g"
+      #  wait_after_tcp_drop_connections: 10s
+      #  restart_container: true

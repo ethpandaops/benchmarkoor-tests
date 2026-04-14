@@ -24,6 +24,7 @@ runner:
         opcode_source:
         file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
 
+  container_runtime: podman
   client:
     config:
       rollback_strategy: none
