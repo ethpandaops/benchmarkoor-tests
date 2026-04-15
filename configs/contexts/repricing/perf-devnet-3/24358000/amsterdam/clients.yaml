@@ -124,3 +124,7 @@ runner:
         labels:
           bal-mode: full
       image: ethpandaops/erigon:bal-devnet-2
+      extra_args:
+        - --override.osaka=1774899169
+        - --override.amsterdam=1774899169
+        - --fcu.background.commit=false

@@ -125,6 +125,7 @@ runner:
           bal-mode: full
       image: ethpandaops/erigon:bal-devnet-2
       extra_args:
+        - --override.amsterdam=1769804040
         - --fcu.background.commit=false
       bootstrap_fcu:
         enabled: true
