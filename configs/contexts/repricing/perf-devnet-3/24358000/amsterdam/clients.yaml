@@ -109,7 +109,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: nethermindeth/nethermind:testing_build_block_with_opcode_tracing
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
