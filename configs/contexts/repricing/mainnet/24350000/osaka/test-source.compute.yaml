@@ -20,6 +20,10 @@ runner:
               - setup/*.txt
             test:
               - testing/*.txt
+      opcode_source:
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24460911828/artifacts/6456466898
+        file: opcodes_tracing.json
+
         # archive:
         #   file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/generated-tests-compute-mainnet.tar.gz
         #   pre_run_steps:
@@ -30,8 +34,6 @@ runner:
         #       - "repricings_compute/mainnet/setup/*.txt"
         #     test:
         #       - "repricings_compute/mainnet/testing/*.txt"
-      # opcode_source:
-      #   file: https://github.com/NethermindEth/gas-benchmarks/releases/download/osaka-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
 
   container_runtime: podman
   client:
