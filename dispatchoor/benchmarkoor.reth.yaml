@@ -136,75 +136,6 @@
     context: "repricing"
     instance-id: "reth-bal-sequential"
 
-- id: benchmarkoor-reth-mainnet-24350000-amsterdam-stateful-bloating-reth-bal-full
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - reth-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "reth"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["reth"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-full"
-
-- id: benchmarkoor-reth-mainnet-24350000-amsterdam-stateful-bloating-reth-bal-nobatchio
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - reth-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "reth"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["reth"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-nobatchio"
-
-- id: benchmarkoor-reth-mainnet-24350000-amsterdam-stateful-bloating-reth-bal-sequential
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - reth-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "reth"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["reth"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "reth-bal-sequential"
-
 - id: benchmarkoor-reth-mainnet-24350000-osaka-stateful-repricing
   name: "Benchmarkoor (Reth) - Mainnet(24350000) - Osaka - Stateful - Repricing"
   owner: ethpandaops
@@ -246,27 +177,6 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-reth-mainnet-24350000-osaka-stateful-bloating
-  name: "Benchmarkoor (Reth) - Mainnet(24350000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "reth"
-    network: "mainnet"
-    block: "24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["reth"]'
-    snapshot: "mainnet/24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
 
 - id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-repricing-reth-bal-full
   name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - reth-bal-full"
@@ -406,8 +316,8 @@
     context: "repricing"
     instance-id: "reth-bal-sequential"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bloating-reth-bal-full
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - reth-bal-full"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-full
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -418,7 +328,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-full"
   inputs:
     run-timeout-minutes: "2160"
@@ -426,11 +336,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-full"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bloating-reth-bal-nobatchio
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - reth-bal-nobatchio"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-nobatchio
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -441,7 +351,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-nobatchio"
   inputs:
     run-timeout-minutes: "2160"
@@ -449,11 +359,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-nobatchio"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bloating-reth-bal-sequential
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - reth-bal-sequential"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-sequential
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -464,7 +374,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-sequential"
   inputs:
     run-timeout-minutes: "2160"
@@ -472,7 +382,7 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "reth-bal-sequential"
 
 - id: benchmarkoor-reth-perf-devnet-3-24358000-osaka-stateful-repricing
@@ -516,24 +426,3 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-reth-perf-devnet-3-24358000-osaka-stateful-bloating
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "reth"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["reth"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"

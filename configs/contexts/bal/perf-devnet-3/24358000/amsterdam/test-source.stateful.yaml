@@ -1,0 +1,36 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: perf-devnet-3-24358000-amsterdam-stateful
+          chain: perf-devnet-3
+          block: "24358000"
+          test-type: stateful
+          context: bal
+          fork: amsterdam
+      source:
+        archive:
+          file: https://github.com/jochem-brouwer/files/raw/refs/heads/main/eest_bal_new.tar.gz
+          pre_run_steps:
+            - "eest_bal/gas-bump.txt"
+            - "eest_bal/funding.txt"
+          steps:
+            setup:
+              - "eest_bal/setup/*.txt"
+            test:
+              - "eest_bal/testing/*.txt"
+      opcode_source:
+        file: opcode_trace_results.json
+        archive: https://github.com/jochem-brouwer/files/raw/refs/heads/main/eest_bal_new.tar.gz
+
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-recreate
+      #rollback_strategy: container-checkpoint-restore
+      #checkpoint_restore_strategy_options:
+      #  tmpfs_threshold: "10g"
+      #  tmpfs_max_size: "15g"
+      #  wait_after_tcp_drop_connections: 10s
+      #  restart_container: true

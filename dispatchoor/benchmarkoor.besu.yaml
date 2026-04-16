@@ -136,75 +136,6 @@
     context: "repricing"
     instance-id: "besu-bal-sequential"
 
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-bloating-besu-bal-full
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-bloating-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-bloating-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "besu-bal-sequential"
-
 - id: benchmarkoor-besu-mainnet-24350000-osaka-stateful-repricing
   name: "Benchmarkoor (Besu) - Mainnet(24350000) - Osaka - Stateful - Repricing"
   owner: ethpandaops
@@ -246,27 +177,6 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-besu-mainnet-24350000-osaka-stateful-bloating
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
 
 - id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-repricing-besu-bal-full
   name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - besu-bal-full"
@@ -406,8 +316,8 @@
     context: "repricing"
     instance-id: "besu-bal-sequential"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bloating-besu-bal-full
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - besu-bal-full"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-full
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -418,7 +328,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-full"
   inputs:
     run-timeout-minutes: "2160"
@@ -426,11 +336,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-full"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bloating-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - besu-bal-nobatchio"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-nobatchio
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -441,7 +351,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-nobatchio"
   inputs:
     run-timeout-minutes: "2160"
@@ -449,11 +359,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-nobatchio"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bloating-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - besu-bal-sequential"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-sequential
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -464,7 +374,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-sequential"
   inputs:
     run-timeout-minutes: "2160"
@@ -472,7 +382,7 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "besu-bal-sequential"
 
 - id: benchmarkoor-besu-perf-devnet-3-24358000-osaka-stateful-repricing
@@ -516,24 +426,3 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-osaka-stateful-bloating
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"

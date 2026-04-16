@@ -136,75 +136,6 @@
     context: "repricing"
     instance-id: "nethermind-bal-sequential"
 
-- id: benchmarkoor-nethermind-mainnet-24350000-amsterdam-stateful-bloating-nethermind-bal-full
-  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - nethermind-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "nethermind"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["nethermind"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-full"
-
-- id: benchmarkoor-nethermind-mainnet-24350000-amsterdam-stateful-bloating-nethermind-bal-nobatchio
-  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - nethermind-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "nethermind"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["nethermind"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-nobatchio"
-
-- id: benchmarkoor-nethermind-mainnet-24350000-amsterdam-stateful-bloating-nethermind-bal-sequential
-  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Amsterdam - Stateful - Bloating - nethermind-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "nethermind"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["nethermind"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bloating"
-    instance-id: "nethermind-bal-sequential"
-
 - id: benchmarkoor-nethermind-mainnet-24350000-osaka-stateful-repricing
   name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Osaka - Stateful - Repricing"
   owner: ethpandaops
@@ -246,27 +177,6 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-nethermind-mainnet-24350000-osaka-stateful-bloating
-  name: "Benchmarkoor (Nethermind) - Mainnet(24350000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "nethermind"
-    network: "mainnet"
-    block: "24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["nethermind"]'
-    snapshot: "mainnet/24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
 
 - id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-repricing-nethermind-bal-full
   name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - nethermind-bal-full"
@@ -406,8 +316,8 @@
     context: "repricing"
     instance-id: "nethermind-bal-sequential"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bloating-nethermind-bal-full
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - nethermind-bal-full"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-full
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -418,7 +328,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-full"
   inputs:
     run-timeout-minutes: "2160"
@@ -426,11 +336,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-full"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bloating-nethermind-bal-nobatchio
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - nethermind-bal-nobatchio"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-nobatchio
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -441,7 +351,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-nobatchio"
   inputs:
     run-timeout-minutes: "2160"
@@ -449,11 +359,11 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-nobatchio"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bloating-nethermind-bal-sequential
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bloating - nethermind-bal-sequential"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-sequential
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -464,7 +374,7 @@
     block: "24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-sequential"
   inputs:
     run-timeout-minutes: "2160"
@@ -472,7 +382,7 @@
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
     test-type: "stateful"
-    context: "bloating"
+    context: "bal"
     instance-id: "nethermind-bal-sequential"
 
 - id: benchmarkoor-nethermind-perf-devnet-3-24358000-osaka-stateful-repricing
@@ -516,24 +426,3 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
-
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-osaka-stateful-bloating
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Osaka - Stateful - Bloating"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "nethermind"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["nethermind"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "bloating"

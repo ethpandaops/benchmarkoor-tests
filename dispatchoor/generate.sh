@@ -11,9 +11,11 @@ SNAPSHOTS=(
 )
 
 FORKS=(amsterdam osaka)
-CONTEXTS=(repricing bloating)
+# bloating context commented out for now, may be re-added later
+CONTEXTS=(repricing bal)
 REPRICING_TEST_TYPES=(stateful compute)
-BLOATING_TEST_TYPES=(stateful)
+# BLOATING_TEST_TYPES=(stateful)
+BAL_TEST_TYPES=(stateful)
 
 for client in "${CLIENTS[@]}"; do
   outfile="${SCRIPT_DIR}/benchmarkoor.${client}.yaml"
@@ -31,6 +33,13 @@ for client in "${CLIENTS[@]}"; do
       fork_display="$(tr '[:lower:]' '[:upper:]' <<< "${fork:0:1}")${fork:1}"
 
       for context in "${CONTEXTS[@]}"; do
+        # bal context only runs on perf-devnet-3/24358000 + amsterdam
+        if [[ "$context" == "bal" ]]; then
+          if [[ "$snapshot" != "perf-devnet-3/24358000" || "$fork" != "amsterdam" ]]; then
+            continue
+          fi
+        fi
+
         # Resolve test types for this context
         test_types_var="${context^^}_TEST_TYPES[@]"
         test_types=("${!test_types_var}")
