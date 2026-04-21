@@ -9,19 +9,34 @@ runner:
           test-type: compute
           context: repricing
           fork: amsterdam
+      #source:
+      #  archive:
+      #    file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-compute-mainnet.tar.gz
+      #    pre_run_steps:
+      #      - "repricings_compute/mainnet/gas-bump.txt"
+      #      - "repricings_compute/mainnet/funding.txt"
+      #    steps:
+      #      setup:
+      #        - "repricings_compute/mainnet/setup/*.txt"
+      #      test:
+      #        - "repricings_compute/mainnet/testing/*.txt"
+      #opcode_source:
+      #  file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
+
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-compute-mainnet.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6529886318
           pre_run_steps:
-            - "repricings_compute/mainnet/gas-bump.txt"
-            - "repricings_compute/mainnet/funding.txt"
+            - "gas-bump.txt"
+            - "funding.txt"
           steps:
             setup:
-              - "repricings_compute/mainnet/setup/*.txt"
+              - "setup/*.txt"
             test:
-              - "repricings_compute/mainnet/testing/*.txt"
+              - "testing/*.txt"
       opcode_source:
-        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-compute-mainnet.json
+        file: opcodes_tracing.json
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6529883102
 
   container_runtime: podman
   client:
