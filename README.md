@@ -37,10 +37,10 @@ configs/
 
 A **context** defines the scenario being tested. Each context may support different test types.
 
-| Context | Description | Test Types |
-|---------|-------------|------------|
-| `repricing` | Gas price repricing changes (EIP-7870) | stateful, compute |
-| `bloating` | State bloat scenarios | stateful |
+| Context | Description | Test Types | Constraints |
+|---------|-------------|------------|-------------|
+| `repricing` | Gas price repricing changes (EIP-7870) | stateful, compute | All snapshots and forks |
+| `bal` | Block-level access list scenarios | stateful | perf-devnet-3/24358000, amsterdam only |
 
 ### Snapshot
 
@@ -87,12 +87,3 @@ The `dispatchoor/` directory contains generated job definitions used by the [dis
 ```bash
 make generate
 ```
-
-### Timeouts
-
-| Scenario | Timeout |
-|----------|---------|
-| Stateful on perf-devnet-3 | 26h |
-| Stateful on mainnet | 13h |
-| Compute on erigon/reth | 15h |
-| Everything else | 6h |
