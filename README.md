@@ -19,7 +19,7 @@ All test configurations live under `configs/`. The directory structure follows t
 ```yaml
 configs/
 ├── global.yaml                            # Global runner settings (log level, cleanup, etc.)
-├── resource-limits-eip-7870-fullnode.yaml  # Hardware constraints (CPU, memory, frequency)
+├── resource-limits-eip-7870-fullnode.yaml # Hardware constraints (CPU, memory, frequency)
 ├── s3-upload.yaml                         # S3 results upload configuration
 ├── s3-indexing.yaml                       # Results indexing configuration
 ├── contexts/
