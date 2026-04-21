@@ -16,7 +16,7 @@ This repository coordinates with the [benchmarkoor](https://github.com/ethpandao
 
 All test configurations live under `configs/`. The directory structure follows this hierarchy:
 
-```
+```yaml
 configs/
 ├── global.yaml                            # Global runner settings (log level, cleanup, etc.)
 ├── resource-limits-eip-7870-fullnode.yaml  # Hardware constraints (CPU, memory, frequency)
