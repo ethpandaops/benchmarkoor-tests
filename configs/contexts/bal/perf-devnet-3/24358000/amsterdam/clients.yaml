@@ -102,13 +102,14 @@ runner:
 
     # Nethermind
 
-    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
+    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
+    #       By default nethermind does sequential processing on `master` branch
 
-    - id: nethermind-bal-full
+    - id: nethermind-bal-sequential
       client: nethermind
       metadata:
         labels:
-          bal-mode: full
+          bal-mode: sequential
       image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
@@ -116,7 +117,7 @@ runner:
 
     # Erigon
 
-    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
+    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
 
     - id: erigon-bal-full
       client: erigon
