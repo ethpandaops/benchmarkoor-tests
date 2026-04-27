@@ -1,4 +1,15 @@
 runner:
+  client:
+    # Override resource limits for BAL purposes. Change is mainly "cpuset_count=4" -> "cpuset_count=6"
+    config:
+      resource_limits:
+        cpuset_count: 6
+        cpu_freq: "3600MHz"
+        cpu_turboboost: false
+        cpu_freq_governor: performance
+        memory: "32g"
+        swap_disabled: true
+  
   instances:
     # Geth
     - id: geth-bal-sequential
