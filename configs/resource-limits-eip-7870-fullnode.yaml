@@ -3,7 +3,7 @@ runner:
     config:
       # Limits as per: https://eips.ethereum.org/EIPS/eip-7870
       resource_limits:
-        cpuset: [4,5,6,7,8,9,10,11] # 8 Logical cores (threads), across 4 physical cores
+        cpuset: [6,7,8,9,10,11] # 6 Logical cores (threads), across 3 physical cores. (EIP says 8, but we should have CL buffer)
         cpu_freq: "3600MHz"
         cpu_turboboost: false
         cpu_freq_governor: performance
