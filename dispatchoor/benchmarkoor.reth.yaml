@@ -316,8 +316,8 @@
     context: "repricing"
     instance-id: "reth-bal-sequential"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-full
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-full"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-full-cpu6
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-full-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -329,7 +329,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-full"
+    instance-id: "reth-bal-full-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["reth"]'
@@ -337,10 +337,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-full"
+    instance-id: "reth-bal-full-cpu6"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-nobatchio
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-nobatchio"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-nobatchio-cpu6
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-nobatchio-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -352,7 +352,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-nobatchio"
+    instance-id: "reth-bal-nobatchio-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["reth"]'
@@ -360,10 +360,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-nobatchio"
+    instance-id: "reth-bal-nobatchio-cpu6"
 
-- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-sequential
-  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-sequential"
+- id: benchmarkoor-reth-perf-devnet-3-24358000-amsterdam-stateful-bal-reth-bal-sequential-cpu6
+  name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - reth-bal-sequential-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -375,7 +375,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-sequential"
+    instance-id: "reth-bal-sequential-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["reth"]'
@@ -383,7 +383,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "reth-bal-sequential"
+    instance-id: "reth-bal-sequential-cpu6"
 
 - id: benchmarkoor-reth-perf-devnet-3-24358000-osaka-stateful-repricing
   name: "Benchmarkoor (Reth) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"

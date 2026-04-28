@@ -316,8 +316,8 @@
     context: "repricing"
     instance-id: "nethermind-bal-sequential"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-full
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-full"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-full-cpu6
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-full-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -329,7 +329,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-full"
+    instance-id: "nethermind-bal-full-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["nethermind"]'
@@ -337,10 +337,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-full"
+    instance-id: "nethermind-bal-full-cpu6"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-nobatchio
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-nobatchio"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-nobatchio-cpu6
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-nobatchio-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -352,7 +352,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-nobatchio"
+    instance-id: "nethermind-bal-nobatchio-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["nethermind"]'
@@ -360,10 +360,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-nobatchio"
+    instance-id: "nethermind-bal-nobatchio-cpu6"
 
-- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-sequential
-  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-sequential"
+- id: benchmarkoor-nethermind-perf-devnet-3-24358000-amsterdam-stateful-bal-nethermind-bal-sequential-cpu6
+  name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - nethermind-bal-sequential-cpu6"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -375,7 +375,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-sequential"
+    instance-id: "nethermind-bal-sequential-cpu6"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["nethermind"]'
@@ -383,7 +383,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "nethermind-bal-sequential"
+    instance-id: "nethermind-bal-sequential-cpu6"
 
 - id: benchmarkoor-nethermind-perf-devnet-3-24358000-osaka-stateful-repricing
   name: "Benchmarkoor (Nethermind) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"
