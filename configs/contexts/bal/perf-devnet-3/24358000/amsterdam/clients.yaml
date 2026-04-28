@@ -9,7 +9,7 @@ runner:
         cpu_freq_governor: performance
         memory: "32g"
         swap_disabled: true
-  
+
   instances:
     # Geth
     - id: geth-bal-sequential-cpu6
@@ -120,8 +120,18 @@ runner:
 
     # Nethermind
 
-    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
-    #       By default nethermind does sequential processing on `master` branch
+    - id: nethermind-bal-full-cpu6
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: full
+          cpu-count: "6"
+      image: nethermindeth/nethermind:master
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
+        - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
 
     - id: nethermind-bal-sequential-cpu6
       client: nethermind
@@ -133,6 +143,21 @@ runner:
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=false
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    - id: nethermind-bal-nobatchio-cpu6
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: nobatchio
+          cpu-count: "6"
+      image: nethermindeth/nethermind:master
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true
+        - --Blocks.ParallelExecutionBatchRead=false
 
     # Erigon
 

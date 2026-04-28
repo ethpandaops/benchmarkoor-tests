@@ -102,18 +102,41 @@ runner:
 
     # Nethermind
 
-    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
-    #       By default nethermind does sequential processing on `master` branch
+    - id: nethermind-bal-full
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/nethermind:feature-parallel-txs
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true
+        - --Blocks.ParallelExecutionBatchRead=true
 
     - id: nethermind-bal-sequential
       client: nethermind
       metadata:
         labels:
           bal-mode: sequential
-      image: nethermindeth/nethermind:master
+      image: ethpandaops/nethermind:feature-parallel-txs
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=false
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    - id: nethermind-bal-nobatchio
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/nethermind:feature-parallel-txs
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true
+        - --Blocks.ParallelExecutionBatchRead=false
 
     # Erigon
 
