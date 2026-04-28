@@ -1,39 +1,54 @@
 runner:
+  client:
+    # Override resource limits for BAL purposes. Change is mainly "cpuset_count=4" -> "cpuset_count=6"
+    config:
+      resource_limits:
+        cpuset_count: 6
+        cpu_freq: "3600MHz"
+        cpu_turboboost: false
+        cpu_freq_governor: performance
+        memory: "32g"
+        swap_disabled: true
+
   instances:
     # Geth
-    - id: geth-bal-sequential
+    - id: geth-bal-sequential-cpu6
       client: geth
       metadata:
         labels:
           bal-mode: sequential
+          cpu-count: "6"
       image: ethpandaops/geth:bal-devnet-2
       extra_args:
         - --bal.executionmode=sequential
 
-    - id: geth-bal-full
+    - id: geth-bal-full-cpu6
       client: geth
       metadata:
         labels:
           bal-mode: full
+          cpu-count: "6"
       image: ethpandaops/geth:bal-devnet-2
       extra_args:
         - --bal.executionmode=full
 
-    - id: geth-bal-nobatchio
+    - id: geth-bal-nobatchio-cpu6
       client: geth
       metadata:
         labels:
           bal-mode: nobatchio
+          cpu-count: "6"
       image: ethpandaops/geth:bal-devnet-2
       extra_args:
         - --bal.executionmode=nobatchio
 
     # Besu
-    - id: besu-bal-sequential
+    - id: besu-bal-sequential-cpu6
       client: besu
       metadata:
         labels:
           bal-mode: sequential
+          cpu-count: "6"
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
         - --Xbal-state-root-timeout=-1
@@ -42,11 +57,12 @@ runner:
         - --Xbal-perfect-parallelization-enabled=false
         - --Xbal-trust-state-root=false
 
-    - id: besu-bal-full
+    - id: besu-bal-full-cpu6
       client: besu
       metadata:
         labels:
           bal-mode: full
+          cpu-count: "6"
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
         - --Xbal-state-root-timeout=-1
@@ -55,11 +71,12 @@ runner:
         - --Xbal-trust-state-root=true
         - --Xbal-perfect-parallelization-enabled=true
 
-    - id: besu-bal-nobatchio
+    - id: besu-bal-nobatchio-cpu6
       client: besu
       metadata:
         labels:
           bal-mode: nobatchio
+          cpu-count: "6"
       image: ethpandaops/besu:bal-devnet-2-with-prefetch
       extra_args:
         - --Xbal-state-root-timeout=-1
@@ -83,11 +100,12 @@ runner:
     #    - --engine.disable-bal-parallel-state-root
     #    - --engine.disable-bal-batch-io
 
-    - id: reth-bal-full
+    - id: reth-bal-full-cpu6
       client: reth
       metadata:
         labels:
           bal-mode: full
+          cpu-count: "6"
       image: ethpandaops/reth:bal-devnet-2
 
     # TODO: Feature flags don't work on bal-devnet-2 branch
@@ -102,11 +120,12 @@ runner:
 
     # Nethermind
 
-    - id: nethermind-bal-full
+    - id: nethermind-bal-full-cpu6
       client: nethermind
       metadata:
         labels:
           bal-mode: full
+          cpu-count: "6"
       image: ethpandaops/nethermind:master
       extra_args:
         - --config=mainnet
@@ -114,23 +133,26 @@ runner:
         - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
         - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
 
-    - id: nethermind-bal-sequential
+    - id: nethermind-bal-sequential-cpu6
       client: nethermind
       metadata:
         labels:
           bal-mode: sequential
+          cpu-count: "6"
       image: ethpandaops/nethermind:master
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
         - --Blocks.ParallelExecution=false
         - --Blocks.ParallelExecutionBatchRead=false
 
-    - id: nethermind-bal-nobatchio
+    - id: nethermind-bal-nobatchio-cpu6
       client: nethermind
       metadata:
         labels:
           bal-mode: nobatchio
+          cpu-count: "6"
       image: ethpandaops/nethermind:master
       extra_args:
         - --config=mainnet
@@ -142,11 +164,12 @@ runner:
 
     # TODO: Doesn't provide feature flags yet to enable the different BAL modes
 
-    - id: erigon-bal-full
+    - id: erigon-bal-full-cpu6
       client: erigon
       metadata:
         labels:
           bal-mode: full
+          cpu-count: "6"
       image: ethpandaops/erigon:bal-devnet-2
       extra_args:
         - --override.osaka=1774899169
