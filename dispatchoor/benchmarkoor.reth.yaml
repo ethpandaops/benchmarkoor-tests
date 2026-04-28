@@ -426,3 +426,141 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-stateful-repricing-reth-bal-full
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-stateful-repricing-reth-bal-nobatchio
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - reth-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-nobatchio"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-stateful-repricing-reth-bal-sequential
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - reth-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-sequential"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-compute-repricing-reth-bal-full
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-compute-repricing-reth-bal-nobatchio
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - reth-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-nobatchio"
+
+- id: benchmarkoor-reth-jochemnet-24402727-amsterdam-compute-repricing-reth-bal-sequential
+  name: "Benchmarkoor (Reth) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - reth-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-sequential"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["reth"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-sequential"

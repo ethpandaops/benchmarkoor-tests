@@ -426,3 +426,141 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-full
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-nobatchio
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-sequential
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-full
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-nobatchio
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-sequential
+  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"

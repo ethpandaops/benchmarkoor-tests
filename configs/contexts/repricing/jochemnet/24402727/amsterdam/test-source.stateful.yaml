@@ -1,0 +1,53 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: jochemnet-24402727-amsterdam-stateful
+          chain: jochemnet
+          block: "24402727"
+          test-type: stateful
+          context: repricing
+          fork: amsterdam
+      #source:
+      #  archive:
+      #    parts:
+      #      - https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-stateful-jochemnet.tar.gz.00.part
+      #      - https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/generated-tests-stateful-jochemnet.tar.gz.01.part
+      #    pre_run_steps:
+      #      - "repricings_stateful/jochemnet/gas-bump.txt"
+      #      - "repricings_stateful/jochemnet/funding.txt"
+      #    steps:
+      #      setup:
+      #        - "repricings_stateful/jochemnet/setup/*.txt"
+      #      test:
+      #        - "repricings_stateful/jochemnet/testing/*.txt"
+      #opcode_source:
+      #  file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v1.1.0/opcodes_tracing-stateful-jochemnet.json
+
+      source:
+        archive:
+          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6533268336
+          pre_run_steps:
+            - "gas-bump.txt"
+            - "funding.txt"
+          steps:
+            setup:
+              - "setup/*.txt"
+            test:
+              - "testing/*.txt"
+      opcode_source:
+        file: opcodes_tracing.json
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6533260272
+
+
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-recreate
+      #rollback_strategy: container-checkpoint-restore
+      #checkpoint_restore_strategy_options:
+      #  tmpfs_threshold: "10g"
+      #  tmpfs_max_size: "15g"
+      #  wait_after_tcp_drop_connections: 10s
+      #  restart_container: true

@@ -1,0 +1,152 @@
+runner:
+  instances:
+    # Geth
+    - id: geth-bal-sequential
+      client: geth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/geth:bal-devnet-3
+      extra_args:
+        - --bal.executionmode=sequential
+
+    - id: geth-bal-full
+      client: geth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/geth:bal-devnet-3
+      extra_args:
+        - --bal.executionmode=full
+
+    - id: geth-bal-nobatchio
+      client: geth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/geth:bal-devnet-3
+      extra_args:
+        - --bal.executionmode=nobatchio
+
+    # Besu
+    - id: besu-bal-sequential
+      client: besu
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
+        - --Xbal-optimization-enabled=false
+        - --Xbal-perfect-parallelization-enabled=false
+        - --Xbal-trust-state-root=false
+
+    - id: besu-bal-full
+      client: besu
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
+        - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-perfect-parallelization-enabled=true
+
+    - id: besu-bal-nobatchio
+      client: besu
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      extra_args:
+        - --Xbal-state-root-timeout=-1
+        - --Xbal-processing-timeout=-1
+        - --Xbal-prefetch-reading-enabled=false
+        - --bonsai-cache-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-perfect-parallelization-enabled=true
+
+    # Reth
+
+    - id: reth-bal-sequential
+      client: reth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/reth:bal-devnet-3
+      extra_args:
+        - --engine.disable-bal-parallel-execution
+        - --engine.disable-bal-parallel-state-root
+        - --engine.disable-bal-batch-io
+
+    - id: reth-bal-full
+      client: reth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/reth:bal-devnet-3
+
+    - id: reth-bal-nobatchio
+      client: reth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/reth:bal-devnet-3
+      extra_args:
+        - --engine.disable-bal-batch-io
+
+    # Nethermind
+
+    - id: nethermind-bal-full
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: full
+      image: nethermindeth/nethermind:master
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
+        - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
+
+    - id: nethermind-bal-sequential
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: nethermindeth/nethermind:master
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=false
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    - id: nethermind-bal-nobatchio
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: nethermindeth/nethermind:master
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    # Erigon
+
+    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
+
+    - id: erigon-bal-full
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/erigon:bal-devnet-3
+      extra_args:
+        - --override.osaka=1774899169
+        - --override.amsterdam=1774899169
+        - --fcu.background.commit=false

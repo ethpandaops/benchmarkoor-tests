@@ -1,0 +1,18 @@
+runner:
+  client:
+    datadirs:
+      besu:
+        source_dir: /data-zfs/snapshots/besu/jochemnet/24402727/
+        method: zfs
+      geth:
+        source_dir: /data-zfs/snapshots/geth/jochemnet/24402727/
+        method: zfs
+      nethermind:
+        source_dir: /data-zfs/snapshots/nethermind/jochemnet/24402727/
+        method: zfs
+      reth:
+        source_dir: /data-zfs/snapshots/reth/jochemnet/24402727/
+        method: zfs
+      erigon:
+        source_dir: /data-zfs/snapshots/erigon/jochemnet/24402727/
+        method: zfs

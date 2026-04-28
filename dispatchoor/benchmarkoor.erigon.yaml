@@ -426,3 +426,141 @@
     fork: "osaka"
     test-type: "compute"
     context: "repricing"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-stateful-repricing-erigon-bal-full
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-stateful-repricing-erigon-bal-nobatchio
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - erigon-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-stateful-repricing-erigon-bal-sequential
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - erigon-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-compute-repricing-erigon-bal-full
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-compute-repricing-erigon-bal-nobatchio
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - erigon-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+
+- id: benchmarkoor-erigon-jochemnet-24402727-amsterdam-compute-repricing-erigon-bal-sequential
+  name: "Benchmarkoor (Erigon) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - erigon-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"

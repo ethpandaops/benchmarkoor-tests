@@ -8,6 +8,7 @@ CLIENTS=(geth erigon nethermind besu reth)
 SNAPSHOTS=(
   "mainnet/24350000"
   "perf-devnet-3/24358000"
+  "jochemnet/24402727"
 )
 
 FORKS=(amsterdam osaka)
@@ -30,6 +31,10 @@ for client in "${CLIENTS[@]}"; do
     network_display="$(tr '[:lower:]' '[:upper:]' <<< "${network:0:1}")${network:1}"
 
     for fork in "${FORKS[@]}"; do
+      # jochemnet only runs amsterdam fork
+      if [[ "$snapshot" == "jochemnet/24402727" && "$fork" != "amsterdam" ]]; then
+        continue
+      fi
       fork_display="$(tr '[:lower:]' '[:upper:]' <<< "${fork:0:1}")${fork:1}"
 
       for context in "${CONTEXTS[@]}"; do
@@ -38,6 +43,10 @@ for client in "${CLIENTS[@]}"; do
           if [[ "$snapshot" != "perf-devnet-3/24358000" || "$fork" != "amsterdam" ]]; then
             continue
           fi
+        fi
+        # jochemnet only runs repricing context
+        if [[ "$snapshot" == "jochemnet/24402727" && "$context" != "repricing" ]]; then
+          continue
         fi
 
         # Resolve test types for this context
