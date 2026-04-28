@@ -13,7 +13,7 @@
     context: "repricing"
     instance-id: "erigon-bal-full"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -36,7 +36,7 @@
     context: "repricing"
     instance-id: "erigon-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -59,7 +59,7 @@
     context: "repricing"
     instance-id: "erigon-bal-sequential"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     fork: "amsterdam"
@@ -150,7 +150,7 @@
     test-type: "stateful"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "mainnet/24350000"
     fork: "osaka"
@@ -193,7 +193,7 @@
     context: "repricing"
     instance-id: "erigon-bal-full"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -216,7 +216,7 @@
     context: "repricing"
     instance-id: "erigon-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -239,7 +239,7 @@
     context: "repricing"
     instance-id: "erigon-bal-sequential"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "amsterdam"
@@ -399,7 +399,7 @@
     test-type: "stateful"
     context: "repricing"
   inputs:
-    run-timeout-minutes: "2160"
+    run-timeout-minutes: "4500"
     clients: '["erigon"]'
     snapshot: "perf-devnet-3/24358000"
     fork: "osaka"
