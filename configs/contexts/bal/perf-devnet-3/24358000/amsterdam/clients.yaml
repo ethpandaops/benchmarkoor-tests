@@ -107,19 +107,19 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: ethpandaops/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
-        - --Blocks.ParallelExecution=true
-        - --Blocks.ParallelExecutionBatchRead=true
+        - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
+        - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
 
     - id: nethermind-bal-sequential
       client: nethermind
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: ethpandaops/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -131,7 +131,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: ethpandaops/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
