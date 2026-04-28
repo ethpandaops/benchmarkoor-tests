@@ -126,7 +126,7 @@ runner:
         labels:
           bal-mode: full
           cpu-count: "6"
-      image: ethpandaops/nethermind:master
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -139,7 +139,6 @@ runner:
         labels:
           bal-mode: sequential
           cpu-count: "6"
-      image: ethpandaops/nethermind:master
       image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
@@ -153,7 +152,7 @@ runner:
         labels:
           bal-mode: nobatchio
           cpu-count: "6"
-      image: ethpandaops/nethermind:master
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
