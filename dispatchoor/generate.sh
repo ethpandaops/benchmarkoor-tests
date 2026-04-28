@@ -62,11 +62,7 @@ for client in "${CLIENTS[@]}"; do
 
           instance_ids=("")
           if [[ "$fork" == "amsterdam" ]]; then
-            cpu_suffix=""
-            if [[ "$context" == "bal" ]]; then
-              cpu_suffix="-cpu6"
-            fi
-            instance_ids=("${client}-bal-full${cpu_suffix}" "${client}-bal-nobatchio${cpu_suffix}" "${client}-bal-sequential${cpu_suffix}")
+            instance_ids=("${client}-bal-full" "${client}-bal-nobatchio" "${client}-bal-sequential")
           fi
 
           for instance_id in "${instance_ids[@]}"; do

@@ -316,8 +316,8 @@
     context: "repricing"
     instance-id: "erigon-bal-sequential"
 
-- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-full-cpu6
-  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-full-cpu6"
+- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-full
+  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -329,7 +329,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-full-cpu6"
+    instance-id: "erigon-bal-full"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["erigon"]'
@@ -337,10 +337,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-full-cpu6"
+    instance-id: "erigon-bal-full"
 
-- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-nobatchio-cpu6
-  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-nobatchio-cpu6"
+- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-nobatchio
+  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -352,7 +352,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-nobatchio-cpu6"
+    instance-id: "erigon-bal-nobatchio"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["erigon"]'
@@ -360,10 +360,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-nobatchio-cpu6"
+    instance-id: "erigon-bal-nobatchio"
 
-- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-sequential-cpu6
-  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-sequential-cpu6"
+- id: benchmarkoor-erigon-perf-devnet-3-24358000-amsterdam-stateful-bal-erigon-bal-sequential
+  name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - erigon-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -375,7 +375,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-sequential-cpu6"
+    instance-id: "erigon-bal-sequential"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["erigon"]'
@@ -383,7 +383,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "erigon-bal-sequential-cpu6"
+    instance-id: "erigon-bal-sequential"
 
 - id: benchmarkoor-erigon-perf-devnet-3-24358000-osaka-stateful-repricing
   name: "Benchmarkoor (Erigon) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"

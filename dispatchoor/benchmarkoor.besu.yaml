@@ -316,8 +316,8 @@
     context: "repricing"
     instance-id: "besu-bal-sequential"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-full-cpu6
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-full-cpu6"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-full
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -329,7 +329,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-full-cpu6"
+    instance-id: "besu-bal-full"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["besu"]'
@@ -337,10 +337,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-full-cpu6"
+    instance-id: "besu-bal-full"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-nobatchio-cpu6
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-nobatchio-cpu6"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-nobatchio
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -352,7 +352,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-nobatchio-cpu6"
+    instance-id: "besu-bal-nobatchio"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["besu"]'
@@ -360,10 +360,10 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-nobatchio-cpu6"
+    instance-id: "besu-bal-nobatchio"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-sequential-cpu6
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-sequential-cpu6"
+- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-sequential
+  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -375,7 +375,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-sequential-cpu6"
+    instance-id: "besu-bal-sequential"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["besu"]'
@@ -383,7 +383,7 @@
     fork: "amsterdam"
     test-type: "stateful"
     context: "bal"
-    instance-id: "besu-bal-sequential-cpu6"
+    instance-id: "besu-bal-sequential"
 
 - id: benchmarkoor-besu-perf-devnet-3-24358000-osaka-stateful-repricing
   name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"
