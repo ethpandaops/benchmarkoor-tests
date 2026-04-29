@@ -163,7 +163,7 @@ runner:
         - --exec.no-prune=true
       bootstrap_fcu:
         enabled: true
-        max_retries: 60
+        max_retries: 120
         backoff: 30s
 
     - id: erigon-bal-sequential
@@ -181,7 +181,7 @@ runner:
         - --exec.serial
       bootstrap_fcu:
         enabled: true
-        max_retries: 60
+        max_retries: 120
         backoff: 30s
 
 
@@ -200,5 +200,5 @@ runner:
         - --exec.batched-io=false
       bootstrap_fcu:
         enabled: true
-        max_retries: 60
+        max_retries: 120
         backoff: 30s
