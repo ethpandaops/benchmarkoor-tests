@@ -2,7 +2,7 @@ runner:
   benchmark:
     results_upload:
       s3:
-        enabled: true
+        enabled: false
         endpoint_url: ${S3_ENDPOINT_URL}
         region: us-east-1
         bucket: benchmarkoor-results
