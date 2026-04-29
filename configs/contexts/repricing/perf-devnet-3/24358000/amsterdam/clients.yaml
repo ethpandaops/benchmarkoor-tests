@@ -52,6 +52,7 @@ runner:
         - --Xbal-state-root-enabled=true
         - --Xbal-trust-state-root=true
         - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-prefetch-batch-size=500
         - --Xbal-processing-timeout=-1
         - --Xbal-state-root-timeout=-1
 
