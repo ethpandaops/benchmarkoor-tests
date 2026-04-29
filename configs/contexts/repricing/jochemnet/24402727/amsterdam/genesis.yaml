@@ -2,9 +2,9 @@ runner:
   client:
     config:
       genesis:
-        # TODO : NEEDS UPDATE TO THE TIMESTAMPS FOR (timestamp of block 24402727) + 1
-        besu: https://gist.githubusercontent.com/skylenet/880ec31d447b7580e476c3534df2b980/raw/af7d57855d0fd2e3c51cb3aa968b9a03fe9a71c6/genesis-perf-devnet-3-24358000-amsterdam-besu.json
-        erigon: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
-        geth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
-        nethermind: https://raw.githubusercontent.com/NethermindEth/gas-benchmarks/6b0db651c812c6731c468b11dd489bdcb76e7afb/scripts/genesisfiles/nethermind/generator-amsterdam-perf-devnet-3.json
-        reth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
+        # Mainnet with updated AMSTERDAM TIMESTAMPS FOR (timestamp of block 24402727) + 1 ====> 1770440544 ( 0x6986C760 in hex)
+        besu: https://gist.githubusercontent.com/skylenet/6c7d89dc5646e074349f0dcee301f709/raw/d8f360be8fd933dad7f6a8d0a796d042db1f4c59/genesis-jochemnet-24402727-amsterdam-besu.json
+        erigon: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/fb8494708f8f24a35830d0f65c3753734eab1f1c/genesis-jochemnet-24402727-amsterdam-genesis.json
+        geth: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/fb8494708f8f24a35830d0f65c3753734eab1f1c/genesis-jochemnet-24402727-amsterdam-genesis.json
+        reth: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/fb8494708f8f24a35830d0f65c3753734eab1f1c/genesis-jochemnet-24402727-amsterdam-genesis.json
+        nethermind: https://gist.githubusercontent.com/skylenet/bf360ab146289280106e83915092adad/raw/58ba17032fd2e68db714a664fd21a2e36d801ed0/genesis-jochemnet-24402727-amsterdam-chainspec.json
