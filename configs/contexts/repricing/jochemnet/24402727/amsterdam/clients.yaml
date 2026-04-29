@@ -159,6 +159,7 @@ runner:
         - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
       bootstrap_fcu:
         enabled: true
         max_retries: 60
@@ -174,6 +175,7 @@ runner:
         - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
         # Bal mode flag
         - --exec.serial
       bootstrap_fcu:
@@ -192,6 +194,7 @@ runner:
         - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
         # Bal mode flag
         - --exec.batched-io=false
       bootstrap_fcu:
