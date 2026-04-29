@@ -159,6 +159,10 @@ runner:
         - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 60
+        backoff: 30s
 
     - id: erigon-bal-sequential
       client: erigon
@@ -172,6 +176,11 @@ runner:
         - --exec.no-merge=true
         # Bal mode flag
         - --exec.serial
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 60
+        backoff: 30s
+
 
     - id: erigon-bal-nobatchio
       client: erigon
@@ -185,3 +194,7 @@ runner:
         - --exec.no-merge=true
         # Bal mode flag
         - --exec.batched-io=false
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 60
+        backoff: 30s
