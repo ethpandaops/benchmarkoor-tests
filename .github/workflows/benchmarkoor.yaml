@@ -18,6 +18,7 @@ on:
         options:
           - "mainnet/24350000"
           - "perf-devnet-3/24358000"
+          - "jochemnet/24402727"
       context:
         description: "Test context"
         required: false
