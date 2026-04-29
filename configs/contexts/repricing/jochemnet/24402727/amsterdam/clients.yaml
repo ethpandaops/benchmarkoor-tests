@@ -156,8 +156,7 @@ runner:
           bal-mode: full
       image: ethpandaops/erigon:bal-devnet-3
       extra_args:
-        - --override.osaka=1774899169
-        - --override.amsterdam=1774899169
+        - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
 
@@ -168,8 +167,7 @@ runner:
           bal-mode: sequential
       image: ethpandaops/erigon:bal-devnet-3
       extra_args:
-        - --override.osaka=1774899169
-        - --override.amsterdam=1774899169
+        - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
         # Bal mode flag
@@ -182,8 +180,7 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/erigon:bal-devnet-3
       extra_args:
-        - --override.osaka=1774899169 # TODO: needs update for jochemnet
-        - --override.amsterdam=1774899169 # TODO: needs update for jochemnet
+        - --override.amsterdam=1769856767
         - --fcu.background.commit=false
         - --exec.no-merge=true
         # Bal mode flag
