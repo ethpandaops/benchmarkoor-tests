@@ -36,11 +36,10 @@ runner:
           bal-mode: sequential
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
-        - --Xbal-state-root-timeout=-1
-        - --Xbal-processing-timeout=-1
-        - --Xbal-optimization-enabled=false
         - --Xbal-perfect-parallelization-enabled=false
+        - --Xbal-state-root-enabled=false
         - --Xbal-trust-state-root=false
+        - --Xbal-prefetch-reading-enabled=false
 
     - id: besu-bal-full
       client: besu
@@ -49,11 +48,12 @@ runner:
           bal-mode: full
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
-        - --Xbal-state-root-timeout=-1
-        - --Xbal-processing-timeout=-1
-        - --Xbal-prefetch-reading-enabled=true
-        - --Xbal-trust-state-root=true
         - --Xbal-perfect-parallelization-enabled=true
+        - --Xbal-state-root-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-processing-timeout=-1
+        - --Xbal-state-root-timeout=-1
 
     - id: besu-bal-nobatchio
       client: besu
@@ -62,12 +62,12 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
-        - --Xbal-state-root-timeout=-1
-        - --Xbal-processing-timeout=-1
-        - --Xbal-prefetch-reading-enabled=false
-        - --bonsai-cache-enabled=true
-        - --Xbal-trust-state-root=true
         - --Xbal-perfect-parallelization-enabled=true
+        - --Xbal-state-root-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-prefetch-reading-enabled=false
+        - --Xbal-processing-timeout=-1
+        - --Xbal-state-root-timeout=-1
 
     # Reth
 
