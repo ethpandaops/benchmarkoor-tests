@@ -27,7 +27,7 @@ runner:
 
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v3.1.0/generated-tests-stateful-jochemnet.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/generated-tests-stateful-jochemnet.tar.gz
           pre_run_steps:
             - "repricings_stateful/jochemnet/gas-bump.txt"
             - "repricings_stateful/jochemnet/funding.txt"
@@ -37,7 +37,7 @@ runner:
             test:
               - "repricings_stateful/jochemnet/testing/*.txt"
       opcode_source:
-        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v3.1.0/opcodes_tracing-stateful-jochemnet.json
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/opcodes_tracing-stateful-jochemnet.json
 
 
   container_runtime: podman
