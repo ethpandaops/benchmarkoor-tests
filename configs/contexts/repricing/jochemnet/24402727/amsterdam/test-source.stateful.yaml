@@ -29,13 +29,13 @@ runner:
         archive:
           file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v3.0.0/generated-tests-stateful-jochemnet.tar.gz
           pre_run_steps:
-            - "jochemnet/gas-bump.txt"
-            - "jochemnet/funding.txt"
+            - "repricings_stateful/jochemnet/gas-bump.txt"
+            - "repricings_stateful/jochemnet/funding.txt"
           steps:
             setup:
-              - "jochemnet/setup/*.txt"
+              - "repricings_stateful/jochemnet/setup/*.txt"
             test:
-              - "jochemnet/testing/*.txt"
+              - "repricings_stateful/jochemnet/testing/*.txt"
       #opcode_source:
       #  file: opcodes_tracing.json
       #  archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6533260272
