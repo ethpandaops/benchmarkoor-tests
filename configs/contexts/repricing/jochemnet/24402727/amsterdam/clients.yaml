@@ -8,6 +8,7 @@ runner:
           bal-mode: sequential
       image: ethpandaops/geth:bal-devnet-3
       extra_args:
+        - --debug.logslowblock=0
         - --bal.executionmode=sequential
 
     - id: geth-bal-full
@@ -17,6 +18,7 @@ runner:
           bal-mode: full
       image: ethpandaops/geth:bal-devnet-3
       extra_args:
+        - --debug.logslowblock=0
         - --bal.executionmode=full
 
     - id: geth-bal-nobatchio
@@ -26,6 +28,7 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/geth:bal-devnet-3
       extra_args:
+        - --debug.logslowblock=0
         - --bal.executionmode=nobatchio
 
     # Besu
@@ -34,7 +37,7 @@ runner:
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -47,7 +50,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -60,7 +63,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/besu:bal-devnet-3-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -138,8 +141,14 @@ runner:
 
     # Erigon
 
-    # TODO: Doesn't provide feature flags yet to enable the different BAL modes
-
+    ## Help for erigon flags:
+      # --exec.batched-io  | true      | Turn on/off batched ahead of time db reads
+      # --exec.state-cache | true      | Turn on/off local caching of db reads
+      # --exec.workers     | num cpu/2 | Number of workers used for exec
+      # --exec.serial      | false     | Force workers to be 1
+      # --exec.no-merge.   | false.    | Turn off background merging
+      # --exec.no-prune.   | false.    | Turn off db removal
+    ##
     - id: erigon-bal-full
       client: erigon
       metadata:
@@ -150,3 +159,32 @@ runner:
         - --override.osaka=1774899169
         - --override.amsterdam=1774899169
         - --fcu.background.commit=false
+        - --exec.no-merge=true
+
+    - id: erigon-bal-sequential
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/erigon:bal-devnet-3
+      extra_args:
+        - --override.osaka=1774899169
+        - --override.amsterdam=1774899169
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        # Bal mode flag
+        - --exec.serial
+
+    - id: erigon-bal-nobatchio
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/erigon:bal-devnet-3
+      extra_args:
+        - --override.osaka=1774899169 # TODO: needs update for jochemnet
+        - --override.amsterdam=1774899169 # TODO: needs update for jochemnet
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        # Bal mode flag
+        - --exec.batched-io=false

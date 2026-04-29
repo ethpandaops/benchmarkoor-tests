@@ -6,7 +6,7 @@ runner:
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/geth:bal-devnet-2
+      image: ethpandaops/geth:bal-devnet-3
       extra_args:
         - --bal.executionmode=sequential
 
@@ -15,7 +15,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/geth:bal-devnet-2
+      image: ethpandaops/geth:bal-devnet-3
       extra_args:
         - --bal.executionmode=full
 
@@ -24,7 +24,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/geth:bal-devnet-2
+      image: ethpandaops/geth:bal-devnet-3
       extra_args:
         - --bal.executionmode=nobatchio
 
@@ -34,7 +34,7 @@ runner:
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -47,7 +47,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -60,7 +60,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/besu:bal-devnet-2-with-prefetch
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-state-root-timeout=-1
         - --Xbal-processing-timeout=-1
@@ -71,34 +71,32 @@ runner:
 
     # Reth
 
-    # TODO: Feature flags don't work on bal-devnet-2 branch
-    #- id: reth-bal-sequential
-    #  client: reth
-    #  metadata:
-    #    labels:
-    #      bal-mode: sequential
-    #  image: ethpandaops/reth:bal-devnet-2
-    #  extra_args:
-    #    - --engine.disable-bal-parallel-execution
-    #    - --engine.disable-bal-parallel-state-root
-    #    - --engine.disable-bal-batch-io
+    - id: reth-bal-sequential
+      client: reth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/reth:bal-devnet-3
+      extra_args:
+        - --engine.disable-bal-parallel-execution
+        - --engine.disable-bal-parallel-state-root
+        - --engine.disable-bal-batch-io
 
     - id: reth-bal-full
       client: reth
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/reth:bal-devnet-2
+      image: ethpandaops/reth:bal-devnet-3
 
-    # TODO: Feature flags don't work on bal-devnet-2 branch
-    # - id: reth-bal-nobatchio
-    #   client: reth
-    #   metadata:
-    #     labels:
-    #       bal-mode: nobatchio
-    #   image: ethpandaops/reth:bal-devnet-2
-    #   extra_args:
-    #     - --engine.disable-bal-batch-io
+    - id: reth-bal-nobatchio
+      client: reth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/reth:bal-devnet-3
+      extra_args:
+        - --engine.disable-bal-batch-io
 
     # Nethermind
 
@@ -107,19 +105,19 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
-        - --Blocks.ParallelExecution=true
-        - --Blocks.ParallelExecutionBatchRead=true
+        - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
+        - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
 
     - id: nethermind-bal-sequential
       client: nethermind
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -131,7 +129,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/nethermind:feature-parallel-txs
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -140,15 +138,50 @@ runner:
 
     # Erigon
 
-    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
-
+    ## Help for erigon flags:
+      # --exec.batched-io  | true      | Turn on/off batched ahead of time db reads
+      # --exec.state-cache | true      | Turn on/off local caching of db reads
+      # --exec.workers     | num cpu/2 | Number of workers used for exec
+      # --exec.serial      | false     | Force workers to be 1
+      # --exec.no-merge.   | false.    | Turn off background merging
+      # --exec.no-prune.   | false.    | Turn off db removal
+    ##
     - id: erigon-bal-full
       client: erigon
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/erigon:bal-devnet-2
+      image: ethpandaops/erigon:bal-devnet-3
       extra_args:
         - --override.osaka=1774899169
         - --override.amsterdam=1774899169
         - --fcu.background.commit=false
+        - --exec.no-merge=true
+
+    - id: erigon-bal-sequential
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/erigon:bal-devnet-3
+      extra_args:
+        - --override.osaka=1774899169
+        - --override.amsterdam=1774899169
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        # Bal mode flag
+        - --exec.serial
+
+    - id: erigon-bal-nobatchio
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/erigon:bal-devnet-3
+      extra_args:
+        - --override.osaka=1774899169
+        - --override.amsterdam=1774899169
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        # Bal mode flag
+        - --exec.batched-io=false

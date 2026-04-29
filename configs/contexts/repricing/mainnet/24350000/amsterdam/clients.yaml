@@ -71,7 +71,7 @@ runner:
 
     # Reth
 
-    # TODO: Feature flags don't work on bal-devnet-2 branch
+    # Feature flags don't work on bal-devnet-2 branch
     #- id: reth-bal-sequential
     #  client: reth
     #  metadata:
@@ -90,7 +90,7 @@ runner:
           bal-mode: full
       image: ethpandaops/reth:bal-devnet-2
 
-    # TODO: Feature flags don't work on bal-devnet-2 branch
+    # Feature flags don't work on bal-devnet-2 branch
     # - id: reth-bal-nobatchio
     #   client: reth
     #   metadata:
@@ -140,7 +140,7 @@ runner:
 
     # Erigon
 
-    # TODO: Doesn't provide feature flags yet to enable just sequential or disable batchio
+    # Doesn't provide feature flags yet to enable just sequential or disable batchio
 
     - id: erigon-bal-full
       client: erigon
