@@ -35,7 +35,7 @@ runner:
             setup:
               - "repricings_stateful/perf-devnet-3/setup/*.txt"
             test:
-              - "perf-devnet-3/testing/*.txt"
+              - "repricings_stateful/perf-devnet-3/testing/*.txt"
       opcode_source:
         file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/opcodes_tracing-stateful-perf-devnet-3.json
 

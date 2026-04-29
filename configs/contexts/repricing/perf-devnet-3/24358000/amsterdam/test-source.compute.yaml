@@ -20,7 +20,7 @@ runner:
             setup:
               - "repricings_compute/perf-devnet-3/setup/*.txt"
             test:
-              - "perf-devnet-3/testing/*.txt"
+              - "repricings_compute/perf-devnet-3/testing/*.txt"
       opcode_source:
         file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/opcodes_tracing-compute-perf-devnet-3.json
 
