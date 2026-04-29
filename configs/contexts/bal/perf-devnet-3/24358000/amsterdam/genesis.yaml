@@ -5,5 +5,6 @@ runner:
         besu: https://gist.githubusercontent.com/skylenet/880ec31d447b7580e476c3534df2b980/raw/af7d57855d0fd2e3c51cb3aa968b9a03fe9a71c6/genesis-perf-devnet-3-24358000-amsterdam-besu.json
         erigon: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
         geth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
-        nethermind: https://raw.githubusercontent.com/NethermindEth/gas-benchmarks/6b0db651c812c6731c468b11dd489bdcb76e7afb/scripts/genesisfiles/nethermind/generator-amsterdam-perf-devnet-3.json
+        # nethermind: https://raw.githubusercontent.com/NethermindEth/gas-benchmarks/6b0db651c812c6731c468b11dd489bdcb76e7afb/scripts/genesisfiles/nethermind/generator-amsterdam-perf-devnet-3.json # It was devnet-2 spec without eip7954TransitionTimestamp and eip8037TransitionTimestamp
+        nethermind: https://gist.githubusercontent.com/skylenet/31106a8e1f8dd7caf98d45a3ecf971da/raw/75a50028d95859dbb2cf6d88e3f718f5987edabe/perf-devnet-3-24358000-amsterdam-chainspec-devnet-3.json
         reth: https://gist.githubusercontent.com/skylenet/83b19b06b91fb44e0131d275a1aa0495/raw/4fb5ed66370bc5dc7c6745a775d4972dd6c1a098/genesis-perf-devnet-3-24358000-amsterdam-genesis.json
