@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-CLIENTS=(geth erigon nethermind besu reth)
+CLIENTS=(geth erigon nethermind besu reth ethrex)
 
 SNAPSHOTS=(
   "mainnet/24350000"

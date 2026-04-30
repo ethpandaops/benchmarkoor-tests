@@ -1,0 +1,566 @@
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-stateful-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-stateful-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-stateful-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-compute-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Compute - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-compute-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Compute - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-amsterdam-compute-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Amsterdam - Compute - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-osaka-stateful-repricing
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Osaka - Stateful - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+
+- id: benchmarkoor-ethrex-mainnet-24350000-osaka-compute-repricing
+  name: "Benchmarkoor (Ethrex) - Mainnet(24350000) - Osaka - Compute - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "mainnet"
+    block: "24350000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "mainnet/24350000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-compute-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-compute-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-compute-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-bal-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-bal-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-amsterdam-stateful-bal-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-osaka-stateful-repricing
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+
+- id: benchmarkoor-ethrex-perf-devnet-3-24358000-osaka-compute-repricing
+  name: "Benchmarkoor (Ethrex) - Perf-devnet-3(24358000) - Osaka - Compute - Repricing"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "perf-devnet-3"
+    block: "24358000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "perf-devnet-3/24358000"
+    fork: "osaka"
+    test-type: "compute"
+    context: "repricing"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-stateful-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-stateful-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-stateful-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-compute-repricing-ethrex-bal-full
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-compute-repricing-ethrex-bal-nobatchio
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - ethrex-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-nobatchio"
+
+- id: benchmarkoor-ethrex-jochemnet-24402727-amsterdam-compute-repricing-ethrex-bal-sequential
+  name: "Benchmarkoor (Ethrex) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - ethrex-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    fork: "amsterdam"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-sequential"
