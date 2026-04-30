@@ -16,3 +16,6 @@ runner:
       erigon:
         source_dir: /data-zfs/snapshots/erigon/perf-devnet-3/24358000/
         method: zfs
+      ethrex:
+        source_dir: /tank/perf-devnet-3-ethrex/
+        method: zfs
