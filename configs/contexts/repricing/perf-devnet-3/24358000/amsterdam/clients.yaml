@@ -82,6 +82,10 @@ runner:
         - --engine.disable-bal-parallel-execution
         - --engine.disable-bal-parallel-state-root
         - --engine.disable-bal-batch-io
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
 
     - id: reth-bal-full
       client: reth
@@ -89,6 +93,10 @@ runner:
         labels:
           bal-mode: full
       image: ethpandaops/reth:bal-devnet-3
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
 
     - id: reth-bal-nobatchio
       client: reth
@@ -98,6 +106,10 @@ runner:
       image: ethpandaops/reth:bal-devnet-3
       extra_args:
         - --engine.disable-bal-batch-io
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
 
     # Nethermind
 
