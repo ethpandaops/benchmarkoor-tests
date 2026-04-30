@@ -36,6 +36,9 @@ runner:
           bal-mode: sequential
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
+        - --Xplugin-rocksdb-max-open-files=-1
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=false
         - --Xbal-state-root-enabled=false
         - --Xbal-trust-state-root=false
@@ -48,6 +51,9 @@ runner:
           bal-mode: full
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
+        - --Xplugin-rocksdb-max-open-files=-1
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
         - --Xbal-trust-state-root=true
@@ -63,6 +69,9 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/besu:bal-devnet-3
       extra_args:
+        - --Xplugin-rocksdb-max-open-files=-1
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
         - --Xbal-trust-state-root=true
