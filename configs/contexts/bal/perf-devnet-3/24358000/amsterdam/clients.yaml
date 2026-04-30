@@ -173,6 +173,7 @@ runner:
         - --override.amsterdam=1774899169
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
 
     - id: erigon-bal-sequential
       client: erigon
@@ -185,6 +186,7 @@ runner:
         - --override.amsterdam=1774899169
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
         # Bal mode flag
         - --exec.serial
 
@@ -199,5 +201,6 @@ runner:
         - --override.amsterdam=1774899169
         - --fcu.background.commit=false
         - --exec.no-merge=true
+        - --exec.no-prune=true
         # Bal mode flag
         - --exec.batched-io=false
