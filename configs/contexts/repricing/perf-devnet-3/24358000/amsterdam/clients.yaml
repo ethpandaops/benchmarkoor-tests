@@ -118,12 +118,15 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: nethermindeth/nethermind:master
+      #image: nethermindeth/nethermind:master
+      image: nethermindeth/nethermind:execution-metrics-standardization
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
         - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
         - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
+        # Slow blocks
+        - --Blocks.SlowBlockThresholdMs=0
 
     - id: nethermind-bal-sequential
       client: nethermind
