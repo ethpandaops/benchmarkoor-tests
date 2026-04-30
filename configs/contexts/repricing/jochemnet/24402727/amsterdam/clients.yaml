@@ -223,3 +223,12 @@ runner:
         enabled: true
         max_retries: 120
         backoff: 30s
+
+    # Ethrex
+
+    - id: ethrex-bal-full
+      client: ethrex
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/ethrex:bal-devnet-3

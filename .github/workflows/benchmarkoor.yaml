@@ -6,7 +6,7 @@ on:
       clients:
         description: "JSON array of execution clients to benchmark"
         required: false
-        default: '["besu", "erigon", "geth", "nethermind", "reth"]'
+        default: '["besu", "erigon", "geth", "nethermind", "reth", "ethrex"]'
       instance-id:
         description: "Set this if you have multiple configurations for the same client but just want to run one of them"
         required: false

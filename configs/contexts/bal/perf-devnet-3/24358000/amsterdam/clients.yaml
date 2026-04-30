@@ -213,3 +213,12 @@ runner:
         - --exec.no-prune=true
         # Bal mode flag
         - --exec.batched-io=false
+
+    # Ethrex
+
+    - id: ethrex-bal-full
+      client: ethrex
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/ethrex:bal-devnet-3
