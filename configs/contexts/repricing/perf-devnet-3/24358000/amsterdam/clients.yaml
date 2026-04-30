@@ -46,8 +46,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      #image: ethpandaops/besu:bal-devnet-3
-      image: ethpandaops/besu:siladu-bal-devnet-3_slowblocklogging
+      image: ethpandaops/besu:bal-devnet-3
       extra_args:
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
@@ -56,8 +55,6 @@ runner:
         - --Xbal-prefetch-batch-size=500
         - --Xbal-processing-timeout=-1
         - --Xbal-state-root-timeout=-1
-        # Slow blocks
-        - --slow-block-threshold=0
 
     - id: besu-bal-nobatchio
       client: besu
