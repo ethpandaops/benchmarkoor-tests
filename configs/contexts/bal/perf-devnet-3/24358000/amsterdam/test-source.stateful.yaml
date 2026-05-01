@@ -9,20 +9,21 @@ runner:
           test-type: stateful
           context: bal
           fork: amsterdam
+
       source:
         archive:
-          file: https://github.com/jochem-brouwer/files/raw/refs/heads/main/eest_bal_new.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/25216010948/artifacts/6751115976
           pre_run_steps:
-            - "eest_bal/gas-bump.txt"
-            - "eest_bal/funding.txt"
+            - "gas-bump.txt"
+            - "funding.txt"
           steps:
             setup:
-              - "eest_bal/setup/*.txt"
+              - "setup/*.txt"
             test:
-              - "eest_bal/testing/*.txt"
+              - "testing/*.txt"
       opcode_source:
-        file: opcode_trace_results.json
-        archive: https://github.com/jochem-brouwer/files/raw/refs/heads/main/eest_bal_new.tar.gz
+        file: opcodes_tracing.json
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/25216010948/artifacts/6751112515
 
   container_runtime: podman
   client:
