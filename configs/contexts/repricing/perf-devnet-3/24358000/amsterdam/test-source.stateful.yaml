@@ -27,7 +27,7 @@ runner:
 
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/generated-tests-stateful-perf-devnet-3.tar.gz
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.1.0/generated-tests-stateful-perf-devnet-3.tar.gz
           pre_run_steps:
             - "repricings_stateful/perf-devnet-3/gas-bump.txt"
             - "repricings_stateful/perf-devnet-3/funding.txt"
@@ -37,7 +37,7 @@ runner:
             test:
               - "repricings_stateful/perf-devnet-3/testing/*.txt"
       opcode_source:
-        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.0.0/opcodes_tracing-stateful-perf-devnet-3.json
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v4.1.0/opcodes_tracing-stateful-perf-devnet-3.json
 
 
   container_runtime: podman
