@@ -185,6 +185,7 @@ runner:
         - --fcu.background.commit=false
         - --exec.no-merge=true
         - --exec.no-prune=true
+        - --exec.no-background-maintenance
       bootstrap_fcu:
         enabled: true
         max_retries: 120
@@ -201,6 +202,7 @@ runner:
         - --fcu.background.commit=false
         - --exec.no-merge=true
         - --exec.no-prune=true
+        - --exec.no-background-maintenance
         # Bal mode flag
         - --exec.serial
       bootstrap_fcu:
@@ -220,6 +222,7 @@ runner:
         - --fcu.background.commit=false
         - --exec.no-merge=true
         - --exec.no-prune=true
+        - --exec.no-background-maintenance
         # Bal mode flag
         - --exec.batched-io=false
       bootstrap_fcu:
