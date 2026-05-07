@@ -23,6 +23,7 @@ runner:
       extra_args:
         - --debug.logslowblock=0
         - --bal.executionmode=full
+        - --bal.prefetchworkers=300
 
     - id: geth-bal-nobatchio
       client: geth
