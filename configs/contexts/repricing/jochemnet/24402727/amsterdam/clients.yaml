@@ -111,6 +111,8 @@ runner:
         enabled: true
         max_retries: 10
         backoff: 1s
+      extra_args:
+        - --db.max-size=1650GB
 
     - id: reth-bal-nobatchio
       client: reth
