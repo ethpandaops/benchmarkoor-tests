@@ -2,94 +2,119 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 
 CLIENTS=(geth erigon nethermind besu reth ethrex)
 
-SNAPSHOTS=(
-  "mainnet/24350000"
-  "perf-devnet-3/24358000"
-  "jochemnet/24402727"
-)
+cap() {
+  local s="$1"
+  printf '%s%s' "$(printf '%s' "${s:0:1}" | tr '[:lower:]' '[:upper:]')" "${s:1}"
+}
 
-FORKS=(amsterdam osaka)
-# bloating context commented out for now, may be re-added later
-CONTEXTS=(repricing bal)
-REPRICING_TEST_TYPES=(stateful compute)
-# BLOATING_TEST_TYPES=(stateful)
-BAL_TEST_TYPES=(stateful)
+# Timeout in minutes for a (client, context, test_type) combo.
+get_timeout() {
+  local client="$1" context="$2" test_type="$3"
+  if [[ "$test_type" == "stateful" ]]; then
+    if [[ "$client" == "erigon" && "$context" == "repricing" ]]; then
+      echo "4500"
+    else
+      echo "2160"
+    fi
+  elif [[ "$test_type" == "compute" && ( "$client" == "erigon" || "$client" == "reth" ) ]]; then
+    echo "900"
+  else
+    echo "360"
+  fi
+}
+
+# Print instance ids from clients.yaml that belong to the given client.
+# A match is an id equal to the client name or starting with `<client>-`.
+# If the only match is the bare client name, prints a single empty line
+# (signal: emit one entry without an instance-id).
+get_instance_ids() {
+  local clients_yaml="$1" client="$2"
+  [[ -f "$clients_yaml" ]] || return 0
+
+  local ids=() id
+  while IFS= read -r id; do
+    if [[ "$id" == "$client" || "$id" == "${client}-"* ]]; then
+      ids+=("$id")
+    fi
+  done < <(sed -nE 's/^[[:space:]]+-[[:space:]]*id:[[:space:]]*([^[:space:]]+).*/\1/p' "$clients_yaml")
+
+  if [[ ${#ids[@]} -eq 0 ]]; then
+    return 0
+  elif [[ ${#ids[@]} -eq 1 && "${ids[0]}" == "$client" ]]; then
+    echo ""
+  else
+    printf '%s\n' "${ids[@]}"
+  fi
+}
 
 for client in "${CLIENTS[@]}"; do
   outfile="${SCRIPT_DIR}/benchmarkoor.${client}.yaml"
-  # Capitalise first letter for display name
-  client_display="$(tr '[:lower:]' '[:upper:]' <<< "${client:0:1}")${client:1}"
+  client_display="$(cap "$client")"
 
   entries=()
-  for snapshot in "${SNAPSHOTS[@]}"; do
-    network="${snapshot%%/*}"
-    block="${snapshot##*/}"
+  prev_subdir_key=""
+
+  while IFS= read -r subdir_path; do
+    [[ -e "${subdir_path}/.dispatchoor_ignore" ]] && continue
+
+    rel="${subdir_path#${CONTEXTS_DIR}/}"
+    IFS='/' read -r context network block subdir <<< "$rel"
+
+    snapshot="${network}/${block}"
     slug="${network}-${block}"
-    network_display="$(tr '[:lower:]' '[:upper:]' <<< "${network:0:1}")${network:1}"
+    network_display="$(cap "$network")"
+    subdir_display="$(cap "$subdir")"
+    context_display="$(cap "$context")"
 
-    for fork in "${FORKS[@]}"; do
-      # jochemnet only runs amsterdam fork
-      if [[ "$snapshot" == "jochemnet/24402727" && "$fork" != "amsterdam" ]]; then
-        continue
-      fi
-      fork_display="$(tr '[:lower:]' '[:upper:]' <<< "${fork:0:1}")${fork:1}"
+    # Discover test types from test-source.*.yaml in this subdir.
+    test_types=()
+    for ts in "${subdir_path}"/test-source.*.yaml; do
+      [[ -e "$ts" ]] || continue
+      tt="${ts##*/test-source.}"
+      tt="${tt%.yaml}"
+      test_types+=("$tt")
+    done
+    [[ ${#test_types[@]} -gt 0 ]] || continue
 
-      for context in "${CONTEXTS[@]}"; do
-        # bal context only runs on perf-devnet-3/24358000 + amsterdam
-        if [[ "$context" == "bal" ]]; then
-          if [[ "$snapshot" != "perf-devnet-3/24358000" || "$fork" != "amsterdam" ]]; then
-            continue
-          fi
-        fi
-        # jochemnet only runs repricing context
-        if [[ "$snapshot" == "jochemnet/24402727" && "$context" != "repricing" ]]; then
-          continue
-        fi
+    # Discover instance ids for this client from clients.yaml.
+    instance_ids=()
+    while IFS= read -r id; do
+      instance_ids+=("$id")
+    done < <(get_instance_ids "${subdir_path}/clients.yaml" "$client")
+    [[ ${#instance_ids[@]} -gt 0 ]] || continue
 
-        # Resolve test types for this context
-        test_types_var="${context^^}_TEST_TYPES[@]"
-        test_types=("${!test_types_var}")
+    subdir_key="${context}/${snapshot}/${subdir}"
+    if [[ "$subdir_key" != "$prev_subdir_key" ]]; then
+      entries+=("# === Context: ${context_display} ===
+# --- Subdir: ${subdir} (${snapshot}) ---")
+      prev_subdir_key="$subdir_key"
+    fi
 
-        for test_type in "${test_types[@]}"; do
-          test_type_display="$(tr '[:lower:]' '[:upper:]' <<< "${test_type:0:1}")${test_type:1}"
-          context_display="$(tr '[:lower:]' '[:upper:]' <<< "${context:0:1}")${context:1}"
+    for test_type in "${test_types[@]}"; do
+      test_type_display="$(cap "$test_type")"
+      timeout="$(get_timeout "$client" "$context" "$test_type")"
 
-          # 36h timeout for stateful runs (75h for erigon repricing stateful),
-          # 12h timeout for erigon/reth compute tests, 6h for everything else
-          timeout="360"
-          if [[ "$test_type" == "stateful" ]]; then
-            timeout="2160"
-            if [[ "$client" == "erigon" && "$context" == "repricing" ]]; then
-              timeout="4500"
-            fi
-          elif [[ "$test_type" == "compute" && ("$client" == "erigon" || "$client" == "reth") ]]; then
-            timeout="900"
-          fi
-
-          instance_ids=("")
-          if [[ "$fork" == "amsterdam" ]]; then
-            instance_ids=("${client}-bal-full" "${client}-bal-nobatchio" "${client}-bal-sequential")
-          fi
-
-          for instance_id in "${instance_ids[@]}"; do
-            id_suffix=""
-            name_suffix=""
-            instance_label=""
-            instance_input=""
-            if [[ -n "$instance_id" ]]; then
-              id_suffix="-${instance_id}"
-              name_suffix=" - ${instance_id}"
-              instance_label="
+      for instance_id in "${instance_ids[@]}"; do
+        id_suffix=""
+        name_suffix=""
+        instance_label=""
+        instance_input=""
+        if [[ -n "$instance_id" ]]; then
+          id_suffix="-${instance_id}"
+          name_suffix=" - ${instance_id}"
+          instance_label="
     instance-id: \"${instance_id}\""
-              instance_input="
+          instance_input="
     instance-id: \"${instance_id}\""
-            fi
+        fi
 
-            entries+=("- id: benchmarkoor-${client}-${slug}-${fork}-${test_type}-${context}${id_suffix}
-  name: \"Benchmarkoor (${client_display}) - ${network_display}(${block}) - ${fork_display} - ${test_type_display} - ${context_display}${name_suffix}\"
+        entries+=("- id: benchmarkoor-${client}-${context}-${slug}-${subdir}-${test_type}${id_suffix}
+  name: \"(${client_display}) - ${context_display} - ${network_display}(${block}) - ${subdir_display} - ${test_type_display}${name_suffix}\"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -98,30 +123,28 @@ for client in "${CLIENTS[@]}"; do
     el-client: \"${client}\"
     network: \"${network}\"
     block: \"${block}\"
-    fork: \"${fork}\"
+    subdir: \"${subdir}\"
     test-type: \"${test_type}\"
     context: \"${context}\"${instance_label}
   inputs:
     run-timeout-minutes: \"${timeout}\"
     clients: '[\"${client}\"]'
     snapshot: \"${snapshot}\"
-    fork: \"${fork}\"
+    subdir: \"${subdir}\"
     test-type: \"${test_type}\"
     context: \"${context}\"${instance_input}")
-          done
-        done
       done
     done
-  done
+  done < <(find "${CONTEXTS_DIR}" -mindepth 4 -maxdepth 4 -type d | sort)
 
-  first=true
-  for entry in "${entries[@]}"; do
-    if $first; then
-      first=false
-    else
+  {
+    echo "# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY"
+    echo "# Regenerate with: make config (or ./dispatchoor/generate.sh)"
+    echo "# Source: configs/contexts/<context>/<network>/<block>/<subdir>/"
+    for entry in "${entries[@]}"; do
       echo ""
-    fi
-    echo "$entry"
-  done > "${outfile}"
-  echo "Generated ${outfile}"
+      echo "$entry"
+    done
+  } > "${outfile}"
+  echo "Generated ${outfile} (${#entries[@]} entries)"
 done

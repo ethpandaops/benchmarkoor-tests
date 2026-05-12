@@ -1,0 +1,32 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: jochemnet-24402727-amsterdam-compute
+          chain: jochemnet
+          block: "24402727"
+          test-type: compute
+          context: repricing
+          fork: amsterdam
+
+      source:
+        archive:
+          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6532377612
+          pre_run_steps:
+            - "gas-bump.txt"
+            - "funding.txt"
+          steps:
+            setup:
+              - "setup/*.txt"
+            test:
+              - "testing/*.txt"
+      opcode_source:
+        file: opcodes_tracing.json
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/24656413846/artifacts/6532374026
+
+
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: none

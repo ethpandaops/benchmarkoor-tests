@@ -1,185 +1,12 @@
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
+# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+# Regenerate with: make config (or ./dispatchoor/generate.sh)
+# Source: configs/contexts/<context>/<network>/<block>/<subdir>/
 
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
+# === Context: Bal ===
+# --- Subdir: amsterdam-devnet-3 (perf-devnet-3/24358000) ---
 
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-stateful-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Stateful - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-compute-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Compute - Repricing - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-compute-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Compute - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-mainnet-24350000-amsterdam-compute-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Amsterdam - Compute - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-
-- id: benchmarkoor-besu-mainnet-24350000-osaka-stateful-repricing
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Osaka - Stateful - Repricing"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "repricing"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "osaka"
-    test-type: "stateful"
-    context: "repricing"
-
-- id: benchmarkoor-besu-mainnet-24350000-osaka-compute-repricing
-  name: "Benchmarkoor (Besu) - Mainnet(24350000) - Osaka - Compute - Repricing"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "mainnet"
-    block: "24350000"
-    fork: "osaka"
-    test-type: "compute"
-    context: "repricing"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "mainnet/24350000"
-    fork: "osaka"
-    test-type: "compute"
-    context: "repricing"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - besu-bal-full"
+- id: benchmarkoor-besu-bal-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-sequential
+  name: "(Besu) - Bal - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -188,191 +15,7 @@
     el-client: "besu"
     network: "perf-devnet-3"
     block: "24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-compute-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-compute-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-compute-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Compute - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-full
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bal"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bal"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bal"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "bal"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-perf-devnet-3-24358000-amsterdam-stateful-bal-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Amsterdam - Stateful - Bal - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "perf-devnet-3"
-    block: "24358000"
-    fork: "amsterdam"
+    subdir: "amsterdam-devnet-3"
     test-type: "stateful"
     context: "bal"
     instance-id: "besu-bal-sequential"
@@ -380,13 +23,13 @@
     run-timeout-minutes: "2160"
     clients: '["besu"]'
     snapshot: "perf-devnet-3/24358000"
-    fork: "amsterdam"
+    subdir: "amsterdam-devnet-3"
     test-type: "stateful"
     context: "bal"
     instance-id: "besu-bal-sequential"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-osaka-stateful-repricing
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Osaka - Stateful - Repricing"
+- id: benchmarkoor-besu-bal-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-full
+  name: "(Besu) - Bal - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -395,19 +38,21 @@
     el-client: "besu"
     network: "perf-devnet-3"
     block: "24358000"
-    fork: "osaka"
+    subdir: "amsterdam-devnet-3"
     test-type: "stateful"
-    context: "repricing"
+    context: "bal"
+    instance-id: "besu-bal-full"
   inputs:
     run-timeout-minutes: "2160"
     clients: '["besu"]'
     snapshot: "perf-devnet-3/24358000"
-    fork: "osaka"
+    subdir: "amsterdam-devnet-3"
     test-type: "stateful"
-    context: "repricing"
+    context: "bal"
+    instance-id: "besu-bal-full"
 
-- id: benchmarkoor-besu-perf-devnet-3-24358000-osaka-compute-repricing
-  name: "Benchmarkoor (Besu) - Perf-devnet-3(24358000) - Osaka - Compute - Repricing"
+- id: benchmarkoor-besu-bal-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-nobatchio
+  name: "(Besu) - Bal - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-nobatchio"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -416,19 +61,24 @@
     el-client: "besu"
     network: "perf-devnet-3"
     block: "24358000"
-    fork: "osaka"
-    test-type: "compute"
-    context: "repricing"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "besu-bal-nobatchio"
   inputs:
-    run-timeout-minutes: "360"
+    run-timeout-minutes: "2160"
     clients: '["besu"]'
     snapshot: "perf-devnet-3/24358000"
-    fork: "osaka"
-    test-type: "compute"
-    context: "repricing"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "bal"
+    instance-id: "besu-bal-nobatchio"
 
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-full"
+# === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-3 (jochemnet/24402727) ---
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-compute-besu-bal-sequential
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Compute - besu-bal-sequential"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor.yaml
@@ -437,122 +87,7 @@
     el-client: "besu"
     network: "jochemnet"
     block: "24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "jochemnet"
-    block: "24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-stateful-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Stateful - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "jochemnet"
-    block: "24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-  inputs:
-    run-timeout-minutes: "2160"
-    clients: '["besu"]'
-    snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
-    test-type: "stateful"
-    context: "repricing"
-    instance-id: "besu-bal-sequential"
-
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-full
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-full"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "jochemnet"
-    block: "24402727"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-full"
-
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-nobatchio
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-nobatchio"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "jochemnet"
-    block: "24402727"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-  inputs:
-    run-timeout-minutes: "360"
-    clients: '["besu"]'
-    snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
-    test-type: "compute"
-    context: "repricing"
-    instance-id: "besu-bal-nobatchio"
-
-- id: benchmarkoor-besu-jochemnet-24402727-amsterdam-compute-repricing-besu-bal-sequential
-  name: "Benchmarkoor (Besu) - Jochemnet(24402727) - Amsterdam - Compute - Repricing - besu-bal-sequential"
-  owner: ethpandaops
-  repo: benchmarkoor-tests
-  workflow_id: benchmarkoor.yaml
-  ref: master
-  labels:
-    el-client: "besu"
-    network: "jochemnet"
-    block: "24402727"
-    fork: "amsterdam"
+    subdir: "amsterdam-devnet-3"
     test-type: "compute"
     context: "repricing"
     instance-id: "besu-bal-sequential"
@@ -560,7 +95,449 @@
     run-timeout-minutes: "360"
     clients: '["besu"]'
     snapshot: "jochemnet/24402727"
-    fork: "amsterdam"
+    subdir: "amsterdam-devnet-3"
     test-type: "compute"
     context: "repricing"
     instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-compute-besu-bal-full
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Compute - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-compute-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Compute - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-stateful-besu-bal-sequential
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Stateful - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-stateful-besu-bal-full
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Stateful - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-3-stateful-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-3 - Stateful - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+# === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-6 (jochemnet/24402727) ---
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-compute-besu-bal-sequential
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Compute - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-compute-besu-bal-full
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Compute - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-compute-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Compute - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-stateful-besu-bal-sequential
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Stateful - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-stateful-besu-bal-full
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Stateful - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-6-stateful-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-6 - Stateful - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-6"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+# === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-3 (perf-devnet-3/24358000) ---
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-compute-besu-bal-sequential
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Compute - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-compute-besu-bal-full
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Compute - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-compute-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Compute - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-sequential
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-sequential"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-full
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-stateful-besu-bal-nobatchio
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Amsterdam-devnet-3 - Stateful - besu-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "amsterdam-devnet-3"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-nobatchio"
+
+# === Context: Repricing ===
+# --- Subdir: osaka (perf-devnet-3/24358000) ---
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-osaka-compute
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Osaka - Compute"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "osaka"
+    test-type: "compute"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "osaka"
+    test-type: "compute"
+    context: "repricing"
+
+- id: benchmarkoor-besu-repricing-perf-devnet-3-24358000-osaka-stateful
+  name: "(Besu) - Repricing - Perf-devnet-3(24358000) - Osaka - Stateful"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "perf-devnet-3"
+    block: "24358000"
+    subdir: "osaka"
+    test-type: "stateful"
+    context: "repricing"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "perf-devnet-3/24358000"
+    subdir: "osaka"
+    test-type: "stateful"
+    context: "repricing"

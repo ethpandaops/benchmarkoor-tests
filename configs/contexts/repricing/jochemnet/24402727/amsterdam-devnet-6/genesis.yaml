@@ -1,0 +1,10 @@
+runner:
+  client:
+    config:
+      genesis:
+        # Mainnet with updated AMSTERDAM TIMESTAMPS FOR (timestamp of block 24402727) + 1 ====> 1769856767 ( 0x697ddeff in hex)
+        nethermind: https://gist.githubusercontent.com/skylenet/b2105a971e805a3757966ecedae14d5f/raw/961790457bc485b32d082127017635827c5c22de/genesis-jochemnet-24402727-amsterdam-devnet-6-chainspec.json
+        erigon: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/ab888a0f90dcf214bd5d3c36b3dfa1827335ecf9/genesis-jochemnet-24402727-amsterdam-genesis.json
+        geth: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/ab888a0f90dcf214bd5d3c36b3dfa1827335ecf9/genesis-jochemnet-24402727-amsterdam-genesis.json
+        reth: https://gist.githubusercontent.com/skylenet/8226878ba786efcf10b5fd74be97fe41/raw/ab888a0f90dcf214bd5d3c36b3dfa1827335ecf9/genesis-jochemnet-24402727-amsterdam-genesis.json
+        besu: https://gist.githubusercontent.com/skylenet/6c7d89dc5646e074349f0dcee301f709/raw/7fee6c1db02037444b6780301aad077dc5b6189c/genesis-jochemnet-24402727-amsterdam-besu.json
