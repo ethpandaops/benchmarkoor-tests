@@ -222,3 +222,5 @@ runner:
         labels:
           bal-mode: full
       image: ethpandaops/ethrex:bal-devnet-3
+      extra_args:
+        - --no-precompile-cache
