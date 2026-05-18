@@ -357,6 +357,147 @@
     instance-id: "nethermind-bal-nobatchio"
 
 # === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-7 (jochemnet/24402727) ---
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-nethermind-bal-full
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-nethermind-bal-sequential
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - nethermind-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-sequential"
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-nethermind-bal-nobatchio
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - nethermind-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-nobatchio"
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-nethermind-bal-full
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-nethermind-bal-sequential
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - nethermind-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-sequential"
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-nethermind-bal-nobatchio
+  name: "(Nethermind) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - nethermind-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["nethermind"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-nobatchio"
+
+# === Context: Repricing ===
 # --- Subdir: amsterdam-devnet-3 (perf-devnet-3/24358000) ---
 
 - id: benchmarkoor-nethermind-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-compute-nethermind-bal-full

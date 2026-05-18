@@ -357,6 +357,147 @@
     instance-id: "geth-bal-nobatchio"
 
 # === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-7 (jochemnet/24402727) ---
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-geth-bal-sequential
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - geth-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-sequential"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-sequential"
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-geth-bal-full
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - geth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-full"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-full"
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-geth-bal-nobatchio
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - geth-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "geth-bal-nobatchio"
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-geth-bal-sequential
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - geth-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-sequential"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-sequential"
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-geth-bal-full
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - geth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-full"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-full"
+
+- id: benchmarkoor-geth-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-geth-bal-nobatchio
+  name: "(Geth) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - geth-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "geth"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-nobatchio"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["geth"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "geth-bal-nobatchio"
+
+# === Context: Repricing ===
 # --- Subdir: amsterdam-devnet-3 (perf-devnet-3/24358000) ---
 
 - id: benchmarkoor-geth-repricing-perf-devnet-3-24358000-amsterdam-devnet-3-compute-geth-bal-sequential
