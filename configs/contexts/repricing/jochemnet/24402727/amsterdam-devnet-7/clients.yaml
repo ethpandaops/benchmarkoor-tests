@@ -1,0 +1,233 @@
+runner:
+  instances:
+    # Geth
+    - id: geth-bal-sequential
+      client: geth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/geth:bal-devnet-6
+      extra_args:
+        - --debug.logslowblock=0
+        - --bal.executionmode=sequential
+      #opcode_extraction:
+      #  enabled: true
+      #  timeout: 4m
+
+    - id: geth-bal-full
+      client: geth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/geth:bal-devnet-6
+      extra_args:
+        - --debug.logslowblock=0
+        - --bal.executionmode=full
+        #- --bal.prefetchworkers=300
+        #- --bal.blockingprefetch
+
+    - id: geth-bal-nobatchio
+      client: geth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/geth:bal-devnet-6
+      extra_args:
+        - --debug.logslowblock=0
+        - --bal.executionmode=nobatchio
+
+    # Besu
+    - id: besu-bal-sequential
+      client: besu
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/besu:bal-devnet-7
+      extra_args:
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
+        - --Xbal-perfect-parallelization-enabled=false
+        - --Xbal-state-root-enabled=false
+        - --Xbal-trust-state-root=false
+        - --Xbal-prefetch-reading-enabled=false
+
+    - id: besu-bal-full
+      client: besu
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/besu:bal-devnet-7
+      extra_args:
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
+        - --Xbal-perfect-parallelization-enabled=true
+        - --Xbal-state-root-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-prefetch-batch-size=8
+        - --Xbal-processing-timeout=-1
+        - --Xbal-state-root-timeout=-1
+
+    - id: besu-bal-nobatchio
+      client: besu
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/besu:bal-devnet-7
+      extra_args:
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
+        - --Xbal-perfect-parallelization-enabled=true
+        - --Xbal-state-root-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-prefetch-reading-enabled=false
+        - --Xbal-processing-timeout=-1
+        - --Xbal-state-root-timeout=-1
+
+    # Reth
+
+    - id: reth-bal-sequential
+      client: reth
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/reth:bal-devnet-7
+      extra_args:
+        - --engine.disable-bal-parallel-execution
+        - --engine.disable-bal-parallel-state-root
+        - --engine.disable-bal-batch-io
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
+
+    - id: reth-bal-full
+      client: reth
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/reth:bal-devnet-7
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
+
+    - id: reth-bal-nobatchio
+      client: reth
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/reth:bal-devnet-7
+      extra_args:
+        - --engine.disable-bal-batch-io
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 1s
+
+    # Nethermind
+
+    - id: nethermind-bal-full
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: full
+      #image: nethermindeth/nethermind:master
+      image: nethermindeth/nethermind:bal-devnet-7
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
+        - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
+
+    - id: nethermind-bal-sequential
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: sequential
+      #image: nethermindeth/nethermind:master
+      image: nethermindeth/nethermind:bal-devnet-7
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=false
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    - id: nethermind-bal-nobatchio
+      client: nethermind
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      #image: nethermindeth/nethermind:master
+      image: nethermindeth/nethermind:bal-devnet-7
+      extra_args:
+        - --config=mainnet
+        - --FlatDb.Enabled=true
+        - --Blocks.ParallelExecution=true
+        - --Blocks.ParallelExecutionBatchRead=false
+
+    # Erigon
+
+    ## Help for erigon flags:
+      # --exec.batched-io  | true      | Turn on/off batched ahead of time db reads
+      # --exec.state-cache | true      | Turn on/off local caching of db reads
+      # --exec.workers     | num cpu/2 | Number of workers used for exec
+      # --exec.serial      | false     | Force workers to be 1
+      # --exec.no-merge.   | false.    | Turn off background merging
+      # --exec.no-prune.   | false.    | Turn off db removal
+    ##
+    - id: erigon-bal-full
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/erigon:bal-devnet-7
+      extra_args:
+        - --override.amsterdam=1769856767
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        - --exec.no-prune=true
+        - --exec.no-background-maintenance
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 120
+        backoff: 30s
+
+    - id: erigon-bal-sequential
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: sequential
+      image: ethpandaops/erigon:bal-devnet-7
+      extra_args:
+        - --override.amsterdam=1769856767
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        - --exec.no-prune=true
+        - --exec.no-background-maintenance
+        # Bal mode flag
+        - --exec.serial
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 120
+        backoff: 30s
+
+
+    - id: erigon-bal-nobatchio
+      client: erigon
+      metadata:
+        labels:
+          bal-mode: nobatchio
+      image: ethpandaops/erigon:bal-devnet-7
+      extra_args:
+        - --override.amsterdam=1769856767
+        - --fcu.background.commit=false
+        - --exec.no-merge=true
+        - --exec.no-prune=true
+        - --exec.no-background-maintenance
+        # Bal mode flag
+        - --exec.batched-io=false
+      bootstrap_fcu:
+        enabled: true
+        max_retries: 120
+        backoff: 30s
