@@ -12,7 +12,7 @@ runner:
 
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26016790301/artifacts/7053734709
+          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114869591
           pre_run_steps:
             - "gas-bump.txt"
             - "funding.txt"
@@ -23,7 +23,7 @@ runner:
               - "testing/*.txt"
       opcode_source:
         file: opcodes_tracing.json
-        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26016790301/artifacts/7053730714
+        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114864665
 
 
   container_runtime: podman
