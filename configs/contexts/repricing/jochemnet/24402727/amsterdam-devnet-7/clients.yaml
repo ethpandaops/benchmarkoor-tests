@@ -245,3 +245,12 @@ runner:
       image: ethpandaops/ethrex:bal-devnet-7
       extra_args:
         - --no-precompile-cache
+
+    # Nimbus
+
+    - id: nimbus-bal-full
+      client: nimbus
+      metadata:
+        labels:
+          bal-mode: full
+      image: ethpandaops/nimbus-eth1:bal-devnet-7

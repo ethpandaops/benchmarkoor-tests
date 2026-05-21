@@ -12,6 +12,7 @@ This repository coordinates with the [benchmarkoor](https://github.com/ethpandao
 - Besu
 - Reth
 - Ethrex
+- Nimbus
 
 ## Configuration
 
