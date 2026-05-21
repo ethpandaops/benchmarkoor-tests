@@ -16,3 +16,6 @@ runner:
       erigon:
         source_dir: /data-zfs/snapshots/erigon/jochemnet/24402727/
         method: zfs
+      ethrex:
+        source_dir: /data-zfs/snapshots/ethrex/jochemnet/24402727/
+        method: zfs
