@@ -6,7 +6,8 @@ runner:
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/geth:bal-devnet-6
+      #image: ethpandaops/geth:bal-devnet-6
+      image: ethpandaops/geth:bal-devnet-7
       extra_args:
         - --debug.logslowblock=0
         - --bal.executionmode=sequential
@@ -19,7 +20,8 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/geth:bal-devnet-6
+      #image: ethpandaops/geth:bal-devnet-6
+      image: ethpandaops/geth:bal-devnet-7
       extra_args:
         - --debug.logslowblock=0
         - --bal.executionmode=full
@@ -31,7 +33,8 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/geth:bal-devnet-6
+      #image: ethpandaops/geth:bal-devnet-6
+      image: ethpandaops/geth:bal-devnet-7
       extra_args:
         - --debug.logslowblock=0
         - --bal.executionmode=nobatchio
