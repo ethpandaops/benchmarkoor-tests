@@ -10,20 +10,35 @@ runner:
           context: repricing
           fork: amsterdam
 
+      # previous (gha artifacts, run 26162124888):
+      #source:
+      #  archive:
+      #    file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114869591
+      #    pre_run_steps:
+      #      - "gas-bump.txt"
+      #      - "funding.txt"
+      #    steps:
+      #      setup:
+      #        - "setup/*.txt"
+      #      test:
+      #        - "testing/*.txt"
+      #opcode_source:
+      #  file: opcodes_tracing.json
+      #  archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114864665
+
       source:
         archive:
-          file: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114869591
+          file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v5.2.0/generated-tests-compute-jochemnet.tar.gz
           pre_run_steps:
-            - "gas-bump.txt"
-            - "funding.txt"
+            - "repricings_compute/jochemnet/gas-bump.txt"
+            - "repricings_compute/jochemnet/funding.txt"
           steps:
             setup:
-              - "setup/*.txt"
+              - "repricings_compute/jochemnet/setup/*.txt"
             test:
-              - "testing/*.txt"
+              - "repricings_compute/jochemnet/testing/*.txt"
       opcode_source:
-        file: opcodes_tracing.json
-        archive: https://github.com/NethermindEth/gas-benchmarks/actions/runs/26162124888/artifacts/7114864665
+        file: https://github.com/NethermindEth/gas-benchmarks/releases/download/amsterdam-repricings-v5.2.0/opcodes_tracing-compute-jochemnet.json
 
 
   container_runtime: podman
