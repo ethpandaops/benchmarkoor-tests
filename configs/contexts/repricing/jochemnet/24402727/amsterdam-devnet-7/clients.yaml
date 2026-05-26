@@ -73,17 +73,17 @@ runner:
 
     # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
     # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
-    # Image built by eth-client-docker-image-builder (besu/aot, BESU_BUILD_AOT).
+    # PoC image, built manually by baking a Besu-team-provided AOT cache into
+    # ethpandaops/besu:bal-devnet-7 (no recompile) and validated to load. This
+    # is experimental and expected to be reverted once comparison numbers are in.
     # BESU_OPTS is a JVM env var, so it must go here, not in extra_args.
-    # Quick-test alternative (no AOT image): keep image bal-devnet-7 and drop
-    # the .aot into the besu ZFS snapshot, then point AOTCache at /data/besu/.
     - id: besu-bal-full-aot
       client: besu
       metadata:
         labels:
           bal-mode: full
           aot: "true"
-      image: ethpandaops/besu:bal-devnet-7-aot
+      image: ethpandaops/besu:bal-devnet-7-aot-poc
       environment:
         BESU_OPTS: "-XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
       extra_args:
