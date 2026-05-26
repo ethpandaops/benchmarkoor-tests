@@ -405,6 +405,29 @@
     context: "repricing"
     instance-id: "besu-bal-full"
 
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-besu-bal-full-aot
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - besu-bal-full-aot"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
+
 - id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-besu-bal-nobatchio
   name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - besu-bal-nobatchio"
   owner: ethpandaops
@@ -473,6 +496,29 @@
     test-type: "stateful"
     context: "repricing"
     instance-id: "besu-bal-full"
+
+- id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-besu-bal-full-aot
+  name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - besu-bal-full-aot"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["besu"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
 
 - id: benchmarkoor-besu-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-besu-bal-nobatchio
   name: "(Besu) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - besu-bal-nobatchio"
