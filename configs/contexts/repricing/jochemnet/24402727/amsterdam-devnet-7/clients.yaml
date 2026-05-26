@@ -71,6 +71,32 @@ runner:
         - --Xbal-processing-timeout=-1
         - --Xbal-state-root-timeout=-1
 
+    # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
+    # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
+    # Image built by eth-client-docker-image-builder (besu/aot, BESU_BUILD_AOT).
+    # BESU_OPTS is a JVM env var, so it must go here, not in extra_args.
+    # Quick-test alternative (no AOT image): keep image bal-devnet-7 and drop
+    # the .aot into the besu ZFS snapshot, then point AOTCache at /data/besu/.
+    - id: besu-bal-full-aot
+      client: besu
+      metadata:
+        labels:
+          bal-mode: full
+          aot: "true"
+      image: ethpandaops/besu:bal-devnet-7-aot
+      environment:
+        BESU_OPTS: "-XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
+      extra_args:
+        - --Xplugin-rocksdb-high-spec-enabled=true
+        # Bal mode flags
+        - --Xbal-perfect-parallelization-enabled=true
+        - --Xbal-state-root-enabled=true
+        - --Xbal-trust-state-root=true
+        - --Xbal-prefetch-reading-enabled=true
+        - --Xbal-prefetch-batch-size=8
+        - --Xbal-processing-timeout=-1
+        - --Xbal-state-root-timeout=-1
+
     - id: besu-bal-nobatchio
       client: besu
       metadata:
