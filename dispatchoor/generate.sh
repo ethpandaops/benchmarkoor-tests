@@ -5,7 +5,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 
-CLIENTS=(geth erigon nethermind besu reth ethrex nimbus)
+CLIENTS=(geth erigon nethermind besu reth ethrex)
 
 cap() {
   local s="$1"
