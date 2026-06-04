@@ -1,0 +1,156 @@
+# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+# Regenerate with: make config (or ./dispatchoor/generate.sh)
+# Source: configs/contexts/<context>/<network>/<block>/<subdir>/
+
+# === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-7 (jochemnet/24402727) ---
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-erigon-bal-full-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-erigon-bal-sequential-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - erigon-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-erigon-bal-nobatchio-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - erigon-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "900"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-erigon-bal-full-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-erigon-bal-sequential-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - erigon-bal-sequential"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-sequential"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-erigon-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-erigon-bal-nobatchio-schelk
+  name: "(Erigon) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - erigon-bal-nobatchio"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "4500"
+    clients: '["erigon"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-nobatchio"
+    data-dir-type: "schelk"

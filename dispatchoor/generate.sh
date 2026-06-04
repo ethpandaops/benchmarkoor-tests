@@ -52,12 +52,37 @@ get_instance_ids() {
   fi
 }
 
+# Data directory types to generate configs for. "zfs" is the default and
+# produces the canonical benchmarkoor.<client>.yaml; any other type produces
+# benchmarkoor.<client>.<type>.yaml with an extra data-dir-type label/input.
+DATA_DIR_TYPES=(zfs schelk)
+
 for client in "${CLIENTS[@]}"; do
-  outfile="${SCRIPT_DIR}/benchmarkoor.${client}.yaml"
+ for data_dir_type in "${DATA_DIR_TYPES[@]}"; do
+  if [[ "$data_dir_type" == "zfs" ]]; then
+    # Default type: canonical filenames, no infix, no extra label/input.
+    outfile="${SCRIPT_DIR}/benchmarkoor.${client}.yaml"
+    ddt_infix=""
+    datadir_id_suffix=""
+    datadir_label=""
+    datadir_input=""
+  else
+    # Non-default type: configs live in datadir.<type>.yaml /
+    # test-source.<test-type>.<type>.yaml and we only emit entries for which
+    # those variant files actually exist.
+    outfile="${SCRIPT_DIR}/benchmarkoor.${client}.${data_dir_type}.yaml"
+    ddt_infix=".${data_dir_type}"
+    datadir_id_suffix="-${data_dir_type}"
+    datadir_label="
+    data-dir-type: \"${data_dir_type}\""
+    datadir_input="
+    data-dir-type: \"${data_dir_type}\""
+  fi
   client_display="$(cap "$client")"
 
   entries=()
   prev_subdir_key=""
+  pending_header=""
 
   while IFS= read -r subdir_path; do
     [[ -e "${subdir_path}/.dispatchoor_ignore" ]] && continue
@@ -71,15 +96,24 @@ for client in "${CLIENTS[@]}"; do
     subdir_display="$(cap "$subdir")"
     context_display="$(cap "$context")"
 
-    # Discover test types from test-source.*.yaml in this subdir.
+    # Discover base test types from test-source.<type>.yaml in this subdir.
+    # Skip data-dir-type variants (e.g. test-source.compute.schelk.yaml): those
+    # carry a dot in the extracted name and are selected via data-dir-type, not
+    # as standalone test types.
     test_types=()
     for ts in "${subdir_path}"/test-source.*.yaml; do
       [[ -e "$ts" ]] || continue
       tt="${ts##*/test-source.}"
       tt="${tt%.yaml}"
+      [[ "$tt" == *.* ]] && continue
       test_types+=("$tt")
     done
     [[ ${#test_types[@]} -gt 0 ]] || continue
+
+    # For non-default data dir types, skip snapshots without a matching datadir.
+    if [[ -n "$ddt_infix" && ! -f "${REPO_ROOT}/configs/datadirs/${snapshot}/datadir${ddt_infix}.yaml" ]]; then
+      continue
+    fi
 
     # Discover instance ids for this client from clients.yaml.
     instance_ids=()
@@ -88,14 +122,22 @@ for client in "${CLIENTS[@]}"; do
     done < <(get_instance_ids "${subdir_path}/clients.yaml" "$client")
     [[ ${#instance_ids[@]} -gt 0 ]] || continue
 
+    # Stage the subdir header and flush it lazily, only once an actual entry is
+    # emitted, so subdirs that contribute no entries leave no orphan header.
     subdir_key="${context}/${snapshot}/${subdir}"
     if [[ "$subdir_key" != "$prev_subdir_key" ]]; then
-      entries+=("# === Context: ${context_display} ===
-# --- Subdir: ${subdir} (${snapshot}) ---")
+      pending_header="# === Context: ${context_display} ===
+# --- Subdir: ${subdir} (${snapshot}) ---"
       prev_subdir_key="$subdir_key"
     fi
 
     for test_type in "${test_types[@]}"; do
+      # For non-default data dir types, skip test types without a matching
+      # test-source variant.
+      if [[ -n "$ddt_infix" && ! -f "${subdir_path}/test-source.${test_type}${ddt_infix}.yaml" ]]; then
+        continue
+      fi
+
       test_type_display="$(cap "$test_type")"
       timeout="$(get_timeout "$client" "$context" "$test_type")"
 
@@ -113,7 +155,12 @@ for client in "${CLIENTS[@]}"; do
     instance-id: \"${instance_id}\""
         fi
 
-        entries+=("- id: benchmarkoor-${client}-${context}-${slug}-${subdir}-${test_type}${id_suffix}
+        if [[ -n "$pending_header" ]]; then
+          entries+=("$pending_header")
+          pending_header=""
+        fi
+
+        entries+=("- id: benchmarkoor-${client}-${context}-${slug}-${subdir}-${test_type}${id_suffix}${datadir_id_suffix}
   name: \"(${client_display}) - ${context_display} - ${network_display}(${block}) - ${subdir_display} - ${test_type_display}${name_suffix}\"
   owner: ethpandaops
   repo: benchmarkoor-tests
@@ -125,14 +172,14 @@ for client in "${CLIENTS[@]}"; do
     block: \"${block}\"
     subdir: \"${subdir}\"
     test-type: \"${test_type}\"
-    context: \"${context}\"${instance_label}
+    context: \"${context}\"${instance_label}${datadir_label}
   inputs:
     run-timeout-minutes: \"${timeout}\"
     clients: '[\"${client}\"]'
     snapshot: \"${snapshot}\"
     subdir: \"${subdir}\"
     test-type: \"${test_type}\"
-    context: \"${context}\"${instance_input}")
+    context: \"${context}\"${instance_input}${datadir_input}")
       done
     done
   done < <(find "${CONTEXTS_DIR}" -mindepth 4 -maxdepth 4 -type d | sort)
@@ -147,4 +194,5 @@ for client in "${CLIENTS[@]}"; do
     done
   } > "${outfile}"
   echo "Generated ${outfile} (${#entries[@]} entries)"
+ done
 done

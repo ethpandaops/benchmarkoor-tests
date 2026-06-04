@@ -1,0 +1,56 @@
+# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+# Regenerate with: make config (or ./dispatchoor/generate.sh)
+# Source: configs/contexts/<context>/<network>/<block>/<subdir>/
+
+# === Context: Repricing ===
+# --- Subdir: amsterdam-devnet-7 (jochemnet/24402727) ---
+
+- id: benchmarkoor-ethrex-repricing-jochemnet-24402727-amsterdam-devnet-7-compute-ethrex-bal-full-schelk
+  name: "(Ethrex) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Compute - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "360"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+    data-dir-type: "schelk"
+
+- id: benchmarkoor-ethrex-repricing-jochemnet-24402727-amsterdam-devnet-7-stateful-ethrex-bal-full-schelk
+  name: "(Ethrex) - Repricing - Jochemnet(24402727) - Amsterdam-devnet-7 - Stateful - ethrex-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor.yaml
+  ref: master
+  labels:
+    el-client: "ethrex"
+    network: "jochemnet"
+    block: "24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+    data-dir-type: "schelk"
+  inputs:
+    run-timeout-minutes: "2160"
+    clients: '["ethrex"]'
+    snapshot: "jochemnet/24402727"
+    subdir: "amsterdam-devnet-7"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "ethrex-bal-full"
+    data-dir-type: "schelk"
