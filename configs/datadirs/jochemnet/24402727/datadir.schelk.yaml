@@ -1,0 +1,24 @@
+runner:
+  client:
+    datadirs:
+      besu:
+        source_dir: /schelk/snapshots/besu/jochemnet/24402727/
+        method: schelk
+      geth:
+        source_dir: /schelk/snapshots/geth/jochemnet/24402727/
+        method: schelk
+      nethermind:
+        source_dir: /schelk/snapshots/nethermind/jochemnet/24402727/
+        method: schelk
+      reth:
+        source_dir: /schelk/snapshots/reth/jochemnet/24402727/
+        method: schelk
+      erigon:
+        source_dir: /schelk/snapshots/erigon/jochemnet/24402727/
+        method: schelk
+      ethrex:
+        source_dir: /schelk/snapshots/ethrex/jochemnet/24402727/
+        method: schelk
+      nimbus:
+        source_dir: /schelk/snapshots/nimbus/jochemnet/24402727/
+        method: schelk

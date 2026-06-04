@@ -38,6 +38,14 @@ on:
           - "stateful"
           - "compute"
         default: "stateful"
+      data-dir-type:
+        description: "Data directory type"
+        required: false
+        type: choice
+        options:
+          - "zfs"
+          - "schelk"
+        default: "zfs"
       run-timeout-minutes:
         description: "Timeout for the benchmark run (minutes)"
         required: false
@@ -63,7 +71,9 @@ jobs:
         client: ${{ fromJSON(inputs.clients) }}
     runs-on:
       group: gasbenchmark
-      labels: snapshot-${{ matrix.client }}
+      labels:
+        - snapshot-${{ matrix.client }}
+        - data-dir-${{ inputs.data-dir-type }}
     timeout-minutes: ${{ fromJSON(inputs.run-timeout-minutes) }}
     steps:
       - name: "Infos: Client=${{ matrix.client }} | Snapshot=${{ inputs.snapshot }} | TestType=${{ inputs.test-type }} | Context=${{ inputs.context }} | Subdirectory=${{ inputs.subdir }}"
@@ -105,9 +115,9 @@ jobs:
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/resource-limits-eip-7870-fullnode.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/s3-upload.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/datadirs/${{ inputs.snapshot }}/datadir.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/datadirs/${{ inputs.snapshot }}/${{ inputs.data-dir-type == 'schelk' && 'datadir.schelk.yaml' || 'datadir.yaml' }},
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.subdir }}/genesis.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.subdir }}/test-source.${{ inputs.test-type }}.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.subdir }}/test-source.${{ inputs.test-type }}${{ inputs.data-dir-type == 'schelk' && '.schelk' || '' }}.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/master/configs/contexts/${{ inputs.context }}/${{ inputs.snapshot }}/${{ inputs.subdir }}/clients.yaml
           run-args: >-
             --limit-instance-client=${{ matrix.client }}
