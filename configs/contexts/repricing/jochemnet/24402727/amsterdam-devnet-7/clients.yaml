@@ -122,6 +122,7 @@ runner:
           bal-mode: sequential
       image: ethpandaops/reth:bal-devnet-7
       extra_args:
+        - --engine.slow-block-threshold=0
         - --engine.disable-bal-parallel-execution
         - --engine.disable-bal-parallel-state-root
         - --engine.disable-bal-batch-io
@@ -136,6 +137,8 @@ runner:
         labels:
           bal-mode: full
       image: ethpandaops/reth:bal-devnet-7
+      extra_args:
+        - --engine.slow-block-threshold=0
       retry_new_payloads_failed_state:
         enabled: true
         max_retries: 10
@@ -148,6 +151,7 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/reth:bal-devnet-7
       extra_args:
+        - --engine.slow-block-threshold=0
         - --engine.disable-bal-batch-io
       retry_new_payloads_failed_state:
         enabled: true
