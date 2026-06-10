@@ -175,6 +175,7 @@ runner:
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
+        - --FlatDb.CompactionOffset=0
         - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
         - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
 
@@ -187,6 +188,7 @@ runner:
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
+        - --FlatDb.CompactionOffset=0
         - --Blocks.ParallelExecution=false
         - --Blocks.ParallelExecutionBatchRead=false
 
@@ -199,6 +201,7 @@ runner:
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
+        - --FlatDb.CompactionOffset=0
         - --Blocks.ParallelExecution=true
         - --Blocks.ParallelExecutionBatchRead=false
 
