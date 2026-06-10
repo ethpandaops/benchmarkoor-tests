@@ -165,8 +165,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      #image: nethermindeth/nethermind:master
-      image: nethermindeth/nethermind:bal-devnet-7
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -178,8 +177,7 @@ runner:
       metadata:
         labels:
           bal-mode: sequential
-      #image: nethermindeth/nethermind:master
-      image: nethermindeth/nethermind:bal-devnet-7
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
@@ -191,8 +189,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      #image: nethermindeth/nethermind:master
-      image: nethermindeth/nethermind:bal-devnet-7
+      image: nethermindeth/nethermind:master
       extra_args:
         - --config=mainnet
         - --FlatDb.Enabled=true
