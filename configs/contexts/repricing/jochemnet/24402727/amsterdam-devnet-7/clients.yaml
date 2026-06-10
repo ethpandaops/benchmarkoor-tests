@@ -46,6 +46,8 @@ runner:
         labels:
           bal-mode: sequential
       image: ethpandaops/besu:bal-devnet-7
+      environment:
+        BESU_OPTS: "-Xmx8g"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
@@ -60,6 +62,8 @@ runner:
         labels:
           bal-mode: full
       image: ethpandaops/besu:bal-devnet-7
+      environment:
+        BESU_OPTS: "-Xmx8g"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
@@ -85,7 +89,7 @@ runner:
           aot: "true"
       image: ethpandaops/besu:bal-devnet-7-aot-poc
       environment:
-        BESU_OPTS: "-XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
+        BESU_OPTS: "-Xmx8g -XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
@@ -103,6 +107,8 @@ runner:
         labels:
           bal-mode: nobatchio
       image: ethpandaops/besu:bal-devnet-7
+      environment:
+        BESU_OPTS: "-Xmx8g"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
