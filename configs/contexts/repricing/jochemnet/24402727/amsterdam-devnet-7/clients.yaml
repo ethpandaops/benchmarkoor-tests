@@ -53,7 +53,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=false
         - --Xbal-state-root-enabled=false
-        - --Xbal-trust-state-root=false
         - --Xbal-prefetch-reading-enabled=false
 
     - id: besu-bal-full
@@ -69,7 +68,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
-        - --Xbal-trust-state-root=true
         - --Xbal-prefetch-reading-enabled=true
         - --Xbal-prefetch-batch-size=8
         - --Xbal-processing-timeout=-1
@@ -95,7 +93,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
-        - --Xbal-trust-state-root=true
         - --Xbal-prefetch-reading-enabled=true
         - --Xbal-prefetch-batch-size=8
         - --Xbal-processing-timeout=-1
@@ -114,7 +111,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
-        - --Xbal-trust-state-root=true
         - --Xbal-prefetch-reading-enabled=false
         - --Xbal-processing-timeout=-1
         - --Xbal-state-root-timeout=-1
