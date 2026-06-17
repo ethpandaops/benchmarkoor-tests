@@ -87,7 +87,7 @@ runner:
           aot: "true"
       image: ethpandaops/besu:bal-devnet-7-aot-poc
       environment:
-        BESU_OPTS: "-Xmx8g -XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
+        BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch -XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
