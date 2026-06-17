@@ -47,7 +47,7 @@ runner:
           bal-mode: sequential
       image: ethpandaops/besu:bal-devnet-7
       environment:
-        BESU_OPTS: "-Xmx8g"
+        BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
@@ -62,7 +62,7 @@ runner:
           bal-mode: full
       image: ethpandaops/besu:bal-devnet-7
       environment:
-        BESU_OPTS: "-Xmx8g"
+        BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
@@ -105,7 +105,7 @@ runner:
           bal-mode: nobatchio
       image: ethpandaops/besu:bal-devnet-7
       environment:
-        BESU_OPTS: "-Xmx8g"
+        BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
         # Bal mode flags
