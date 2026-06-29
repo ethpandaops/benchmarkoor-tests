@@ -19,6 +19,7 @@ runner:
       ethrex:
         source_dir: /tank/jochemnet-ethrex/
         method: zfs
+        container_dir: /data/chain-1
       nimbus:
         source_dir: /data-zfs/snapshots/nimbus/jochemnet/24402727/
         method: zfs
