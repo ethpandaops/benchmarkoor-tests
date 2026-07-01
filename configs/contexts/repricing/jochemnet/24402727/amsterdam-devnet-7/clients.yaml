@@ -223,6 +223,7 @@ runner:
         - --exec.no-merge=true
         - --exec.no-prune=true
         - --exec.no-background-maintenance
+        - --experimental.parallel-commitment
       bootstrap_fcu:
         enabled: true
         max_retries: 120
