@@ -40,12 +40,15 @@ runner:
         - --bal.executionmode=nobatchio
 
     # Besu
+    #
+    # Pinned to 2fc4fe1 so reruns of this closed devnet reproduce, rather than
+    # silently picking up whatever the rolling tag points at.
     - id: besu-bal-sequential
       client: besu
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/besu:glamsterdam-devnet-6
+      image: ethpandaops/besu:glamsterdam-devnet-6-2fc4fe1
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
@@ -61,7 +64,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:glamsterdam-devnet-6
+      image: ethpandaops/besu:glamsterdam-devnet-6-2fc4fe1
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
@@ -80,7 +83,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/besu:glamsterdam-devnet-6
+      image: ethpandaops/besu:glamsterdam-devnet-6-2fc4fe1
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"

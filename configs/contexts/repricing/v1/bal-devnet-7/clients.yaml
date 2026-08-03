@@ -43,12 +43,15 @@ runner:
         - --bal.executionmode=nobatchio
 
     # Besu
+    #
+    # Pinned to faebc5e, the commit the AOT cache was generated against. The AOT
+    # instance can't follow a rolling tag, so the others must not either.
     - id: besu-bal-sequential
       client: besu
       metadata:
         labels:
           bal-mode: sequential
-      image: ethpandaops/besu:bal-devnet-7
+      image: ethpandaops/besu:bal-devnet-7-faebc5e
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
@@ -64,7 +67,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:bal-devnet-7
+      image: ethpandaops/besu:bal-devnet-7-faebc5e
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
@@ -81,7 +84,7 @@ runner:
     # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
     # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
     # PoC image, built manually by baking a Besu-team-provided AOT cache into
-    # ethpandaops/besu:bal-devnet-7 (no recompile) and validated to load. This
+    # ethpandaops/besu:bal-devnet-7-faebc5e (no recompile) and validated to load. This
     # is experimental and expected to be reverted once comparison numbers are in.
     # BESU_OPTS is a JVM env var, so it must go here, not in extra_args.
     - id: besu-bal-full-aot
@@ -90,7 +93,7 @@ runner:
         labels:
           bal-mode: full
           aot: "true"
-      image: ethpandaops/besu:bal-devnet-7-aot-poc
+      image: ethpandaops/besu:bal-devnet-7-aot-faebc5e
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch -XX:AOTCache=/opt/besu/aot/besu.aot -Xlog:aot=info"
@@ -109,7 +112,7 @@ runner:
       metadata:
         labels:
           bal-mode: nobatchio
-      image: ethpandaops/besu:bal-devnet-7
+      image: ethpandaops/besu:bal-devnet-7-faebc5e
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
