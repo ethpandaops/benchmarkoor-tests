@@ -126,7 +126,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/erigon:glamsterdam-devnet-7-fceab5f
+      image: ethpandaops/erigon:glamsterdam-devnet-7
       extra_args:
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
         - --fcu.background.commit=false

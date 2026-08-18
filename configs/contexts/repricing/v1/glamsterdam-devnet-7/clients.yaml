@@ -121,7 +121,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/erigon:glamsterdam-devnet-7-fceab5f
+      image: ethpandaops/erigon:glamsterdam-devnet-7
       extra_args:
         - --override.amsterdam=1
         - --fcu.background.commit=false
@@ -140,7 +140,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/ethrex:glamsterdam-devnet-7
+      image: ethpandaops/ethrex:glamsterdam-devnet-7-3f6569f
       genesis_fork_override: { amsterdam: 1 }
       extra_args:
         - --skip-genesis-validation
