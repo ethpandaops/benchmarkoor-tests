@@ -124,7 +124,6 @@ runner:
       image: ethpandaops/erigon:glamsterdam-devnet-7
       extra_args:
         - --override.amsterdam=1
-        - --fcu.background.commit=false
         - --exec.no-merge=true
         - --exec.no-prune=true
         - --exec.no-background-maintenance
