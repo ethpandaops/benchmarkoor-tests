@@ -43,6 +43,7 @@ on:
           - "v1/glamsterdam-devnet-7-full"
           # Jochemnet
           - "jochemnet/v1/glamsterdam-devnet-7"
+          - "jochemnet/v1/glamsterdam-devnet-8"
       test-type:
         description: "Test type to run"
         required: false
@@ -86,15 +87,17 @@ jobs:
               && format('benchmarkoor-v1-jochemnet-runner-{0}', matrix.client)
               || format('benchmarkoor-v1-runner-{0}', matrix.client)
           }}
-        # Pin each client's build to a specific host. Unlisted clients fall back
-        # to their per-client label (harmless duplicate → no host pin).
-        #- >-
-        #  ${{
-        #    (matrix.client == 'nethermind' && 'benchmarkoor-v1-runner-benchmark-ci-9') ||
-        #    (matrix.client == 'geth' && 'benchmarkoor-v1-runner-benchmark-ci-8') ||
-        #    (matrix.client == 'besu' && 'benchmarkoor-v1-runner-benchmark-ci-16') ||
-        #    format('benchmarkoor-v1-runner-{0}', matrix.client)
-        #  }}
+        # Pin a client's build to a specific host. The pin only applies to the
+        # jochemnet pool, because the pinned host carries a jochemnet label.
+        # Every other case repeats the label above (harmless duplicate → no pin).
+        - >-
+          ${{
+            contains(inputs.subdir, 'jochemnet')
+              && (matrix.client == 'geth'
+                    && 'benchmarkoor-v1-jochemnet-runner-benchmark-ci-18'
+                    || format('benchmarkoor-v1-jochemnet-runner-{0}', matrix.client))
+              || format('benchmarkoor-v1-runner-{0}', matrix.client)
+          }}
     timeout-minutes: ${{ fromJSON(inputs.build-timeout-minutes) }}
     steps:
       - name: "Infos: Client=${{ matrix.client }} | Snapshot=${{ inputs.snapshot }} | TestType=${{ inputs.test-type }} | Context=${{ inputs.context }} | Subdirectory=${{ inputs.subdir }}"
