@@ -132,7 +132,7 @@ builder:
       datadir_method: direct
       tests:
         - tests/benchmark/stateful/bloatnet
-      marker: repricing
+      #marker: repricing
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes (e.g. bloated_eoa_10GB)
       # against pre-deployed state; without it those variants are skipped.

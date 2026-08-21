@@ -132,7 +132,7 @@ builder:
       datadir_method: direct
       tests:
         - tests/benchmark/compute
-      marker: repricing
+      #marker: repricing
       filter: >-
         not (test_blobhash and one_blob)
       extract_opcode_count: true
