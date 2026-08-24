@@ -49,7 +49,7 @@ builder:
         BLOATNET_RECEIVER_CONTRACT_COUNT: "100000"
       tests:
         - tests/benchmark/stateful/bloatnet/test_setup_contracts.py
-      filter: code_size_65536
+      #filter: code_size_65536
       # Deploy the EIP-8282 builder-execution-request contracts on OSAKA, before
       # amsterdam activates (a strict client rejects amsterdam blocks whose 8282
       # system contracts have no code). The deployer is funded in the funding
