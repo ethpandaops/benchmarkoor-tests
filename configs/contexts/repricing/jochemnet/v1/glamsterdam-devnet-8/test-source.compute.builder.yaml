@@ -1,7 +1,7 @@
 global:
   env:
-    EEST_REPO: https://github.com/LouisTsai-Csie/execution-specs.git
-    EEST_REF: feat-deploy-script
+    EEST_REPO: https://github.com/jochem-brouwer/execution-specs.git
+    EEST_REF: feat-deploy-script-oom-fix
 
     # Client images (For pre-run and payload generation)
     NETHERMIND_IMAGE: ethpandaops/nethermind:glamsterdam-devnet-8
