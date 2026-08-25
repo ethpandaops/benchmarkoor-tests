@@ -19,15 +19,16 @@ runner:
 
     # Besu
     #
-    # Pinned to 3013b7a rather than the rolling glamsterdam-devnet-7 tag. This
-    # build includes the shared-executor fix for BAL state-root computation.
+    # 00d2f04 is the current head of the rolling glamsterdam-devnet-7 tag, and
+    # digest-identical to it. Pinned per-commit so the AOT twin stays on the
+    # exact jars its cache was generated against.
     # Keep in step with v1/glamsterdam-devnet-7.
     - id: besu-bal-full
       client: besu
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:glamsterdam-devnet-7-3013b7a
+      image: ethpandaops/besu:glamsterdam-devnet-7-00d2f04
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
@@ -42,7 +43,7 @@ runner:
     # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
     # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
     # Built by baking a Besu-team-provided AOT cache into
-    # ethpandaops/besu:glamsterdam-devnet-7-3013b7a (no recompile) and validated to load.
+    # ethpandaops/besu:glamsterdam-devnet-7-00d2f04 (no recompile) and validated to load.
     # BESU_OPTS is a JVM env var, so it must go here, not in extra_args.
     # AOTMode=on makes the JVM refuse to start if the cache can't be mapped.
     # Without it the JVM silently falls back to a cold run (exit 0), which would
@@ -53,7 +54,7 @@ runner:
         labels:
           bal-mode: full
           aot: "true"
-      image: ethpandaops/besu:glamsterdam-devnet-7-aot-3013b7a
+      image: ethpandaops/besu:glamsterdam-devnet-7-aot-00d2f04
       genesis_fork_override: { amsterdam: 1 }
       environment:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch -XX:AOTCache=/opt/besu/aot/besu.aot -XX:AOTMode=on -Xlog:aot=info"
