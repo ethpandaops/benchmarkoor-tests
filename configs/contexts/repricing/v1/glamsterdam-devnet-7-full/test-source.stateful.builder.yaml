@@ -59,7 +59,7 @@ builder:
       # Besu
       - name: besu
         filler_client: besu
-        filler_image: ethpandaops/besu:glamsterdam-devnet-7-3013b7a
+        filler_image: ethpandaops/besu:glamsterdam-devnet-7-00d2f04
         source_dir: ${STATE_DIR}/besu
         filler_extra_args:
           - --rpc-http-max-batch-size=16384 # Default 1024

@@ -62,7 +62,7 @@ builder:
       # Besu
       - name: besu
         filler_client: besu
-        filler_image: ethpandaops/besu:glamsterdam-devnet-7-3013b7a
+        filler_image: ethpandaops/besu:glamsterdam-devnet-7-00d2f04
         source_dir: ${STATE_DIR}/besu
         # besu reads forks from the geth-format genesis; benchmarkoor patches
         # amsterdamTime in at boot (snapshot block 0 ts is 0, so amsterdam at ts 1).
