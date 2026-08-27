@@ -133,6 +133,13 @@ builder:
       tests:
         - tests/benchmark/stateful/bloatnet
       #marker: repricing
+      # Only the account-access benchmark, and only against the two max-size
+      # contract receivers. EEST renders an enum param as
+      # `account_mode_AccountMode.<NAME>`, so the bare mode name matches it as
+      # a substring.
+      filter: >-
+        test_account_access and (EXISTING_CONTRACT_SAME_MAX or
+        EXISTING_CONTRACT_DIFF_MAX)
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes (e.g. bloated_eoa_10GB)
       # against pre-deployed state; without it those variants are skipped.
