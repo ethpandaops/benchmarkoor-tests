@@ -94,7 +94,7 @@ jobs:
           ${{
             contains(inputs.subdir, 'jochemnet')
               && (matrix.client == 'geth'
-                    && 'benchmarkoor-v1-jochemnet-runner-benchmark-ci-18'
+                    && 'benchmarkoor-v1-jochemnet-runner-benchmark-ci-3'
                     || format('benchmarkoor-v1-jochemnet-runner-{0}', matrix.client))
               || format('benchmarkoor-v1-runner-{0}', matrix.client)
           }}
