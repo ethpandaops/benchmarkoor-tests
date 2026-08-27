@@ -1,7 +1,9 @@
 global:
   env:
-    EEST_REPO: https://github.com/jochem-brouwer/execution-specs.git
-    EEST_REF: feat-deploy-script-oom-fix
+    #EEST_REPO: https://github.com/jochem-brouwer/execution-specs.git
+    #EEST_REF: feat-deploy-script-oom-fix
+    EEST_REPO: https://github.com/skylenet/execution-specs.git
+    EEST_REF: fix/no-reset-reanchor-start-block
 
     # Client images (For pre-run and payload generation)
     NETHERMIND_IMAGE: ethpandaops/nethermind:glamsterdam-devnet-8
