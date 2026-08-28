@@ -47,3 +47,49 @@
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+
+# --- Subdir: jochemnet/v1/glamsterdam-devnet-8 ---
+
+- id: benchmarkoor-reth-repricing-jochemnet-v1-glamsterdam-devnet-8-compute-reth-bal-full
+  name: "(Reth) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Compute - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    clients: '["reth"]'
+    instance-id: "reth-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 900, "global": 1260}'
+
+- id: benchmarkoor-reth-repricing-jochemnet-v1-glamsterdam-devnet-8-stateful-reth-bal-full
+  name: "(Reth) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Stateful - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    clients: '["reth"]'
+    instance-id: "reth-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'

@@ -47,3 +47,49 @@
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 4500, "global": 4860}'
+
+# --- Subdir: jochemnet/v1/glamsterdam-devnet-8 ---
+
+- id: benchmarkoor-erigon-repricing-jochemnet-v1-glamsterdam-devnet-8-compute-erigon-bal-full
+  name: "(Erigon) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Compute - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+  inputs:
+    clients: '["erigon"]'
+    instance-id: "erigon-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 900, "global": 1260}'
+
+- id: benchmarkoor-erigon-repricing-jochemnet-v1-glamsterdam-devnet-8-stateful-erigon-bal-full
+  name: "(Erigon) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Stateful - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+  inputs:
+    clients: '["erigon"]'
+    instance-id: "erigon-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 4500, "global": 4860}'

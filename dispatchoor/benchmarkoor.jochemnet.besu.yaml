@@ -91,3 +91,93 @@
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+
+# --- Subdir: jochemnet/v1/glamsterdam-devnet-8 ---
+
+- id: benchmarkoor-besu-repricing-jochemnet-v1-glamsterdam-devnet-8-compute-besu-bal-full
+  name: "(Besu) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Compute - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    clients: '["besu"]'
+    instance-id: "besu-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 360, "global": 720}'
+
+- id: benchmarkoor-besu-repricing-jochemnet-v1-glamsterdam-devnet-8-stateful-besu-bal-full
+  name: "(Besu) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Stateful - besu-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full"
+  inputs:
+    clients: '["besu"]'
+    instance-id: "besu-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+
+- id: benchmarkoor-besu-repricing-jochemnet-v1-glamsterdam-devnet-8-compute-besu-bal-full-aot
+  name: "(Besu) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Compute - besu-bal-full-aot"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
+  inputs:
+    clients: '["besu"]'
+    instance-id: "besu-bal-full-aot"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 360, "global": 720}'
+
+- id: benchmarkoor-besu-repricing-jochemnet-v1-glamsterdam-devnet-8-stateful-besu-bal-full-aot
+  name: "(Besu) - Repricing - jochemnet/v1/glamsterdam-devnet-8 - Stateful - besu-bal-full-aot"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "besu"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "besu-bal-full-aot"
+  inputs:
+    clients: '["besu"]'
+    instance-id: "besu-bal-full-aot"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
