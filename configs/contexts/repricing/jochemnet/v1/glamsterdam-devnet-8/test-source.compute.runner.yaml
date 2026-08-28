@@ -1,0 +1,21 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: jochemnet-glamsterdam-devnet-8-compute-full
+          block: "24402727"
+          test-type: compute
+          fork: amsterdam
+          data-disk-type: schelk
+      source:
+        eest_fixtures:
+          # TOODO
+          # fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-46d56762-4525339a-r2/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
+          # fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+          # pre_runs:
+          #  fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: none
