@@ -10,22 +10,11 @@ runner:
           data-disk-type: schelk
       source:
         eest_fixtures:
-          # Repacked from jochem-brouwer/files@jochemnet-compute-4525339a:
-          # 4884 filled, 0 failed, EEST 46d56762.
-          #
-          # NOT our own build run 31183512437. That one filled 4883 of 4895 and,
-          # more to the point, its pre-run produced a different chain from the
-          # stateful build despite identical config — end block 24410463 either
-          # way, but 0xf8115f05 rather than 0x4525339a. The datadirs are promoted
-          # to 0x4525339a by the stateful runs, so its fixtures anchored to a
-          # chain that was not there and every payload was an orphan.
-          #
-          # These were filled against 0x4525339a, which is where the datadirs
-          # actually sit.
-          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-46d56762-4525339a-r2/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
-          fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
-          pre_runs:
-            fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
+          # TOODO
+          # fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-46d56762-4525339a-r2/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
+          # fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+          # pre_runs:
+          #  fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
   container_runtime: podman
   client:
     config:
