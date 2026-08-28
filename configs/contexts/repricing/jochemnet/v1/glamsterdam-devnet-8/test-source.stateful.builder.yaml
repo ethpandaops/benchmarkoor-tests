@@ -125,6 +125,15 @@ builder:
     config:
       fork: amsterdam
       rpc_seed_key: "0x0000000000000000000000000000000000000000000000000000000000000001"
+      # fill-stateful mints every account a test funds from keys counting up
+      # from here, and assumes each one has never sent a transaction
+      # (`EOA(key=i, nonce=0)`). benchmarkoor's default of 1000 lands in a
+      # range that already has history on the jochemnet fork: 360 of the
+      # 2026-08-27 fill's failures were `nonce too low` on keys 1013-2027,
+      # whose on-chain nonces ran 2-1763. Start a billion keys above the
+      # pre-run's own 1000000000, matching benchmarkoor's convention of
+      # keeping each stage's accounts a billion apart.
+      eoa_start: 2000000000
       gas_benchmark_values: [200,300]
       # source_dir here is the schelk scratch the pre-run just advanced (SNAPSHOT_DIR).
       # Boot the filler DIRECTLY on it (no copy), continuing from the pre-run head.
