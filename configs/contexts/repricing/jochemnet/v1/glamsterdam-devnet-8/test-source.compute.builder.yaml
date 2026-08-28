@@ -183,3 +183,7 @@ builder:
         filler_extra_args:
           - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
           - --rpc.batch-request-limit=16384 # Default 1000
+          # testing_buildBlockV1 POSTs a whole block's transactions to the
+          # eth RPC port. The deep-branch benchmarks exceed geth's 5 MB
+          # default and come back 413 Request Entity Too Large.
+          - --rpc.http-body-limit=128 # Default 5 (megabytes)

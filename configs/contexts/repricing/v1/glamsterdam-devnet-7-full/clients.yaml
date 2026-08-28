@@ -86,7 +86,8 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image:  nethermindeth/nethermind:master
+      #image:  nethermindeth/nethermind:master
+      image: ethpandaops/nethermind:qu0b-qu0b-flatdb-persist-on-shutdown
       genesis_eip_override: { timestamp: 1, eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282] }
       extra_args:
         - --Init.BaseDbPath=/data
