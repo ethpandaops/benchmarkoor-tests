@@ -10,9 +10,13 @@ runner:
           data-disk-type: schelk
       source:
         eest_fixtures:
-          # Promoted from build run 31133523115 (geth, 1463 benchmarks, 0
-          # failures) by benchmarkoor-release. EEST d9ad55b3, 100-300 Mgas.
-          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-d9ad55b3-20260807-000744/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz
+          # Promoted from build run 33148365172 (geth, 692 filled, 68
+          # failures) by benchmarkoor-release. EEST e269bb44, 200-300 Mgas.
+          # The 68 are the depth benchmarks (39 short of mined contracts, 13
+          # rejected payloads), 8 block-access-list mismatches, 4 initcode
+          # assertions and 4 receipt-status failures, so deep-branch coverage
+          # is absent from this set.
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260828-063412/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz
           fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
           pre_runs:
             fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
