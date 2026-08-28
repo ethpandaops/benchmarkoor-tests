@@ -3,10 +3,9 @@ runner:
     tests:
       metadata:
         labels:
-          name: jochemnet-glamsterdam-devnet-8-stateful
+          name: jochemnet-glamsterdam-devnet-8-stateful-full
           block: "24402727"
           test-type: stateful
-          context: repricing
           fork: amsterdam
           data-disk-type: schelk
       source:
