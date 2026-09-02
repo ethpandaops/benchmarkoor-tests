@@ -1,0 +1,26 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: jochemnet-glamsterdam-stateful-full
+          block: "24402727"
+          test-type: stateful
+          fork: amsterdam
+          data-disk-type: schelk
+      source:
+        eest_fixtures:
+          # Promoted from build run 33148365172 (geth, 692 filled, 68
+          # failures) by benchmarkoor-release. EEST e269bb44, 200-300 Mgas.
+          # The 68 are the depth benchmarks (39 short of mined contracts, 13
+          # rejected payloads), 8 block-access-list mismatches, 4 initcode
+          # assertions and 4 receipt-status failures, so deep-branch coverage
+          # is absent from this set.
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260828-063412/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz
+          fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+          pre_runs:
+            fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-recreate

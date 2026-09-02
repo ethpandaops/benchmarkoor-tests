@@ -1,0 +1,196 @@
+global:
+  env:
+    #EEST_REPO: https://github.com/jochem-brouwer/execution-specs.git
+    #EEST_REF: feat-deploy-script-oom-fix
+    EEST_REPO: https://github.com/skylenet/execution-specs.git
+    EEST_REF: fix/no-reset-reanchor-start-block
+
+    # Client images (For pre-run and payload generation)
+    NETHERMIND_IMAGE: ethpandaops/nethermind:master-f0a29b8
+    GETH_IMAGE: ethpandaops/geth:master-bbb9119
+
+    # AMSTERDAM_ACTIVATION_TS is defined in this context's global.yaml so the
+    # build and the run share one schedule for the datadir they pass between
+    # them.
+
+builder:
+
+##
+## PRE RUN PAYLOAD GENERATION
+##
+
+  pre_runs:
+    pull_policy: always
+    eest_repo: ${EEST_REPO}
+    eest_ref: ${EEST_REF}
+    config:
+      # The pre-runs should fork to amsterdam.
+      fork: amsterdam
+      rpc_seed_key: "0x0000000000000000000000000000000000000000000000000000000000000001"
+      datadir_method: schelk
+      # Ramp the block gas limit up to 1 TGas with empty blocks before filling.
+      gas_limit: 1000000000000
+      # One funding block crediting the fill-stateful seed account via a beacon
+      # withdrawal (rpc_seed_key 0x..01 -> this address). The deployer (0x..02) is
+      # funded automatically alongside it.
+      funding_accounts:
+        - address: 0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
+      funding_pools:
+        # EEST yield_distinct_sender pool for stateful ether-transfer benchmarks
+        # (test_ether_transfers_onchain_receivers). Address i = EOA of key
+        # int(keccak256(base_key_seed)) + i, matching execution-specs' SENDER_BASE_KEY.
+        # count must cover the largest per-variant sender count
+        # (gas_benchmark_value / per-iteration cost). At 300 Mgas the biggest
+        # ether-transfer variant fans out to ~25000 distinct senders; size the
+        # pool to that so txs aren't dropped ("expected N but only <count>
+        # included"). Scale this together with gas_benchmark_values below.
+        - base_key_seed: gas-repricings-private-key
+          count: 25000
+      gas_benchmark_values: [1000]
+      fill_env:
+        BLOATNET_RECEIVER_CONTRACT_COUNT: "100000"
+      tests:
+        - tests/benchmark/stateful/bloatnet/test_setup_contracts.py
+      #filter: code_size_65536
+      # Deploy the EIP-8282 builder-execution-request contracts on OSAKA, before
+      # amsterdam activates (a strict client rejects amsterdam blocks whose 8282
+      # system contracts have no code). The deployer is funded in the funding
+      # block; its contracts land at CREATE(deployer, 0) and CREATE(deployer, 1)
+      # (logged at build time). See the fixed-address caveat in the header.
+      # Hoisted to the stage config so BOTH clients deploy the identical pair —
+      # each still needs its own genesis_eip_override (target-only field) to
+      # schedule the activation the deploy blocks must precede.
+      predeploy:
+        pre_fork: osaka
+        deployer_key: "0x0000000000000000000000000000000000000000000000000000000000000002"
+        contracts:
+          # Replay of glamsterdam-devnet-8's OWN EIP-8282 deployment txs, sent to
+          # the deterministic-deployment proxy (CREATE2) at 0x4e59b448…c0B4956C.
+          # data is the factory's calldata: 32-byte mined salt then initcode.
+          # Because a CREATE2 address is
+          #   keccak256(0xff ++ factory ++ salt ++ keccak256(initcode))[12:]
+          # and never involves msg.sender, re-sending this from OUR deployer lands
+          # the contracts on the canonical addresses the clients hardcode — which
+          # is what makes the fixed-address problem go away. Running the real
+          # initcode also sets the constructor storage (excess = EXCESS_INHIBITOR)
+          # rather than installing runtime code over empty storage.
+          # Source txs on devnet-7:
+          #   deposit 0x89703ec01488d08c9bf6a29a623396c88152f7df6f6cf06b1d7c9e4805c781dd
+          #   exit    0xeb17df81c87dfae5ab110feeac385d296245a9983ecdb1c301c6caed2f0b9770
+          # address is verified against the deployed code after the block builds.
+          - to: "0x4e59b44847b379578588920cA78FbF26c0B4956C"
+            address: "0x0000bFF46984e3725691FA540a8C7589300D8282" # BUILDER_DEPOSIT_CONTRACT_ADDRESS
+            data: "0x1f4f2c41c28e816e259b621c58b94b37309c8dec42c8f6e400001a46c9d96bf761027480600a5f395ff33373fffffffffffffffffffffffffffffffffffffffe1461011c575f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146102705760015460088111605257506058565b60089003015b601190600182026001905f5b5f821115607f57810190830284830290049160010191906064565b90939004925050503660b814609f57366102705734610270575f5260205ff35b8034106102705760383567ffffffffffffffff1680633b9aca001161027057633b9aca00029034031061027057600154600101600155600354806006026004015f358155600101602035815560010160403581556001016060358155600101608035815560010160a035905560b85f5f3760b85fa0600101600355005b60035460025480820380604011610131575060405b5f5b8181146101d7578281016006026004018160b8028154815260200181600101548152602001816002015480825260401c67ffffffffffffffff16816010018160381c81600701538160301c81600601538160281c81600501538160201c81600401538160181c81600301538160101c81600201538160081c816001015353602001816003015481526020018160040154815260200190600501549052600101610133565b91018092146101e957906002556101f4565b90505f6002555f6003555b36610242575f54600154817fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1461023057600882820111610238575b50505f610264565b0160089003610264565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5b5f555f60015560b8025ff35b5f5ffd"
+          - to: "0x4e59b44847b379578588920cA78FbF26c0B4956C"
+            address: "0x000064D678505ad48F8cCb093BC65613800E8282" # BUILDER_EXIT_CONTRACT_ADDRESS
+            data: "0x89abb1878437213f971f849327423ed1d9c5cdb03970cd8f0000318b3ff101197fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5f556101ca80602d5f395ff33373fffffffffffffffffffffffffffffffffffffffe1460e1575f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146101c65760015460028111605157506057565b60029003015b601190600182026001905f5b5f821115607e57810190830284830290049160010191906063565b909390049250505036603014609e57366101c657346101c6575f5260205ff35b34106101c657600154600101600155600354806003026004013381556001015f35815560010160203590553360601b5f5260305f60143760445fa0600101600355005b6003546002548082038060101160f5575060105b5f5b81811461012d5782810160030260040181604402815460601b8152601401816001015481526020019060020154905260010160f7565b910180921461013f579060025561014a565b90505f6002555f6003555b36610198575f54600154817fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146101865760028282011161018e575b50505f6101ba565b01600290036101ba565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5b5f555f6001556044025ff35b5f5ffd"
+    targets:
+      - name: nethermind
+        filler_client: nethermind
+        filler_image: ${NETHERMIND_IMAGE}
+        source_dir: ${NETHERMIND_SNAPSHOT_DIR}
+        genesis: ${NETHERMIND_CHAINSPEC}
+        genesis_eip_override:
+          timestamp: ${AMSTERDAM_ACTIVATION_TS}
+          eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282]
+        filler_extra_args:
+          - --FlatDb.Enabled=true
+          - --FlatDb.CompactionOffset=0
+          - --FlatDb.MinReorgDepth=1024
+          - --FlatDb.MaxReorgDepth=1024
+          - --JsonRpc.MaxBatchSize=16384 # Default 1024
+          - --Init.AutoDump=None
+          - --Merge.NewPayloadBlockProcessingTimeout=70000
+          - --Blocks.CachePrecompilesOnBlockProcessing=false
+
+      - name: geth
+        filler_client: geth
+        filler_image: ${GETH_IMAGE}
+        source_dir: ${GETH_SNAPSHOT_DIR}
+        genesis: ${GETH_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+          - --rpc.batch-request-limit=16384 # Default 1000
+          - --rpc.http-body-limit=128 # Default 5 (megabytes)
+##
+## BENCHMARK PAYLOAD GENERATION
+##
+
+  eest_payloads:
+    pull_policy: always
+    eest_repo: ${EEST_REPO}
+    eest_ref: ${EEST_REF}
+    config:
+      fork: amsterdam
+      rpc_seed_key: "0x0000000000000000000000000000000000000000000000000000000000000001"
+      # fill-stateful mints every account a test funds from keys counting up
+      # from here, and assumes each one has never sent a transaction
+      # (`EOA(key=i, nonce=0)`). benchmarkoor's default of 1000 lands in a
+      # range that already has history on the jochemnet fork: 360 of the
+      # 2026-08-27 fill's failures were `nonce too low` on keys 1013-2027,
+      # whose on-chain nonces ran 2-1763. Start a billion keys above the
+      # pre-run's own 1000000000, matching benchmarkoor's convention of
+      # keeping each stage's accounts a billion apart.
+      eoa_start: 2000000000
+      gas_benchmark_values: [200,300]
+      # source_dir here is the schelk scratch the pre-run just advanced (SNAPSHOT_DIR).
+      # Boot the filler DIRECTLY on it (no copy), continuing from the pre-run head.
+      # method: direct only mounts the schelk source (never recovers), so it does
+      # NOT wipe the pre-run's advancement. The fill mutates the scratch in place;
+      # its per-test reset leaves it at the setup head for the runner.
+      datadir_method: direct
+      tests:
+        - tests/benchmark/stateful/bloatnet
+      #marker: repricing
+      # Two selections, one per test:
+      #   test_account_access          -> the two max-size contract receivers
+      #   test_ether_transfers_...     -> the three max-size receiver case_ids
+      # EEST renders a param id as `<argname>_<value>`, so the bare name
+      # matches (`account_mode_AccountMode.EXISTING_CONTRACT_SAME_MAX`,
+      # `case_id_diff_to_contract_same_max`) as a substring either way.
+      #filter: >-
+      #  (test_account_access and (EXISTING_CONTRACT_SAME_MAX or
+      #  EXISTING_CONTRACT_DIFF_MAX)) or (test_ether_transfers_onchain_receivers
+      #  and (diff_to_contract_same_max or diff_to_contract_diff_max or
+      #  diff_to_delegated_contract_diff))
+      extract_opcode_count: true
+      # Resolves @pytest.mark.stub_parametrize prefixes (e.g. bloated_eoa_10GB)
+      # against pre-deployed state; without it those variants are skipped.
+      address_stubs:
+        bloated_eoa_10GB:
+          addr: "0x87a6314da5ac8832f6e7a176c8fb133b19f5be04"
+          pkey: "0x4da32d29f6dcffa26e09dc4e102033f2d105de1444fb893493ae703289275e0e"
+
+    targets:
+      - name: nethermind
+        filler_client: nethermind
+        filler_image: ${NETHERMIND_IMAGE}
+        source_dir: ${NETHERMIND_SNAPSHOT_DIR}
+        genesis: ${NETHERMIND_CHAINSPEC}
+        output_dir: ${EEST_FIXTURES_DIR}/nethermind
+        # Same amsterdam schedule as the pre-run so this boot recognises the
+        # advanced datadir head (built post-activation) as amsterdam.
+        genesis_eip_override:
+          timestamp: ${AMSTERDAM_ACTIVATION_TS}
+          eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282]
+        filler_extra_args:
+          - --FlatDb.Enabled=true
+          - --FlatDb.CompactionOffset=0
+          - --FlatDb.MinReorgDepth=1024
+          - --FlatDb.MaxReorgDepth=1024
+          - --JsonRpc.MaxBatchSize=16384 # Default 1024
+          - --Init.AutoDump=None
+          - --Merge.NewPayloadBlockProcessingTimeout=70000
+          - --Blocks.CachePrecompilesOnBlockProcessing=false
+
+      - name: geth
+        filler_client: geth
+        filler_image: ${GETH_IMAGE}
+        source_dir: ${GETH_SNAPSHOT_DIR}
+        output_dir: ${EEST_FIXTURES_DIR}/geth
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+          - --rpc.batch-request-limit=16384 # Default 1000
+          - --rpc.http-body-limit=128 # Default 5 (megabytes)

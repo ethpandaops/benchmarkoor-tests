@@ -2,6 +2,30 @@
 # Regenerate with: make config (or ./dispatchoor/generate.sh)
 # Source: configs/contexts/repricing/jochemnet/v1/<subdir>/
 
+# --- Subdir: jochemnet/v1/glamsterdam ---
+
+- id: benchmarkoor-erigon-repricing-jochemnet-v1-glamsterdam-stateful-erigon-bal-full
+  name: "(Erigon) - Repricing - jochemnet/v1/glamsterdam - Stateful - erigon-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "erigon"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "erigon-bal-full"
+  inputs:
+    clients: '["erigon"]'
+    instance-id: "erigon-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 4500, "global": 4860}'
+
 # --- Subdir: jochemnet/v1/glamsterdam-devnet-7 ---
 
 - id: benchmarkoor-erigon-repricing-jochemnet-v1-glamsterdam-devnet-7-compute-erigon-bal-full

@@ -2,6 +2,30 @@
 # Regenerate with: make config (or ./dispatchoor/generate.sh)
 # Source: configs/contexts/repricing/jochemnet/v1/<subdir>/
 
+# --- Subdir: jochemnet/v1/glamsterdam ---
+
+- id: benchmarkoor-reth-repricing-jochemnet-v1-glamsterdam-stateful-reth-bal-full
+  name: "(Reth) - Repricing - jochemnet/v1/glamsterdam - Stateful - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    clients: '["reth"]'
+    instance-id: "reth-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+
 # --- Subdir: jochemnet/v1/glamsterdam-devnet-7 ---
 
 - id: benchmarkoor-reth-repricing-jochemnet-v1-glamsterdam-devnet-7-compute-reth-bal-full

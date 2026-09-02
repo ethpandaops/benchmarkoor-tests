@@ -38,6 +38,7 @@ on:
           # Jochemnet
           - "jochemnet/v1/glamsterdam-devnet-7"
           - "jochemnet/v1/glamsterdam-devnet-8"
+          - "jochemnet/v1/glamsterdam"
       test-type:
         description: "Test type to run"
         required: false
