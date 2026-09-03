@@ -181,6 +181,9 @@ builder:
         filler_image: ${GETH_IMAGE}
         source_dir: ${GETH_SNAPSHOT_DIR}
         output_dir: ${EEST_FIXTURES_DIR}/geth
+        # benchmark-ci-3 still holds an older fixtures dir with no build
+        # fingerprint, so --rebuild-on-diff skips it. force overwrites it.
+        force: true
         filler_extra_args:
           - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
           - --rpc.batch-request-limit=16384 # Default 1000
