@@ -9,7 +9,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/geth:glamsterdam-devnet-8
+      image: ethpandaops/geth:master
       extra_args:
         - --engine.maxreorgdepth=1024
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
@@ -28,7 +28,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:glamsterdam-devnet-8
+      image: ethpandaops/besu:main
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       environment:
@@ -50,7 +50,7 @@ runner:
         labels:
           bal-mode: full
           aot: "true"
-      image: ethpandaops/besu:glamsterdam-devnet-8-aot
+      image: ethpandaops/besu:main-aot
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       environment:
@@ -85,7 +85,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image:  ethpandaops/nethermind:glamsterdam-devnet-8
+      image:  ethpandaops/nethermind:master
       genesis_eip_override:
         timestamp: ${AMSTERDAM_ACTIVATION_TS}
         eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282]
@@ -112,7 +112,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/erigon:glamsterdam-devnet-8
+      image: ethpandaops/erigon:main
       extra_args:
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
         - --exec.no-merge=true
@@ -141,7 +141,7 @@ runner:
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/ethrex:glamsterdam-devnet-8
+      image: ethpandaops/ethrex:main
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       extra_args:
