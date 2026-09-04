@@ -97,6 +97,10 @@ runner:
         - --FlatDb.MaxReorgDepth=1024
         - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
         - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
+      retry_new_payloads_failed_state:
+        enabled: true
+        max_retries: 10
+        backoff: 2s
 
     # Erigon
     ## Help for erigon flags:
