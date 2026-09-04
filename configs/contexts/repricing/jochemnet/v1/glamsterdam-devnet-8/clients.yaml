@@ -97,7 +97,7 @@ runner:
         - --FlatDb.MaxReorgDepth=1024
         - --Blocks.ParallelExecution=true # Default is true, but set explicitly for clarity
         - --Blocks.ParallelExecutionBatchRead=true # Default is true, but set explicitly for clarity
-      retry_new_payloads_failed_state:
+      retry_new_payloads_syncing_state:
         enabled: true
         max_retries: 10
         backoff: 2s
