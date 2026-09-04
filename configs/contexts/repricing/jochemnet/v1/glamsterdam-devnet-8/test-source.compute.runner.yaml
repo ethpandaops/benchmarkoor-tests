@@ -36,3 +36,4 @@ runner:
   client:
     config:
       rollback_strategy: none
+      post_test_sleep_duration: 200ms
