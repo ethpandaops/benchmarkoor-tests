@@ -10,11 +10,28 @@ runner:
           data-disk-type: schelk
       source:
         eest_fixtures:
-          # TOODO
-          # fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-46d56762-4525339a-r2/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
-          # fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
-          # pre_runs:
-          #  fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
+          # Promoted from build run 33759962853 (geth, 2302 filled, 28
+          # failures) by benchmarkoor-release. EEST e269bb44, 200-300 Mgas.
+          # The 28 are 10 "initcode prefix too long" on the EIP-7928
+          # block-access-list benchmarks (8 state_root_computation, 2
+          # prefetch_cold_storage), 12 truncated-PUSH variants EEST rejects as
+          # raw bytes, 2 cold SSTORE out-of-gas over the gas cap and 4
+          # full-data blocks short of sender balance. Those four groups are
+          # absent from this set.
+          #
+          # That build ran with no pre_runs stage of its own. Its filler booted
+          # on the schelk backup, which the stateful build had already promoted
+          # to block 24443820 (0xef8d2034), so these payloads anchor on the
+          # STATEFUL pre-run head, not on the raw 24402727 snapshot. The
+          # release therefore carries that build's bundle, copied in by
+          # benchmarkoor-release's pre-runs-from-release input from
+          # eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260828-063412.
+          # Keep the pre_runs block below: without the replay the runner starts
+          # 41093 blocks short and every payload is an orphan.
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-e269bb44-20260903-131433/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
+          fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+          pre_runs:
+            fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
   container_runtime: podman
   client:
     config:
