@@ -38,8 +38,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
-        - --Xbal-prefetch-reading-enabled=true
-        - --Xbal-prefetch-batch-size=8
 
     # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
     # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
@@ -60,8 +58,6 @@ runner:
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
-        - --Xbal-prefetch-reading-enabled=true
-        - --Xbal-prefetch-batch-size=8
 
     # Reth
     - id: reth-bal-full
