@@ -23,6 +23,10 @@ on:
         description: "Release tag (empty = auto: eest-payloads-<snapshot>-<fork>-<eest-sha8>)"
         required: false
         default: ""
+      pre-runs-from-release:
+        description: "Release tag to copy pre-runs/<client>/ from (empty = none)"
+        required: false
+        default: ""
       draft:
         description: "Keep the release as a draft for manual review"
         required: false
@@ -154,6 +158,14 @@ jobs:
       matrix:
         client: ${{ fromJSON(needs.prepare-release.outputs.clients) }}
     steps:
+      # Before the download: checkout cleans the workspace, so it has to run
+      # while there is nothing there to lose.
+      - name: Check out the graft script
+        if: inputs.pre-runs-from-release != ''
+        uses: actions/checkout@v5
+        with:
+          sparse-checkout: .github/scripts
+
       - name: Download build artifact for ${{ matrix.client }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -164,6 +176,50 @@ jobs:
             -R "${{ github.repository }}" -D dl
           mv dl/benchmarkoor-build-artifacts.tar.gz \
             "${{ needs.prepare-release.outputs.asset_base }}-${{ matrix.client }}.tar.gz"
+
+      # A build with no pre_runs stage of its own still fills against a pre-run
+      # head: the filler boots on a datadir an EARLIER build already advanced.
+      # The runner replays the bundle out of the same tarball as the fixtures
+      # (a runner `pre_runs:` block takes only a fixtures_subdir, never a URL of
+      # its own), so the bundle has to travel inside this release. Without it
+      # the runner starts at the raw snapshot head and every payload is an
+      # orphan. Copy it from the release whose pre-run head the fill booted on.
+      - name: Copy pre-runs from ${{ inputs.pre-runs-from-release }}
+        if: inputs.pre-runs-from-release != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLIENT: ${{ matrix.client }}
+          SRC_TAG: ${{ inputs.pre-runs-from-release }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          ASSET="${{ needs.prepare-release.outputs.asset_base }}-${CLIENT}.tar.gz"
+
+          # The source release names its per-client tarball in manifest.json. Its
+          # asset_base differs from ours (different test-type), so read the name
+          # instead of guessing it. Reassemble parts the way download.sh does.
+          mkdir -p src && cd src
+          gh release download "$SRC_TAG" -R "$REPO" -p manifest.json
+          TARBALL=$(jq -r --arg c "$CLIENT" '.assets[] | select(.client==$c) | .tarball // empty' manifest.json)
+          if [ -z "$TARBALL" ]; then
+            echo "::error::Release $SRC_TAG has no asset for client $CLIENT."
+            exit 1
+          fi
+          for f in $(jq -r --arg c "$CLIENT" '.assets[] | select(.client==$c) | .files[]' manifest.json); do
+            gh release download "$SRC_TAG" -R "$REPO" -p "$f"
+          done
+          if [ ! -f "$TARBALL" ]; then cat "$TARBALL".part-* > "$TARBALL"; rm -f "$TARBALL".part-*; fi
+          cd ..
+
+          # Never unpack either archive: pre-run.request runs to tens of GB
+          # uncompressed and a hosted runner has ~25 GB of disk. The script
+          # streams both in and one out, so disk holds only the tarballs.
+          python3 .github/scripts/graft-pre-runs.py \
+            --into "$ASSET" --source "src/$TARBALL" \
+            --client "$CLIENT" --out merged.tar.gz
+          rm -rf src
+          mv merged.tar.gz "$ASSET"
+          echo "PRERUN_SOURCE_RELEASE=$SRC_TAG" >> "$GITHUB_ENV"
 
       - name: Extract build metadata, checksum, split if >2 GB, upload
         env:
@@ -190,12 +246,16 @@ jobs:
           PYTEST=$(find meta -name .benchmarkoor-pytest-report.json | head -1)
           # Present only when the pre_runs target set bundle_dir — the action
           # archives the whole pre_run_bundle/ directory, this file included.
+          # Also present when the step above copied a bundle in from another
+          # release; PRERUN_SOURCE_RELEASE then names where it came from.
           PRERUN=$(find meta -name pre-run.meta.json | head -1)
           jq -n --arg client "$CLIENT" \
+            --arg prerun_src "${PRERUN_SOURCE_RELEASE:-}" \
             --slurpfile sa "${SA:-/dev/null}" --slurpfile fill "${FILL:-/dev/null}" \
             --slurpfile build "${BUILD:-/dev/null}" --slurpfile pytest "${PYTEST:-/dev/null}" \
             --slurpfile prerun "${PRERUN:-/dev/null}" \
             '{client:$client,
+              prerun_source_release:$prerun_src,
               state_actor:($sa[0] // {}),
               eest_fill:($fill[0] // {}),
               build_inputs:(($build[0] // {}).inputs // {}),
@@ -304,6 +364,7 @@ jobs:
                 marker: .build_inputs.marker,
                 tests: .build_inputs.tests,
                 genesis_eips: (.build_inputs.genesis_eip_override.EIPs // .build_inputs.genesis_eip_override.eips),
+                prerun_source_release: (.prerun_source_release | select(. != "")),
                 prerun_payloads: .pre_run.payloads,
                 prerun_start_block: .pre_run.start_block_number,
                 prerun_start_hash: .pre_run.start_block_hash,
@@ -420,6 +481,13 @@ jobs:
                 echo "| End block | $pe (\`$(val "$b" .prerun_end_hash)\`) |"
                 echo "| Payloads | $pc |"
                 echo "| Contiguous | $contig |"
+                # A copied bundle did not come from this build run. Say so, and
+                # name the release it came from — the fixtures below only anchor
+                # if that bundle's end block is where the fill booted.
+                src=$(jq -r '.prerun_source_release // empty' <<<"$b")
+                if [ -n "$src" ]; then
+                  echo "| Source | copied from [\`$src\`](https://github.com/$REPO/releases/tag/$src) |"
+                fi
                 echo
               fi
               echo "#### eest tests / benchmarks"
