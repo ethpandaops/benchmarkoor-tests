@@ -23,12 +23,18 @@ runner:
           enabled: true
 
     # Besu
+    #
+    # 0d7d0f5 is the head of the glamsterdam-devnet-8 branch and digest-identical
+    # to the rolling glamsterdam-devnet-8 tag. Pinned per-commit because the AOT
+    # cache is only valid for the exact jars it was generated against, so the
+    # rolling tag moving would silently unpair the A/B comparison.
+    # Bump both together, and only once a matching AOT cache exists.
     - id: besu-bal-full
       client: besu
       metadata:
         labels:
           bal-mode: full
-      image: ethpandaops/besu:main
+      image: ethpandaops/besu:glamsterdam-devnet-8-0d7d0f5
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       environment:
@@ -41,14 +47,19 @@ runner:
 
     # Same as besu-bal-full, but on the AOT-cache image: the JVM starts
     # pre-warmed (Project Leyden) so Besu isn't penalised for JIT/C2 warmup.
-    # PoC image, built manually by baking a Besu-team-provided AOT cache into
+    # Built by baking a Besu-team-provided AOT cache into
+    # ethpandaops/besu:glamsterdam-devnet-8-0d7d0f5 (no recompile) and validated to load.
+    # BESU_OPTS is a JVM env var, so it must go here, not in extra_args.
+    # AOTMode=on makes the JVM refuse to start if the cache can't be mapped.
+    # Without it the JVM silently falls back to a cold run (exit 0), which would
+    # publish results labelled aot:"true" that got no AOT benefit at all.
     - id: besu-bal-full-aot
       client: besu
       metadata:
         labels:
           bal-mode: full
           aot: "true"
-      image: ethpandaops/besu:main-aot
+      image: ethpandaops/besu:glamsterdam-devnet-8-aot-0d7d0f5
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       environment:
