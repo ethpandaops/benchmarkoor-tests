@@ -131,6 +131,13 @@ runner:
         - --exec.no-prune=true
         - --exec.no-background-maintenance
         - --experimental.parallel-commitment
+      db_compaction:
+        enabled: true
+        when: [before_benchmarks]
+        inspect: true
+        timeout: 3h
+        persist:
+          enabled: true
       bootstrap_fcu:
         enabled: true
         max_retries: 120
