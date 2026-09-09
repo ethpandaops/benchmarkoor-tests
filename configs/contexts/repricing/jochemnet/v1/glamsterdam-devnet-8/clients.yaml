@@ -21,6 +21,7 @@ runner:
         timeout: 60m
         persist:
           enabled: true
+      rollback_strategy: rpc-debug-setHead
 
     # Besu
     #
