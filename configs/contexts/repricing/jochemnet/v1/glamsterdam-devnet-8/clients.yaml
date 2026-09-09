@@ -108,6 +108,9 @@ runner:
         enabled: true
         max_retries: 10
         backoff: 2s
+      resource_limits:
+        memory: "52g"
+
 
     # Erigon
     ## Help for erigon flags:
