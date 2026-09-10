@@ -134,6 +134,7 @@ runner:
       db_compaction:
         enabled: true
         when: [before_benchmarks]
+        prepare: [seg-retire]
         inspect: true
         timeout: 3h
         persist:
