@@ -126,6 +126,7 @@ runner:
           bal-mode: full
       image: ethpandaops/erigon:main
       extra_args:
+        - --debug.slow-block-threshold=0
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
         - --exec.no-merge=true
         - --exec.no-prune=true
