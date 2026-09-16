@@ -1,3 +1,11 @@
+global:
+  env:
+    # Consumed by the geth-bal-full instance in clients.yaml. Compute runs use
+    # no rollback (see runner.client.config below), but geth OOMs without one,
+    # so it rolls back with debug_setHead. The stateful runner file does not
+    # set this, so stateful geth keeps container-recreate.
+    GETH_ROLLBACK_STRATEGY: rpc-debug-setHead
+
 runner:
   benchmark:
     tests:
