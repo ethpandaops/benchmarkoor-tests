@@ -21,7 +21,14 @@ runner:
         timeout: 60m
         persist:
           enabled: true
-      rollback_strategy: rpc-debug-setHead
+      # Set per test type, not here. test-source.compute.runner.yaml defines
+      # GETH_ROLLBACK_STRATEGY=rpc-debug-setHead in global.env; the stateful
+      # runner file leaves it unset, so the value expands to "" and the
+      # instance falls through to that file's runner.client.config
+      # (container-recreate). The runner files cannot set this field directly:
+      # the config merge replaces the instances list wholesale, and clients.yaml
+      # is merged last.
+      rollback_strategy: ${GETH_ROLLBACK_STRATEGY}
 
     # Besu
     #
