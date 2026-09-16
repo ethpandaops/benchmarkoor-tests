@@ -56,7 +56,7 @@ on:
       build-timeout-minutes:
         description: "Timeout for the benchmark build (minutes)"
         required: false
-        default: "2160"
+        default: "2880"
       image:
         description: "Benchmarkoor docker image. Empty builds the image locally from git-ref (the action only honours git-ref when this is empty)."
         required: false
