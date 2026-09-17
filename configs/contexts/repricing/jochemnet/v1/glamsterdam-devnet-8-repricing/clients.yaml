@@ -97,6 +97,8 @@ runner:
     # Nethermind
     - id: nethermind-bal-full
       client: nethermind
+      # Uses debug_resetHead for Nethermind; retain the process across tests.
+      rollback_strategy: rpc-debug-setHead
       metadata:
         labels:
           bal-mode: full
