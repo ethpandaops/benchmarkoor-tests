@@ -11,13 +11,16 @@ runner:
           context: repricing
       source:
         eest_fixtures:
-          # Promoted from build run 33148365172 (geth, 692 filled, 68
-          # failures) by benchmarkoor-release. EEST e269bb44, 200-300 Mgas.
-          # The 68 are the depth benchmarks (39 short of mined contracts, 13
-          # rejected payloads), 8 block-access-list mismatches, 4 initcode
-          # assertions and 4 receipt-status failures, so deep-branch coverage
-          # is absent from this set.
-          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260828-063412/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz
+          # Promoted from build run 35097694911 (geth, 2761 filled, 0
+          # failures) by benchmarkoor-release. EEST e269bb44. The pre-runs
+          # were grafted from the 20260828-063412 release (41093 payloads,
+          # blocks 24402727 -> 24443820), the same head this fill booted on.
+          # The release splits this tarball into .part-000/.part-001 because
+          # 2.17 GB exceeds the 2 GB asset cap; the runner streams the parts
+          # back to back (benchmarkoor fixtures_url_parts).
+          fixtures_url_parts:
+            - https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260916-124530/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz.part-000
+            - https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260916-124530/eest-payloads-jochemnet-v1-amsterdam-stateful-geth.tar.gz.part-001
           fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
           pre_runs:
             fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
