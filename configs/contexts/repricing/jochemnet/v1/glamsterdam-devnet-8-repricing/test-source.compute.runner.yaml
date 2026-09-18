@@ -19,14 +19,9 @@ runner:
           context: repricing
       source:
         eest_fixtures:
-          # Promoted from build run 33759962853 (geth, 2302 filled, 28
-          # failures) by benchmarkoor-release. EEST e269bb44, 200-300 Mgas.
-          # The 28 are 10 "initcode prefix too long" on the EIP-7928
-          # block-access-list benchmarks (8 state_root_computation, 2
-          # prefetch_cold_storage), 12 truncated-PUSH variants EEST rejects as
-          # raw bytes, 2 cold SSTORE out-of-gas over the gas cap and 4
-          # full-data blocks short of sender balance. Those four groups are
-          # absent from this set.
+          # Promoted from build run 35164624917 (geth, 4884 passed, 11
+          # skipped, 11 deselected, 0 failures) by benchmarkoor-release.
+          # EEST e269bb44.
           #
           # That build ran with no pre_runs stage of its own. Its filler booted
           # on the schelk backup, which the stateful build had already promoted
@@ -37,7 +32,7 @@ runner:
           # eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260828-063412.
           # Keep the pre_runs block below: without the replay the runner starts
           # 41093 blocks short and every payload is an orphan.
-          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-e269bb44-20260903-131433/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-jochemnet-v1-amsterdam-compute-e269bb44-20260916-235909/eest-payloads-jochemnet-v1-amsterdam-compute-geth.tar.gz
           fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
           pre_runs:
             fixtures_subdir: benchmarkoor-build-artifacts/pre-runs/geth/pre_run_bundle
