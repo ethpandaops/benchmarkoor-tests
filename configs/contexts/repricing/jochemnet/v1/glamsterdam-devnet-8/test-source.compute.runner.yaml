@@ -5,6 +5,9 @@ global:
     # so it rolls back with debug_setHead. The stateful runner file does not
     # set this, so stateful geth keeps container-recreate.
     GETH_ROLLBACK_STRATEGY: rpc-debug-setHead
+    # Same for the nethermind-bal-full instance: compute runs roll back with
+    # debug_resetHead, stateful runs keep container-recreate.
+    NETHERMIND_ROLLBACK_STRATEGY: rpc-debug-setHead
 
 runner:
   benchmark:
