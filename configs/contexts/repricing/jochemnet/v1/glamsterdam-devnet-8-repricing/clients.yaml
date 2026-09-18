@@ -116,6 +116,13 @@ runner:
         enabled: true
         max_retries: 10
         backoff: 2s
+      # Set per test type, not here. test-source.compute.runner.yaml defines
+      # NETHERMIND_ROLLBACK_STRATEGY=rpc-debug-setHead in global.env; the
+      # stateful runner file leaves it unset, so the value expands to "" and
+      # the instance falls through to that file's runner.client.config
+      # (container-recreate). See the geth instance above for why the runner
+      # files cannot set this field directly.
+      rollback_strategy: ${NETHERMIND_ROLLBACK_STRATEGY}
 
     # Erigon
     ## Help for erigon flags:
