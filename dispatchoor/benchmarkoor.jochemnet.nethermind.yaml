@@ -93,3 +93,49 @@
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+
+# --- Subdir: jochemnet/v1/glamsterdam-devnet-8-repricing ---
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-v1-glamsterdam-devnet-8-repricing-compute-nethermind-bal-full
+  name: "(Nethermind) - Repricing - jochemnet/v1/glamsterdam-devnet-8-repricing - Compute - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8-repricing"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    clients: '["nethermind"]'
+    instance-id: "nethermind-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8-repricing"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 360, "global": 720}'
+
+- id: benchmarkoor-nethermind-repricing-jochemnet-v1-glamsterdam-devnet-8-repricing-stateful-nethermind-bal-full
+  name: "(Nethermind) - Repricing - jochemnet/v1/glamsterdam-devnet-8-repricing - Stateful - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8-repricing"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    clients: '["nethermind"]'
+    instance-id: "nethermind-bal-full"
+    snapshot: "jochemnet/v1"
+    subdir: "jochemnet/v1/glamsterdam-devnet-8-repricing"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
