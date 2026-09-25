@@ -11,6 +11,7 @@ runner:
           bal-mode: full
       image: ethpandaops/geth:master
       extra_args:
+        - --cache.noprecompile
         - --engine.maxreorgdepth=1024
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
         - --debug.logslowblock=0
