@@ -570,7 +570,10 @@ jobs:
               mf=$(jq -r '(.merged_from // [])
                     | map("\(.filled // "?") from " +
                           (if .release then "`\(.release)`" else "this build" end) +
-                          " (eest `\((.eest_sha // "unknown")[0:8])`)")
+                          " (eest `\((.eest_sha // "unknown")[0:8])`" +
+                          (if .new != null or .overridden != null
+                           then "; \(.new // 0) new, \(.overridden // 0) overriding"
+                           else "" end) + ")")
                     | join(" + ")' <<<"$b")
               if [ -n "$mf" ]; then echo "| Merged from | $mf |"; fi
               echo "| Pytest passed / total | $(val "$b" .pytest_passed) / $(val "$b" .pytest_total) |"

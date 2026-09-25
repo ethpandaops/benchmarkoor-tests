@@ -311,6 +311,10 @@ def main():
                 + (new_fill.get("failed") or 0)
             merged_fill["size_bytes"] = (fill.get("size_bytes") or 0) \
                 + size_delta
+            # `new` and `overridden` split what this build contributed: a case
+            # ID the base did not hold, against one it replaced. They sum to
+            # the build's own `filled`, and only the contributing side carries
+            # them — on the base they would just repeat `overridden`.
             merged_fill["merged_from"] = [
                 {"release": args.source_tag or None,
                  "eest_sha": fill.get("eest_sha"),
@@ -319,7 +323,9 @@ def main():
                 {"release": None,
                  "eest_sha": new_fill.get("eest_sha"),
                  "filter": new_fill.get("filter"),
-                 "filled": new_fill.get("filled")},
+                 "filled": new_fill.get("filled"),
+                 "new": added,
+                 "overridden": overridden},
             ]
             add_bytes(out, prefix + FILL,
                       json.dumps(merged_fill, indent=2).encode(), template)
