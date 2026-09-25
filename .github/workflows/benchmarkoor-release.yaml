@@ -27,6 +27,10 @@ on:
         description: "Release tag to copy pre-runs/<client>/ from (empty = none)"
         required: false
         default: ""
+      merge-from-release:
+        description: "Release tag whose fixtures this build's fixtures merge into (this build wins every test-ID collision). Brings that release's pre-runs bundle along, so it excludes pre-runs-from-release."
+        required: false
+        default: ""
       draft:
         description: "Keep the release as a draft for manual review"
         required: false
@@ -59,6 +63,15 @@ jobs:
       test_type: ${{ steps.meta.outputs.test_type }}
       clients: ${{ steps.meta.outputs.clients }}
     steps:
+      # A merge base already carries its own pre-runs bundle, and the graft
+      # script refuses to shadow one. Catch the pair here rather than after
+      # the publish legs have each downloaded a gigabyte.
+      - name: Reject conflicting lineage inputs
+        if: inputs.merge-from-release != '' && inputs.pre-runs-from-release != ''
+        run: |
+          echo "::error::merge-from-release and pre-runs-from-release are mutually exclusive. The merge base supplies the bundle."
+          exit 1
+
       - name: Derive clients, context and lineage from the build run
         id: meta
         env:
@@ -160,8 +173,8 @@ jobs:
     steps:
       # Before the download: checkout cleans the workspace, so it has to run
       # while there is nothing there to lose.
-      - name: Check out the graft script
-        if: inputs.pre-runs-from-release != ''
+      - name: Check out the merge/graft scripts
+        if: inputs.pre-runs-from-release != '' || inputs.merge-from-release != ''
         uses: actions/checkout@v5
         with:
           sparse-checkout: .github/scripts
@@ -176,6 +189,53 @@ jobs:
             -R "${{ github.repository }}" -D dl
           mv dl/benchmarkoor-build-artifacts.tar.gz \
             "${{ needs.prepare-release.outputs.asset_base }}-${{ matrix.client }}.tar.gz"
+
+      # A filtered build fills only part of the suite. Merging its fixtures
+      # into a release that already holds the rest ships one asset carrying
+      # both, with this build winning every test-ID collision. The merge is
+      # per test case, not per file: a fixture JSON keyed by pytest node ID
+      # covers one test function, so replacing whole files would drop the
+      # parameters this build's filter left out. See merge-fixtures.py.
+      #
+      # The base release's pre-runs bundle rides along, which is why this and
+      # pre-runs-from-release exclude each other.
+      - name: Merge fixtures into ${{ inputs.merge-from-release }}
+        if: inputs.merge-from-release != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CLIENT: ${{ matrix.client }}
+          SRC_TAG: ${{ inputs.merge-from-release }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          ASSET="${{ needs.prepare-release.outputs.asset_base }}-${CLIENT}.tar.gz"
+
+          # Same fetch as the pre-runs step below: the source release names its
+          # per-client tarball in manifest.json (its asset_base can differ from
+          # ours), and parts are reassembled the way download.sh does.
+          mkdir -p src && cd src
+          gh release download "$SRC_TAG" -R "$REPO" -p manifest.json
+          TARBALL=$(jq -r --arg c "$CLIENT" '.assets[] | select(.client==$c) | .tarball // empty' manifest.json)
+          if [ -z "$TARBALL" ]; then
+            echo "::error::Release $SRC_TAG has no asset for client $CLIENT."
+            exit 1
+          fi
+          for f in $(jq -r --arg c "$CLIENT" '.assets[] | select(.client==$c) | .files[]' manifest.json); do
+            gh release download "$SRC_TAG" -R "$REPO" -p "$f"
+          done
+          if [ ! -f "$TARBALL" ]; then cat "$TARBALL".part-* > "$TARBALL"; rm -f "$TARBALL".part-*; fi
+          cd ..
+
+          # Streams both archives; the ~50 GB pre-runs bundle is never unpacked.
+          python3 .github/scripts/merge-fixtures.py \
+            --base "src/$TARBALL" --overlay "$ASSET" \
+            --client "$CLIENT" --source-tag "$SRC_TAG" --out merged.tar.gz
+          rm -rf src
+          mv merged.tar.gz "$ASSET"
+
+          # The bundle in the merged asset came from the base release, so the
+          # notes name it the same way the copy step does.
+          echo "PRERUN_SOURCE_RELEASE=$SRC_TAG" >> "$GITHUB_ENV"
 
       # A build with no pre_runs stage of its own still fills against a pre-run
       # head: the filler boots on a datadir an EARLIER build already advanced.
@@ -357,6 +417,7 @@ jobs:
                 filter: .eest_fill.filter,
                 fixtures_filled: .eest_fill.filled,
                 fixtures_failed: .eest_fill.failed,
+                merged_from: .eest_fill.merged_from,
                 fixtures_size_bytes: .eest_fill.size_bytes,
                 gas_benchmark_values: .build_inputs.gas_benchmark_values,
                 max_gas_per_test: .build_inputs.max_gas_per_test,
@@ -503,6 +564,15 @@ jobs:
               echo "| Fixed opcode count | $(val "$b" .fixed_opcode_count) |"
               echo "| Filter | $(val "$b" .filter) |"
               echo "| Fixtures filled / failed | $(val "$b" .fixtures_filled) / $(val "$b" .fixtures_failed) |"
+              # A merged asset carries fixtures from more than one fill, so
+              # name each source and how many cases it contributed. Absent on
+              # an ordinary single-build release.
+              mf=$(jq -r '(.merged_from // [])
+                    | map("\(.filled // "?") from " +
+                          (if .release then "`\(.release)`" else "this build" end) +
+                          " (eest `\((.eest_sha // "unknown")[0:8])`)")
+                    | join(" + ")' <<<"$b")
+              if [ -n "$mf" ]; then echo "| Merged from | $mf |"; fi
               echo "| Pytest passed / total | $(val "$b" .pytest_passed) / $(val "$b" .pytest_total) |"
               echo "| Fixtures size | $(hbytes "$(jq -r '.fixtures_size_bytes // empty' <<<"$b")") |"
               echo "| Asset | \`$(val "$a" .tarball)\` ($(jq -r '.files|length' <<<"$a") file(s)) |"
