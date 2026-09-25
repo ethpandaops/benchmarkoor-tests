@@ -144,8 +144,12 @@ builder:
       tests:
         - tests/benchmark/compute
       #marker: repricing
+      # Temporary branch filter: build ONLY the two benchmarks the v2 eest
+      # branch adds (execution-specs#3631 and #3637). The test_blobhash
+      # exclusion this replaces is unnecessary here, because neither selected
+      # test is test_blobhash.
       filter: >-
-        not (test_blobhash and one_blob)
+        test_jumpdest_analysis or test_tstore_key_distribution
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes (e.g. bloated_eoa_10GB)
       # against pre-deployed state; without it those variants are skipped.
