@@ -19,3 +19,9 @@ runner:
     discovery_path: repricings/results
     interval: 1m
     timeout: 10s
+
+  storage_probe:
+    enabled: true
+    file_size: 1GB   # size of the test file
+    duration: 5s     # time of each workload
+    io_depth: 64     # I/O operations in flight
