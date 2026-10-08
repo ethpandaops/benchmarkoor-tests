@@ -1,0 +1,100 @@
+# Pre-runs that turn a jochemnet release into a shadowfork snapshot
+# (benchmarkoor-snapshot.yaml). Loaded after configs/datadirs/jochemnet/v1/global.yaml
+# (snapshot dirs, genesis files) and the release's own context global.yaml
+# (AMSTERDAM_ACTIVATION_TS), so the schedule is the one the release was built on.
+#
+# The workflow sets SNAPSHOT_BASE_BUNDLE (the release's pre_run_bundle),
+# SNAPSHOT_TAIL_DIR (where geth-ramp writes its bundle, the one the replays
+# continue with), SNAPSHOT_GAS_LIMIT and SNAPSHOT_IMAGE, and builds one target
+# per host with --limit-pre-runs-target.
+builder:
+  pre_runs:
+    pull_policy: always
+    config:
+      fork: amsterdam
+      datadir_method: schelk
+    targets:
+      # geth continues the release's pre-run and walks the gas limit down from the
+      # payloads' 1 TGas with empty blocks (~1/1024 per block, ~8.7k blocks to
+      # 200M). --cache.gc=0 leaves geth no write buffer, so every block that
+      # leaves the 128 diff layers is flushed to pebble: the journal holds only
+      # the last 128 ramp blocks, never the release's contracts.
+      - name: geth-ramp
+        filler_client: geth
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${GETH_SNAPSHOT_DIR}
+        bundle_dir: ${SNAPSHOT_TAIL_DIR}
+        genesis: ${GETH_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        fill: false
+        gas_limit: ${SNAPSHOT_GAS_LIMIT}
+        gas_bump_max_blocks: 10000
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+          - --cache.gc=0
+
+      # Every other client replays the release, then the ramp, onto its own
+      # jochemnet snapshot.
+      # Each payload must come back VALID, so each client re-derives geth's state
+      # root, receipts and block access list at every block.
+      - name: nethermind-replay
+        filler_client: nethermind
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${NETHERMIND_SNAPSHOT_DIR}
+        genesis: ${NETHERMIND_CHAINSPEC}
+        genesis_eip_override:
+          timestamp: ${AMSTERDAM_ACTIVATION_TS}
+          eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282]
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+        filler_extra_args:
+          # The snapshot dir is the chain column dir (datadirs/jochemnet/v1/global.yaml).
+          - --Init.BaseDbPath=/data
+          - --FlatDb.Enabled=true
+          - --FlatDb.CompactionOffset=0
+          - --FlatDb.MinReorgDepth=1024
+          - --FlatDb.MaxReorgDepth=1024
+
+      - name: besu-replay
+        filler_client: besu
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${BESU_SNAPSHOT_DIR}
+        genesis: ${BESU_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+
+      - name: reth-replay
+        filler_client: reth
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${RETH_SNAPSHOT_DIR}
+        genesis: ${RETH_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+
+      - name: erigon-replay
+        filler_client: erigon
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${ERIGON_SNAPSHOT_DIR}
+        genesis: ${ERIGON_GENESIS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+
+      - name: ethrex-replay
+        filler_client: ethrex
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${ETHREX_SNAPSHOT_DIR}
+        genesis: ${ETHREX_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+        filler_extra_args:
+          - --skip-genesis-validation

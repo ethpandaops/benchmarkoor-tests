@@ -1,0 +1,330 @@
+name: benchmarkoor-snapshot
+
+# Turns a jochemnet benchmarkoor-release into a shadowfork snapshot every client
+# can boot without a pre-run of its own (msf-2): the release's pre-run applied to
+# each client's jochemnet datadir, the gas limit walked down, the datadir
+# compacted, and the result published to <bucket>/jochemnet/<client>/<head>/.
+#
+#   prepare  release manifest → base and head blocks, context; bucket write probe
+#   geth     replay the release's pre-run, ramp the gas limit down (the tail
+#            bundle), reopen at the head, compact, export
+#   replay   every other client: release pre-run + tail, compact, export
+#   latest   only once every client is up: <bucket>/jochemnet/<client>/latest
+#
+# Each payload must come back VALID on every client, so every image has geth's
+# state root, receipts and block access list at every block. Runs on the
+# jochemnet hosts, whose schelk baseline holds the release's base snapshot; the
+# scratch is recovered afterwards so the next benchmark starts from the baseline.
+#
+# Needs benchmarkoor with pre_runs base_bundle and fill: false (#349),
+# `db compact` (#351) and `snapshot export` (#350): until they merge, dispatch
+# with image "" and a git-ref carrying all three.
+run-name: "benchmarkoor-snapshot · ${{ inputs.release }} · gas=${{ inputs.gas-limit }} · publish=${{ inputs.publish }}"
+
+on:
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "jochemnet benchmarkoor-release whose pre-run the snapshot carries"
+        default: "eest-payloads-jochemnet-v1-amsterdam-stateful-e269bb44-20260916-124530"
+      gas-limit:
+        description: "Gas limit of the published head (the release's payloads run at 1 TGas)"
+        default: "200000000"
+      clients:
+        description: "Clients replaying geth's chain (JSON array); geth always runs"
+        default: '["nethermind", "besu", "reth", "erigon", "ethrex"]'
+      images:
+        description: "Client images (JSON): the releases the devnets run, which open and publish each datadir"
+        default: '{"geth": "ethereum/client-go:v1.17.7", "nethermind": "nethermind/nethermind:2.1.0", "besu": "hyperledger/besu:26.9.0", "reth": "ghcr.io/paradigmxyz/reth:v2.7.0", "erigon": "erigontech/erigon:v3.7.1", "ethrex": "ghcr.io/lambdaclass/ethrex:29.0.1"}'
+      compaction-image:
+        description: "RocksDB ldb image for nethermind/besu compaction"
+        default: "ghcr.io/ethpandaops/benchmarkoor-rocksdb-ldb:11.8.1"
+      bucket:
+        description: "Bucket published to as jochemnet/<client>/<head>/"
+        default: "ethpandaops-shadowfork-images"
+      publish:
+        description: "Export to the bucket and write latest (false: build, check and compact only)"
+        type: boolean
+        default: true
+      image:
+        description: "Benchmarkoor docker image. Empty builds it from git-ref."
+        default: "ghcr.io/ethpandaops/benchmarkoor:master"
+      git-ref:
+        description: "Benchmarkoor git ref, used only when image is empty"
+        default: ""
+      timeout-minutes:
+        description: "Per client job"
+        default: "2880"
+
+concurrency:
+  group: benchmarkoor-snapshot
+  cancel-in-progress: false
+
+env:
+  CONFIG_BASE: https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs
+  AWS_DEFAULT_REGION: auto
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      base: ${{ steps.release.outputs.base }}
+      head: ${{ steps.release.outputs.head }}
+      context: ${{ steps.release.outputs.context }}
+      subdir: ${{ steps.release.outputs.subdir }}
+      eest: ${{ steps.release.outputs.eest }}
+      ams: ${{ steps.release.outputs.ams }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Release
+        id: release
+        env:
+          TAG: ${{ inputs.release }}
+        run: |
+          m=$(curl -fsSL "https://github.com/${GITHUB_REPOSITORY}/releases/download/$TAG/manifest.json")
+          [ "$(jq -r .snapshot <<<"$m")" = jochemnet/v1 ] || { echo "::error::$TAG is not a jochemnet/v1 release"; exit 1; }
+          b=$(jq -ce '.assets[] | select(.client == "geth") | .build' <<<"$m")
+          base=$(jq -re .prerun_start_block <<<"$b")
+          # The hosts' schelk baseline is the snapshot named in the datadirs config; the
+          # release's pre-run has to start on it.
+          dir=$(sed -n 's/^ *GETH_SNAPSHOT_DIR: *//p' configs/datadirs/jochemnet/v1/global.yaml)
+          [ "${dir##*/}" = "$base" ] || { echo "::error::$TAG starts at $base, the hosts hold ${dir##*/}"; exit 1; }
+          # The release was built and is run on its context's schedule; so is the snapshot.
+          ctx="configs/contexts/$(jq -r .context <<<"$m")/$(jq -r .subdir <<<"$m")/global.yaml"
+          ams=$(sed -n 's/^ *AMSTERDAM_ACTIVATION_TS: *"\{0,1\}\([0-9]*\).*/\1/p' "$ctx")
+          [ -n "$ams" ] || { echo "::error::no AMSTERDAM_ACTIVATION_TS in $ctx"; exit 1; }
+          {
+            echo "ams=$ams"
+            echo "base=$base"
+            echo "head=$(jq -re .prerun_end_block <<<"$b")"
+            echo "context=$(jq -re .context <<<"$m")"
+            echo "subdir=$(jq -re .subdir <<<"$m")"
+            echo "eest=$(jq -re .eest_sha <<<"$m")"
+          } | tee -a "$GITHUB_OUTPUT"
+
+      - name: Bucket write
+        if: inputs.publish
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          BUCKET: ${{ inputs.bucket }}
+        run: |
+          key="jochemnet/.probe-${GITHUB_RUN_ID}"
+          if ! { echo probe | aws s3 cp - "s3://$BUCKET/$key" && aws s3 rm "s3://$BUCKET/$key"; }; then
+            echo "::error::the repo's S3 credentials cannot write $BUCKET"; exit 1
+          fi
+
+  geth:
+    needs: prepare
+    runs-on:
+      group: gasbenchmark
+      labels:
+        - benchmarkoor-v1-jochemnet-runner-geth
+        - benchmarkoor-v1-jochemnet-runner-benchmark-ci-3
+    timeout-minutes: ${{ fromJSON(inputs.timeout-minutes) }}
+    env:
+      CLIENT: geth
+      SNAPSHOT_IMAGE: ${{ fromJSON(inputs.images).geth }}
+      SNAPSHOT_GAS_LIMIT: ${{ inputs.gas-limit }}
+      DATADIR: /schelk/snapshots/geth/jochemnet/${{ needs.prepare.outputs.base }}
+      AMSTERDAM_TIME: ${{ needs.prepare.outputs.ams }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Release pre-run
+        run: |
+          W=$RUNNER_TEMP/snapshot
+          { echo "W=$W"; echo "SNAPSHOT_BASE_BUNDLE=$W/release/pre_run_bundle"; echo "SNAPSHOT_TAIL_DIR=$W/tail"; } >> "$GITHUB_ENV"
+          .github/scripts/release-pre-run-bundle.sh "${{ inputs.release }}" "$W/release"
+
+      - name: Datadir layout
+        run: .github/scripts/check-datadir-layout.sh "$CLIENT" "$DATADIR"
+
+      - name: Replay the release, ramp the gas limit down
+        uses: ethpandaops/benchmarkoor@master
+        with:
+          mode: build
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ inputs.image }}
+          git-ref: ${{ inputs.git-ref }}
+          upload-artifacts: "false"
+          upload-build-artifacts: "false"
+          build-config-urls: >-
+            ${{ env.CONFIG_BASE }}/global.yaml,
+            ${{ env.CONFIG_BASE }}/datadirs/jochemnet/v1/global.yaml,
+            ${{ env.CONFIG_BASE }}/contexts/${{ needs.prepare.outputs.context }}/${{ needs.prepare.outputs.subdir }}/global.yaml,
+            ${{ env.CONFIG_BASE }}/snapshots/jochemnet/v1/builder.yaml
+          build-args: >-
+            --skip-state-actor-build
+            --skip-eest-payload-build
+            --limit-pre-runs-target=geth-ramp
+
+      - name: Check the tail
+        env:
+          RELEASE_HEAD: ${{ needs.prepare.outputs.head }}
+        run: |
+          m=$SNAPSHOT_TAIL_DIR/pre_run_bundle/pre-run.meta.json
+          cat "$m"
+          [ "$(jq -r .start_block_number "$m")" = "$RELEASE_HEAD" ] || { echo "::error::the ramp does not start on the release head $RELEASE_HEAD"; exit 1; }
+          last=$(tail -n 2 "$SNAPSHOT_TAIL_DIR/pre_run_bundle/pre-run.request" | head -n 1 | jq -r '.params[0].gasLimit')
+          [ $((last)) -eq "$SNAPSHOT_GAS_LIMIT" ] || { echo "::error::head gas limit $((last)), want $SNAPSHOT_GAS_LIMIT"; exit 1; }
+
+      # The head's block is what a snapshot consumer anchors on, and reading it from a
+      # restarted geth proves the datadir reopens at the head: the journal written on
+      # stop holds only the last 128 ramp blocks (--cache.gc=0 flushed the rest).
+      - name: Reopen at the head
+        run: |
+          want=$(jq -r .end_block_hash "$SNAPSHOT_TAIL_DIR/pre_run_bundle/pre-run.meta.json")
+          docker run -d --name snapshot-geth-reopen --network host -v "$DATADIR:/data" "$SNAPSHOT_IMAGE" \
+            --datadir /data --override.amsterdam="$AMSTERDAM_TIME" --nodiscover --maxpeers 0 --port 0 \
+            --http --http.addr 127.0.0.1 --http.port 18545 --http.api eth --authrpc.port 18551
+          for _ in $(seq 120); do
+            curl -sf -H 'Content-Type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"eth_getBlockByNumber","params":["latest",true]}' \
+              http://127.0.0.1:18545 > "$W/head.json" && break
+            sleep 5
+          done
+          docker stop -t 600 snapshot-geth-reopen
+          code=$(docker inspect -f '{{.State.ExitCode}}' snapshot-geth-reopen)
+          docker logs --tail 30 snapshot-geth-reopen
+          docker rm snapshot-geth-reopen
+          [ "$code" = 0 ] || { echo "::error::geth exited $code"; exit 1; }
+          got=$(jq -r .result.hash "$W/head.json")
+          [ "$got" = "$want" ] || { echo "::error::geth reopened at $got, want $want"; exit 1; }
+          cp "$W/head.json" "$SNAPSHOT_TAIL_DIR/"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: snapshot-tail
+          path: ${{ env.SNAPSHOT_TAIL_DIR }}
+          if-no-files-found: error
+
+      # --image: the release that wrote the datadir compacts it; the CLI default is the client's
+      # :stable, a newer geth that may migrate the database format on open.
+      - name: Compact
+        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE"
+
+      - name: Export
+        if: inputs.publish
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          RELEASE: ${{ inputs.release }}
+          EEST: ${{ needs.prepare.outputs.eest }}
+          BASE: ${{ needs.prepare.outputs.base }}
+          BUCKET: ${{ inputs.bucket }}
+        run: .github/scripts/snapshot-export.sh
+
+      - name: Clean up
+        if: always()
+        run: |
+          docker rm -f snapshot-geth-reopen >/dev/null 2>&1 || true
+          sudo -E "${BENCHMARKOOR_SCHELK_BIN:-schelk}" recover -y
+          sudo rm -rf "$RUNNER_TEMP/snapshot"
+
+  replay:
+    needs: [prepare, geth]
+    strategy:
+      fail-fast: false
+      matrix:
+        client: ${{ fromJSON(inputs.clients) }}
+    runs-on:
+      group: gasbenchmark
+      labels:
+        - benchmarkoor-v1-jochemnet-runner-${{ matrix.client }}
+    timeout-minutes: ${{ fromJSON(inputs.timeout-minutes) }}
+    env:
+      CLIENT: ${{ matrix.client }}
+      SNAPSHOT_IMAGE: ${{ fromJSON(inputs.images)[matrix.client] }}
+      SNAPSHOT_GAS_LIMIT: ${{ inputs.gas-limit }}
+      COMPACTION_IMAGE: ${{ inputs.compaction-image }}
+      DATADIR: /schelk/snapshots/${{ matrix.client }}/jochemnet/${{ needs.prepare.outputs.base }}
+      AMSTERDAM_TIME: ${{ needs.prepare.outputs.ams }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Release pre-run
+        run: |
+          W=$RUNNER_TEMP/snapshot
+          { echo "W=$W"; echo "SNAPSHOT_BASE_BUNDLE=$W/release/pre_run_bundle"; echo "SNAPSHOT_TAIL_DIR=$W/tail"; } >> "$GITHUB_ENV"
+          .github/scripts/release-pre-run-bundle.sh "${{ inputs.release }}" "$W/release"
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: snapshot-tail
+          path: ${{ env.SNAPSHOT_TAIL_DIR }}
+
+      - name: Datadir layout
+        run: .github/scripts/check-datadir-layout.sh "$CLIENT" "$DATADIR"
+
+      - name: Replay the release and the ramp
+        uses: ethpandaops/benchmarkoor@master
+        with:
+          mode: build
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          image: ${{ inputs.image }}
+          git-ref: ${{ inputs.git-ref }}
+          upload-artifacts: "false"
+          upload-build-artifacts: "false"
+          build-config-urls: >-
+            ${{ env.CONFIG_BASE }}/global.yaml,
+            ${{ env.CONFIG_BASE }}/datadirs/jochemnet/v1/global.yaml,
+            ${{ env.CONFIG_BASE }}/contexts/${{ needs.prepare.outputs.context }}/${{ needs.prepare.outputs.subdir }}/global.yaml,
+            ${{ env.CONFIG_BASE }}/snapshots/jochemnet/v1/builder.yaml
+          build-args: >-
+            --skip-state-actor-build
+            --skip-eest-payload-build
+            --limit-pre-runs-target=${{ matrix.client }}-replay
+
+      # ethrex has no compaction; reth (MDBX) is a logged no-op.
+      - name: Compact
+        if: matrix.client != 'ethrex'
+        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE" --compaction-image "$COMPACTION_IMAGE"
+
+      - name: Export
+        if: inputs.publish
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+          RELEASE: ${{ inputs.release }}
+          EEST: ${{ needs.prepare.outputs.eest }}
+          BASE: ${{ needs.prepare.outputs.base }}
+          BUCKET: ${{ inputs.bucket }}
+        run: .github/scripts/snapshot-export.sh
+
+      - name: Clean up
+        if: always()
+        run: |
+          sudo -E "${BENCHMARKOOR_SCHELK_BIN:-schelk}" recover -y
+          sudo rm -rf "$RUNNER_TEMP/snapshot"
+
+  # latest is written last and only once every client is up, so a consumer of it
+  # never meets a height some client lacks.
+  latest:
+    if: inputs.publish
+    needs: [prepare, geth, replay]
+    runs-on: ubuntu-latest
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
+      BUCKET: ${{ inputs.bucket }}
+      CLIENTS: ${{ inputs.clients }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: snapshot-tail
+          path: tail
+
+      - name: Write latest
+        run: |
+          head=$(( $(jq -r .result.number tail/head.json) ))
+          clients=$(jq -r '["geth"] + . | unique | .[]' <<<"$CLIENTS")
+          for c in $clients; do
+            aws s3 ls "s3://$BUCKET/jochemnet/$c/$head/" | grep -q '\.tar\.zst$' || { echo "::error::no $c archive at $head"; exit 1; }
+          done
+          for c in $clients; do echo "$head" | aws s3 cp - "s3://$BUCKET/jochemnet/$c/latest"; done
+          echo "### jochemnet snapshot $head ($(jq -r .result.hash tail/head.json)): ${clients//$'\n'/ }" >> "$GITHUB_STEP_SUMMARY"
