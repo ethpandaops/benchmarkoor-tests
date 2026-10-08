@@ -139,6 +139,9 @@ jobs:
           { echo "W=$W"; echo "SNAPSHOT_BASE_BUNDLE=$W/release/pre_run_bundle"; echo "SNAPSHOT_TAIL_DIR=$W/tail"; } >> "$GITHUB_ENV"
           .github/scripts/release-pre-run-bundle.sh "${{ inputs.release }}" "$W/release"
 
+      - name: Datadir layout
+        run: .github/scripts/check-datadir-layout.sh "$CLIENT" "$DATADIR"
+
       - name: Replay the release, ramp the gas limit down
         uses: ethpandaops/benchmarkoor@master
         with:
@@ -250,6 +253,9 @@ jobs:
         with:
           name: snapshot-tail
           path: ${{ env.SNAPSHOT_TAIL_DIR }}
+
+      - name: Datadir layout
+        run: .github/scripts/check-datadir-layout.sh "$CLIENT" "$DATADIR"
 
       - name: Replay the release and the ramp
         uses: ethpandaops/benchmarkoor@master
