@@ -200,8 +200,10 @@ jobs:
           path: ${{ env.SNAPSHOT_TAIL_DIR }}
           if-no-files-found: error
 
+      # --image: the release that wrote the datadir compacts it; the CLI default is the client's
+      # :stable, a newer geth that may migrate the database format on open.
       - name: Compact
-        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR"
+        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE"
 
       - name: Export
         if: inputs.publish
@@ -279,7 +281,7 @@ jobs:
       # ethrex has no compaction; reth (MDBX) is a logged no-op.
       - name: Compact
         if: matrix.client != 'ethrex'
-        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --compaction-image "$COMPACTION_IMAGE"
+        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE" --compaction-image "$COMPACTION_IMAGE"
 
       - name: Export
         if: inputs.publish
