@@ -85,6 +85,7 @@ All workflows are `workflow_dispatch`-only and must be dispatched from the defau
 | `benchmarkoor-build-state-actor.yaml` | Build **only** the state-actor datadir (no payload fill). Has a `force` input to rebuild over an already-populated/partial datadir. |
 | `benchmarkoor-release.yaml` | Promote the filled payloads from a build run into a GitHub Release. |
 | `benchmarkoor-run.yaml` | Build the datadir, replay the payloads, and upload results to S3. |
+| `benchmarkoor-snapshot.yaml` | Turn a jochemnet release into a shadowfork snapshot: every client's jochemnet datadir advanced by the release's pre-run, its gas limit walked down, compacted, and published as `<bucket>/jochemnet/<client>/<head>/`. See below. |
 
 Common inputs: `clients` (JSON array), `snapshot`, `context`, `subdir`, `test-type`, and `instance-id`. `benchmarkoor-build-state-actor.yaml` takes only `snapshot` + `clients` (plus `force`), since the test context is irrelevant to a datadir-only build.
 
@@ -92,6 +93,28 @@ Config merge order:
 
 - **build:** `global` → `datadirs/<snapshot>/{global,builder}` → `contexts/<context>/<subdir>/{global, test-source.<test-type>.builder}`
 - **run:** `global` → resource-limits → `s3-upload` → `datadirs/<snapshot>/{global,runner}` → `contexts/<context>/<subdir>/{global, test-source.<test-type>.runner, clients}`
+
+### Shadowfork snapshots (`benchmarkoor-snapshot.yaml`)
+
+A devnet that shadowforks jochemnet (msf-2) boots these datadirs as they are, so it gets the
+release's contracts without a pre-run of its own. Given a release tag:
+
+1. **geth** (the pinned jochemnet geth host) replays the release's pre-run onto its snapshot and
+   walks the gas limit down to `gas-limit` with empty blocks, recorded as the *tail* bundle
+   (`configs/snapshots/jochemnet/v1/builder.yaml`, target `geth-ramp`). It runs with
+   `--cache.gc=0`, so no block outside geth's 128 diff layers is left in the journal. A restarted
+   geth must come back at the tail's head; its head block is what every client publishes.
+2. **every other client** replays the release's pre-run and then the tail onto its own snapshot.
+   Every payload must be VALID, so every image agrees with geth at every block.
+3. Each datadir is **compacted** (`benchmarkoor db compact`; ldb per column family for
+   nethermind/besu, none for ethrex) so the release's contracts sit in the same DB tiers as old
+   state and read no faster than mainnet state would, then **exported** (`benchmarkoor snapshot export`).
+4. `latest` is written last, once every client's archive is up.
+
+Runs on the jochemnet hosts, whose schelk baseline is the release's base snapshot (checked against
+`configs/datadirs/jochemnet/v1/global.yaml`), and `schelk recover`s the scratch afterwards.
+Publishing uses the repo's `S3_ENDPOINT_URL` / `AWS_*` secrets; the first job checks they can write
+the bucket. Each host needs ~55 GB free for the release's pre-run bundle (50 GB uncompressed).
 
 ## Dispatchoor
 
