@@ -23,8 +23,8 @@ on:
         description: "execution-specs repo for the fill"
         default: "https://github.com/qu0b/execution-specs.git"
       eest-ref:
-        description: "execution-specs ref: needs the combined-sizes setup test and skylenet's fixture spill"
-        default: "qu0b/bench-images-v2"
+        description: "execution-specs ref: upstream forks/amsterdam + #3648 (fixture spill) + #3304 (deploy script) + the combined-sizes test"
+        default: "qu0b/bench-images-v3"
       geth-image:
         description: "geth release that fills and opens the image (the one the devnets run)"
         default: "ethereum/client-go:v1.17.7"

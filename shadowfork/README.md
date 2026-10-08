@@ -55,7 +55,9 @@ Requirements learned the hard way:
   devnet build: the glamsterdam-devnet-8 images trailed by a major version (nethermind 1.40 vs 2.1).
 - The fill must not hold its fixture in memory: each 64 KiB deploy's code is also in its block
   access list, so the bundle is ~55 GB and an in-memory fixture passed 200 GiB. The default EEST
-  ref carries skylenet's spill-to-disk fixes.
+  ref (`qu0b/execution-specs@qu0b/bench-images-v3`) is upstream `forks/amsterdam` plus the two open
+  upstream PRs this needs, ethereum/execution-specs#3648 (spill payload lists to disk) and #3304
+  (the deployment script), plus the combined-sizes test and JUMPDEST at 24 KiB.
 - Every long step is its own process: no host may auto-upgrade or restart services mid-build
   (unattended-upgrades restarted a unit and killed a 1 TB upload with it).
 
