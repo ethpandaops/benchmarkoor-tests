@@ -12,7 +12,12 @@ case $c in
         [ ! -e "$d/chaindata" ] || { echo "::error::$d/chaindata: a flat instance dir, geth wants it under $d/geth/"; exit 1; } ;;
   nethermind) need nethermind_db/mainnet/state ;;
   besu) need database ;;
-  reth|erigon|ethrex) echo "$c datadir layout not checked (unverified)"; exit 0 ;;
+  # jochemnet's reth v2 archive: static_files/, rocksdb/ and the MDBX db at the datadir root.
+  reth) need static_files; need rocksdb ;;
+  # erigon's pruned archive is its datadir: chaindata/ (mdbx) and snapshots/ (segments).
+  erigon) need chaindata; need snapshots ;;
+  # ethrex keeps its RocksDB at <datadir>/chain-1; the archive is that directory's contents.
+  ethrex) need chain-1/CURRENT ;;
   *) echo "::error::unknown client $c"; exit 1 ;;
 esac
 echo "$c datadir layout ok: $d"
