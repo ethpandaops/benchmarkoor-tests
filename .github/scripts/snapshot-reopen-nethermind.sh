@@ -9,7 +9,11 @@ expected=${SNAPSHOT_TAIL_DIR:?tail directory}/head.json
 name=snapshot-nethermind-reopen-${GITHUB_RUN_ID:-$$}
 url=$(sed -n 's/^ *GETH_GENESIS: *//p' configs/datadirs/jochemnet/v1/global.yaml)
 [ -n "$url" ]
-curl -fsSL --max-time 60 "$url" | jq --argjson ams "${AMSTERDAM_TIME:?fork timestamp}" '.config.amsterdamTime = $ams' > "$GENESIS"
+# Geth permits unprefixed alloc addresses; Nethermind's genesis reader requires 0x.
+curl -fsSL --max-time 60 "$url" | jq --argjson ams "${AMSTERDAM_TIME:?fork timestamp}" '
+  .config.amsterdamTime = $ams |
+  .alloc |= with_entries(.key |= if startswith("0x") then . else "0x" + . end)
+' > "$GENESIS"
 mkdir -p "$OUT"
 rm -f "$OUT/PASS"
 want=$(jq -er .result.hash "$expected")
