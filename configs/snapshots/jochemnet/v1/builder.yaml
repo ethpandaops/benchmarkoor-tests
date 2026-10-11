@@ -70,8 +70,13 @@ builder:
           - --Init.BaseDbPath=/data
           - --FlatDb.Enabled=true
           - --FlatDb.CompactionOffset=0
-          - --FlatDb.MinReorgDepth=1024
-          - --FlatDb.MaxReorgDepth=1024
+          # A distributable snapshot must reopen without replaying a 1024-block
+          # flat-state window. Persist finalized state during the snapshot build;
+          # these settings do not change the benchmark or consumer defaults.
+          - --FlatDb.CompactSize=1
+          - --FlatDb.MinReorgDepth=0
+          - --FlatDb.MaxReorgDepth=0
+          - --FlatDb.EnableLongFinality=false
 
       - name: besu-replay
         filler_client: besu

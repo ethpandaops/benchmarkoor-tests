@@ -285,6 +285,10 @@ jobs:
         if: matrix.client != 'ethrex'
         run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE" --compaction-image "$COMPACTION_IMAGE"
 
+      - name: Reopen Nethermind after compaction
+        if: matrix.client == 'nethermind'
+        run: .github/scripts/snapshot-reopen-nethermind.sh
+
       - name: Export
         if: inputs.publish
         env:
@@ -297,9 +301,18 @@ jobs:
           BUCKET: ${{ inputs.bucket }}
         run: .github/scripts/snapshot-export.sh
 
+      - name: Nethermind reopen evidence
+        if: always() && matrix.client == 'nethermind'
+        uses: actions/upload-artifact@v4
+        with:
+          name: snapshot-nethermind-reopen
+          path: ${{ env.W }}/nethermind-reopen
+          if-no-files-found: ignore
+
       - name: Clean up
         if: always()
         run: |
+          docker rm -f "snapshot-nethermind-reopen-${GITHUB_RUN_ID}" >/dev/null 2>&1 || true
           sudo -E "${BENCHMARKOOR_SCHELK_BIN:-schelk}" recover -y
           sudo rm -rf "$RUNNER_TEMP/snapshot"
 
