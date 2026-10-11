@@ -35,6 +35,22 @@ builder:
           - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
           - --cache.gc=0
 
+      # A geth rebuild from an existing tail (a re-run that must land on the same
+      # head as the other clients): replays the release and the tail like the
+      # others, with the ramp's --cache.gc=0 so the journal stays at 128 layers.
+      - name: geth-replay
+        filler_client: geth
+        filler_image: ${SNAPSHOT_IMAGE}
+        source_dir: ${GETH_SNAPSHOT_DIR}
+        genesis: ${GETH_GENESIS}
+        genesis_fork_override:
+          amsterdam: ${AMSTERDAM_ACTIVATION_TS}
+        base_bundle: ${SNAPSHOT_BASE_BUNDLE}
+        replay_from: ${SNAPSHOT_TAIL_DIR}/pre_run_bundle
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+          - --cache.gc=0
+
       # Every other client replays the release, then the ramp, onto its own
       # jochemnet snapshot.
       # Each payload must come back VALID, so each client re-derives geth's state
