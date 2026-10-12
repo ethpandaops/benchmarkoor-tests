@@ -158,6 +158,12 @@ jobs:
             --skip-eest-payload-build
             --limit-pre-runs-target=geth-ramp
 
+      # The composite action removes its binary during cleanup.
+      - name: Restore benchmarkoor CLI
+        env:
+          BENCHMARKOOR_IMAGE: ${{ inputs.image }}
+        run: .github/scripts/snapshot-extract-benchmarkoor.sh
+
       - name: Check the tail
         env:
           RELEASE_HEAD: ${{ needs.prepare.outputs.head }}
@@ -220,6 +226,7 @@ jobs:
           docker rm -f snapshot-geth-reopen >/dev/null 2>&1 || true
           sudo -E "${BENCHMARKOOR_SCHELK_BIN:-schelk}" recover -y
           sudo rm -rf "$RUNNER_TEMP/snapshot"
+          rm -f "$RUNNER_TEMP/benchmarkoor"
 
   replay:
     needs: [prepare, geth]
@@ -274,6 +281,12 @@ jobs:
             --skip-eest-payload-build
             --limit-pre-runs-target=${{ matrix.client }}-replay
 
+      # The composite action removes its binary during cleanup.
+      - name: Restore benchmarkoor CLI
+        env:
+          BENCHMARKOOR_IMAGE: ${{ inputs.image }}
+        run: .github/scripts/snapshot-extract-benchmarkoor.sh
+
       # Only run compaction provided by the client. Other datadirs are exported
       # after replay without external database tools or manual file replacement.
       - name: Compact with client command
@@ -314,6 +327,7 @@ jobs:
           docker rm -f "snapshot-nethermind-reopen-${GITHUB_RUN_ID}" >/dev/null 2>&1 || true
           sudo -E "${BENCHMARKOOR_SCHELK_BIN:-schelk}" recover -y
           sudo rm -rf "$RUNNER_TEMP/snapshot"
+          rm -f "$RUNNER_TEMP/benchmarkoor"
 
   # latest is written last and only once every client is up, so a consumer of it
   # never meets a height some client lacks.
