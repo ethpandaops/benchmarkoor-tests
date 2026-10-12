@@ -3,12 +3,12 @@ name: benchmarkoor-snapshot
 # Turns a jochemnet benchmarkoor-release into a shadowfork snapshot every client
 # can boot without a pre-run of its own (msf-2): the release's pre-run applied to
 # each client's jochemnet datadir, the gas limit walked down, the datadir
-# compacted, and the result published to <bucket>/jochemnet/<client>/<head>/.
+# compacted with client commands where supported, and the result published to <bucket>/jochemnet/<client>/<head>/.
 #
 #   prepare  release manifest → base and head blocks, context; bucket write probe
 #   geth     replay the release's pre-run, ramp the gas limit down (the tail
 #            bundle), reopen at the head, compact, export
-#   replay   every other client: release pre-run + tail, compact, export
+#   replay   every other client: release pre-run + tail, compact if supported, export
 #   latest   only once every client is up: <bucket>/jochemnet/<client>/latest
 #
 # Each payload must come back VALID on every client, so every image has geth's
@@ -36,9 +36,6 @@ on:
       images:
         description: "Client images (JSON): the releases the devnets run, which open and publish each datadir"
         default: '{"geth": "ethereum/client-go:v1.17.7", "nethermind": "nethermind/nethermind:2.1.0", "besu": "hyperledger/besu:26.9.0", "reth": "ghcr.io/paradigmxyz/reth:v2.7.0", "erigon": "erigontech/erigon:v3.7.1", "ethrex": "ghcr.io/lambdaclass/ethrex:29.0.1"}'
-      compaction-image:
-        description: "RocksDB ldb image for nethermind/besu compaction"
-        default: "ghcr.io/ethpandaops/benchmarkoor-rocksdb-ldb:11.8.1"
       bucket:
         description: "Bucket published to as jochemnet/<client>/<head>/"
         default: "ethpandaops-shadowfork-images"
@@ -239,7 +236,6 @@ jobs:
       CLIENT: ${{ matrix.client }}
       SNAPSHOT_IMAGE: ${{ fromJSON(inputs.images)[matrix.client] }}
       SNAPSHOT_GAS_LIMIT: ${{ inputs.gas-limit }}
-      COMPACTION_IMAGE: ${{ inputs.compaction-image }}
       DATADIR: /schelk/snapshots/${{ matrix.client }}/jochemnet/${{ needs.prepare.outputs.base }}
       AMSTERDAM_TIME: ${{ needs.prepare.outputs.ams }}
     steps:
@@ -278,19 +274,17 @@ jobs:
             --skip-eest-payload-build
             --limit-pre-runs-target=${{ matrix.client }}-replay
 
-      # reth: `reth db copy --compact` (mdbx_copy, copy-and-swap); erigon: `erigon db compact`;
-      # nethermind/besu: ldb per column family. ethrex is RocksDB with a merge operator ldb
-      # lacks (tx_locations_merge), so the generic compaction refuses it: exported as replayed.
-      - name: Compact
-        if: matrix.client != 'ethrex'
-        run: |
-          extra=()
-          case "$CLIENT" in
-            nethermind|besu) extra+=(--compaction-image "$COMPACTION_IMAGE") ;;
-          esac
-          sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE" "${extra[@]}"
+      # Only run compaction provided by the client. Other datadirs are exported
+      # after replay without external database tools or manual file replacement.
+      - name: Compact with client command
+        if: matrix.client == 'erigon'
+        run: sudo -E "$RUNNER_TEMP/benchmarkoor" db compact --client "$CLIENT" --datadir "$DATADIR" --image "$SNAPSHOT_IMAGE"
 
-      - name: Reopen Nethermind after compaction
+      - name: Report skipped compaction
+        if: matrix.client != 'erigon'
+        run: echo "Compaction skipped for $CLIENT; no client-owned compaction command is integrated."
+
+      - name: Reopen Nethermind before export
         if: matrix.client == 'nethermind'
         run: .github/scripts/snapshot-reopen-nethermind.sh
 

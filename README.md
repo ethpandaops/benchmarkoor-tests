@@ -85,7 +85,7 @@ All workflows are `workflow_dispatch`-only and must be dispatched from the defau
 | `benchmarkoor-build-state-actor.yaml` | Build **only** the state-actor datadir (no payload fill). Has a `force` input to rebuild over an already-populated/partial datadir. |
 | `benchmarkoor-release.yaml` | Promote the filled payloads from a build run into a GitHub Release. |
 | `benchmarkoor-run.yaml` | Build the datadir, replay the payloads, and upload results to S3. |
-| `benchmarkoor-snapshot.yaml` | Turn a jochemnet release into a shadowfork snapshot: every client's jochemnet datadir advanced by the release's pre-run, its gas limit walked down, compacted, and published as `<bucket>/jochemnet/<client>/<head>/`. See below. |
+| `benchmarkoor-snapshot.yaml` | Turn a jochemnet release into a shadowfork snapshot: every client's jochemnet datadir advanced by the release's pre-run, its gas limit walked down, compacted where supported, and published as `<bucket>/jochemnet/<client>/<head>/`. See below. |
 
 Common inputs: `clients` (JSON array), `snapshot`, `context`, `subdir`, `test-type`, and `instance-id`. `benchmarkoor-build-state-actor.yaml` takes only `snapshot` + `clients` (plus `force`), since the test context is irrelevant to a datadir-only build.
 
@@ -106,9 +106,10 @@ release's contracts without a pre-run of its own. Given a release tag:
    geth must come back at the tail's head; its head block is what every client publishes.
 2. **every other client** replays the release's pre-run and then the tail onto its own snapshot.
    Every payload must be VALID, so every image agrees with geth at every block.
-3. Each datadir is **compacted** (`benchmarkoor db compact`; ldb per column family for
-   nethermind/besu, none for ethrex) so the release's contracts sit in the same DB tiers as old
-   state and read no faster than mainnet state would, then **exported** (`benchmarkoor snapshot export`).
+3. **Geth and Erigon** are compacted with their own commands (`benchmarkoor db compact`).
+   Compaction is skipped for the other clients; no external database tool or manual file swap
+   is used. Nethermind must reopen offline at the expected head before export. Each datadir
+   is then **exported** (`benchmarkoor snapshot export`).
 4. `latest` is written last, once every client's archive is up.
 
 Runs on the jochemnet hosts, whose schelk baseline is the release's base snapshot (checked against
