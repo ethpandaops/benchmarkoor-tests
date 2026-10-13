@@ -46,11 +46,11 @@ configs/
         └── test-source.<test-type>.runner.yaml    # Where a run FETCHES the filled payloads
 ```
 
-A run is identified by the tuple `(snapshot, context, subdir, test-type, client, instance-id)`. Today `snapshot` is always `state-actor/v1` and `context` is always `repricing`; the variation is in `subdir`, `test-type`, and `client`. Each workflow assembles its config by fetching the files for that tuple from this repo, pinned to the dispatched commit (`github.sha`).
+A run is identified by the tuple `(snapshot, context, subdir, test-type, client, instance-id)`. `snapshot` is `state-actor/v1`, `state-actor/v2` or `jochemnet/v1`, and `context` is always `repricing`; the variation is in `subdir`, `test-type`, and `client`. Each workflow assembles its config by fetching the files for that tuple from this repo, pinned to the dispatched commit (`github.sha`).
 
 ### Snapshot (state-actor prestate)
 
-`snapshot` selects a prestate version under `configs/datadirs/<snapshot>/`. The only snapshot today is `state-actor/v1`. Its `builder.yaml` defines the prestate: the entities to generate (sequential EOAs, CREATE2 contract families, bloated storage, EIP-7702 delegations, EIP-8282 request predeploys, …), the target datadir size, and the per-client `state-actor` builder images. The datadir is materialized on build hosts and mounted into runs via schelk.
+`snapshot` selects a prestate version under `configs/datadirs/<snapshot>/`. `state-actor/v1` is the devnet-6/7 prestate. `state-actor/v2` adds the state the glamsterdam-devnet-8 benchmarks read: CREATE2 receivers and EIP-7702 delegations at both the 24 KiB (Osaka) and the 64 KiB (Amsterdam, EIP-7954) code size. v2 has its own `STATE_DIR` (`/schelk/state-actor/v2`), so the v1 datadirs and their releases stay valid. Each `builder.yaml` defines the prestate: the entities to generate (sequential EOAs, CREATE2 contract families, bloated storage, EIP-7702 delegations, EIP-8282 request predeploys, …), the target datadir size, and the per-client `state-actor` builder images. The datadir is materialized on build hosts and mounted into runs via schelk.
 
 ### Context & Subdir
 
@@ -62,6 +62,8 @@ The only **context** is `repricing` (gas-repricing / EIP-7870 scenarios). A **su
 | `v1/glamsterdam-devnet-6` | Glamsterdam devnet-6 variant |
 | `v1/glamsterdam-devnet-7` | Glamsterdam devnet-7 variant (`-m repricing` subset, 100M–300M gas sweep) |
 | `v1/glamsterdam-devnet-7-full` | Glamsterdam devnet-7, full suite: no repricing marker, 200M/300M gas only, frozen `benchmarks/amsterdam` EEST ref |
+| `state-actor/v2/glamsterdam-devnet-8` | Glamsterdam devnet-8 on `state-actor/v2`, full suite (no marker, 200M/300M). Same tests as `jochemnet/v1/glamsterdam-devnet-8` |
+| `state-actor/v2/glamsterdam-devnet-8-repricing` | Glamsterdam devnet-8 on `state-actor/v2`, `-m repricing` over 100M–300M. Same tests as `jochemnet/v1/glamsterdam-devnet-8-repricing` |
 
 ### Test Types
 
@@ -121,7 +123,7 @@ the bucket. Each host needs ~55 GB free for the release's pre-run bundle (50 GB 
 
 The `dispatchoor/` directory holds generated job definitions for [dispatchoor](https://github.com/ethpandaops/dispatchoor) to trigger `benchmarkoor-run.yaml`.
 
-`dispatchoor/generate.sh` produces one file per client (`benchmarkoor.<client>.yaml`) by scanning `configs/contexts/repricing/v1/*`. For each subdir it emits a dispatch entry per test type (`stateful`, `compute`) for that client's `<client>-bal-full` instance, targeting `benchmarkoor-run.yaml`. Subdirs with a `.dispatchoor_ignore` file are skipped.
+`dispatchoor/generate.sh` produces one file per client (`benchmarkoor.<client>.yaml`) by scanning `configs/contexts/repricing/v1/*`. `configs/contexts/repricing/jochemnet/v1/*` and `configs/contexts/repricing/state-actor/v2/*` go to `benchmarkoor.jochemnet.<client>.yaml` and `benchmarkoor.state-actor-v2.<client>.yaml`. For each subdir it emits a dispatch entry per test type (`stateful`, `compute`) for that client's `<client>-bal-full` instance, targeting `benchmarkoor-run.yaml`. Subdirs with a `.dispatchoor_ignore` file are skipped, and a family with no entries gets no file.
 
 Regenerate with:
 

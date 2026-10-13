@@ -17,6 +17,7 @@ on:
         type: choice
         options:
           - "state-actor/v1"
+          - "state-actor/v2"
           - "jochemnet/v1"
       context:
         description: "Test context"
@@ -35,6 +36,9 @@ on:
           - "v1/glamsterdam-devnet-6"
           - "v1/glamsterdam-devnet-7"
           - "v1/glamsterdam-devnet-7-full"
+          # State actor v2
+          - "state-actor/v2/glamsterdam-devnet-8"
+          - "state-actor/v2/glamsterdam-devnet-8-repricing"
           # Jochemnet
           - "jochemnet/v1/glamsterdam-devnet-7"
           - "jochemnet/v1/glamsterdam-devnet-8"

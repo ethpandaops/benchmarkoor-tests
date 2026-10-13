@@ -23,6 +23,7 @@ on:
         type: choice
         options:
           - "state-actor/v1"
+          - "state-actor/v2"
           - "jochemnet/v1"
       context:
         description: "Test context"
@@ -41,6 +42,9 @@ on:
           - "v1/glamsterdam-devnet-6"
           - "v1/glamsterdam-devnet-7"
           - "v1/glamsterdam-devnet-7-full"
+          # State actor v2
+          - "state-actor/v2/glamsterdam-devnet-8"
+          - "state-actor/v2/glamsterdam-devnet-8-repricing"
           # Jochemnet
           - "jochemnet/v1/glamsterdam-devnet-7"
           - "jochemnet/v1/glamsterdam-devnet-8"
@@ -88,16 +92,19 @@ jobs:
               && format('benchmarkoor-v1-jochemnet-runner-{0}', matrix.client)
               || format('benchmarkoor-v1-runner-{0}', matrix.client)
           }}
-        # Pin a client's build to a specific host. The pin only applies to the
-        # jochemnet pool, because the pinned host carries a jochemnet label.
-        # Every other case repeats the label above (harmless duplicate → no pin).
+        # Pin geth builds to a specific host per pool: benchmark-ci-3 holds the
+        # jochemnet geth snapshot, benchmark-ci-8 is the geth host for
+        # state-actor builds. Every other case repeats the label above
+        # (harmless duplicate → no pin).
         - >-
           ${{
             contains(inputs.subdir, 'jochemnet')
               && (matrix.client == 'geth'
                     && 'benchmarkoor-v1-jochemnet-runner-benchmark-ci-3'
                     || format('benchmarkoor-v1-jochemnet-runner-{0}', matrix.client))
-              || format('benchmarkoor-v1-runner-{0}', matrix.client)
+              || (matrix.client == 'geth'
+                    && 'benchmarkoor-v1-runner-benchmark-ci-8'
+                    || format('benchmarkoor-v1-runner-{0}', matrix.client))
           }}
     timeout-minutes: ${{ fromJSON(inputs.build-timeout-minutes) }}
     steps:

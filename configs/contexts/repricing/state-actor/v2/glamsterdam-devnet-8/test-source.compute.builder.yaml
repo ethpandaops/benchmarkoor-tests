@@ -1,0 +1,66 @@
+global:
+  env:
+    # Filler images
+    NETHERMIND_IMAGE: ethpandaops/nethermind:glamsterdam-devnet-8
+    GETH_IMAGE: ethpandaops/geth:glamsterdam-devnet-8
+
+# No pre_runs stage. jochemnet/v1/glamsterdam-devnet-8 deploys the benchmark
+# receivers and delegations in a pre-run; state-actor/v2 writes the same
+# state into the datadir (configs/datadirs/state-actor/v2/builder.yaml).
+builder:
+  eest_payloads:
+    pull_policy: always
+    eest_repo: ${EEST_REPO}
+    eest_ref: ${EEST_REF}
+    config:
+      fork: amsterdam
+      # Key #0 → 0xf39Fd6…2266 (the pre-funded seed in the state-actor spec)
+      rpc_seed_key: "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+      # Full suite: no repricing marker, only the 200M/300M gas points.
+      gas_benchmark_values: [200,300]
+      datadir_method: schelk
+      tests:
+        - tests/benchmark/compute
+      # test_blobhash[one_blob] is rejected INVALID by the filler (same as
+      # jochemnet/v1/glamsterdam-devnet-8).
+      filter: >-
+        not (test_blobhash and one_blob)
+      extract_opcode_count: true
+      # Resolves @pytest.mark.stub_parametrize prefixes against pre-deployed
+      # state (e.g. bloated_eoa_10GB → 0x87a6…be04).
+      address_stubs:
+        bloated_eoa_10GB:
+          addr: "0x87a6314da5ac8832f6e7a176c8fb133b19f5be04"
+          pkey: "0x4da32d29f6dcffa26e09dc4e102033f2d105de1444fb893493ae703289275e0e"
+    targets:
+      - name: nethermind
+        filler_client: nethermind
+        filler_image: ${NETHERMIND_IMAGE}
+        source_dir: ${STATE_DIR}/nethermind
+        # nethermind reads a parity chainspec; amsterdam is activated via the
+        # genesis_eip_override (same EIP set as the runner instance).
+        genesis: ${STATE_DIR}/nethermind/parity-chainspec.json
+        genesis_eip_override:
+          timestamp: ${AMSTERDAM_ACTIVATION_TS}
+          eips: [2780, 7708, 7778, 7843, 7928, 7954, 7976, 7981, 7997, 8024, 8037, 8038, 8246, 8282]
+        output_dir: ${EEST_FIXTURES_DIR}/nethermind
+        filler_extra_args:
+          - --FlatDb.Enabled=true
+          - --FlatDb.CompactionOffset=0
+          - --FlatDb.MinReorgDepth=1024
+          - --FlatDb.MaxReorgDepth=1024
+          - --JsonRpc.MaxBatchSize=16384 # Default 1024
+          - --Init.AutoDump=None
+          - --Merge.NewPayloadBlockProcessingTimeout=70000
+          - --Blocks.CachePrecompilesOnBlockProcessing=false
+
+      - name: geth
+        filler_client: geth
+        filler_image: ${GETH_IMAGE}
+        source_dir: ${STATE_DIR}/geth
+        output_dir: ${EEST_FIXTURES_DIR}/geth
+        filler_extra_args:
+          - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
+          - --engine.maxreorgdepth=1024 # Long-chain benchmarks exceed the 512 default
+          - --rpc.batch-request-limit=16384 # Default 1000
+          - --rpc.http-body-limit=128 # Default 5 (megabytes)

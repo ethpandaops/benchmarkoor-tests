@@ -11,18 +11,21 @@ CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 #
 #   contexts/repricing/v1/<name>            → snapshot=state-actor/v1, subdir=v1/<name>
 #   contexts/repricing/jochemnet/v1/<name>  → snapshot=jochemnet/v1,   subdir=jochemnet/v1/<name>
+#   contexts/repricing/state-actor/v2/<name> → snapshot=state-actor/v2, subdir=state-actor/v2/<name>
 #
 # Fields: <dir>|<snapshot>|<subdir-prefix>|<file-infix>
 # The file infix keeps the families in separate files — state-actor stays on the
 # historical benchmarkoor.<client>.yaml names, jochemnet gets
 # benchmarkoor.jochemnet.<client>.yaml — because both have a
-# glamsterdam-devnet-7 subdir and would otherwise collide.
+# glamsterdam-devnet-7 subdir and would otherwise collide. state-actor/v2 gets
+# benchmarkoor.state-actor-v2.<client>.yaml for the same reason.
 CONTEXT="repricing"
 VERSION="v1"
 
 FAMILIES=(
   "${CONTEXTS_DIR}/${CONTEXT}/${VERSION}|state-actor/${VERSION}|${VERSION}|"
   "${CONTEXTS_DIR}/${CONTEXT}/jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet."
+  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/v2|state-actor/v2|state-actor/v2|state-actor-v2."
 )
 
 CLIENTS=(geth erigon nethermind besu reth ethrex)
@@ -144,6 +147,14 @@ for client in "${CLIENTS[@]}"; do
     done
     done
   done < <(find "${family_dir}" -mindepth 1 -maxdepth 1 -type d | sort)
+
+  # A family whose subdirs are all ignored gets no file, so dispatchoor
+  # never sees an empty job list.
+  if [[ ${#entries[@]} -eq 0 ]]; then
+    rm -f "${outfile}"
+    echo "Skipped ${outfile} (no entries)"
+    continue
+  fi
 
   {
     echo "# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY"

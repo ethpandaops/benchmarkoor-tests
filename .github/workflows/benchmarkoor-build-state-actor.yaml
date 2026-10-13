@@ -22,6 +22,7 @@ on:
         type: choice
         options:
           - "state-actor/v1"
+          - "state-actor/v2"
       build-timeout-minutes:
         description: "Timeout for the benchmark build (minutes)"
         required: false
