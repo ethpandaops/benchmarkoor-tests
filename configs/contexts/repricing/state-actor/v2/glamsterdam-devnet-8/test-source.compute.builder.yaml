@@ -56,6 +56,11 @@ builder:
 
       - name: geth
         filler_client: geth
+        # A failed or cancelled fill leaves fixtures with no build
+        # fingerprint, and --rebuild-on-diff then skips the fill with a green
+        # job (run 38435683141). force refills every time. The stateful and
+        # compute builds also share this output_dir.
+        force: true
         filler_image: ${GETH_IMAGE}
         source_dir: ${STATE_DIR}/geth
         output_dir: ${EEST_FIXTURES_DIR}/geth
