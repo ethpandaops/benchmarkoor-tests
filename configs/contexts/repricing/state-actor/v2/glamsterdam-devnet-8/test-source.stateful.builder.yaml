@@ -21,6 +21,12 @@ builder:
       datadir_method: schelk
       tests:
         - tests/benchmark/stateful/bloatnet
+      # test_deploy_existing_contracts is jochemnet's pre-run setup, not a
+      # benchmark: it deploys the receivers and delegations that
+      # state-actor/v2 already writes, so every CREATE2 deploy collides and
+      # the receipts fail (4 failures in run 38439838358).
+      filter: >-
+        not test_deploy_existing_contracts
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes against pre-deployed
       # state (e.g. bloated_eoa_10GB → 0x87a6…be04).
