@@ -23,7 +23,11 @@ builder:
       seed: 42
       fork: osaka
       chain: 1337
-      gas_limit: 1000000000 # 1TGas
+      # 1 TGas, the same block gas limit as the jochemnet pre-run ramp. geth
+      # adds the gas limit of each transaction to the block total, so at
+      # 1 GGas the compute setup blocks failed with "gas limit reached"
+      # (197 failures in run 38468809541). v1 keeps 1 GGas.
+      gas_limit: 1000000000000
       target_size: 350GB
     spec:
       entities:
