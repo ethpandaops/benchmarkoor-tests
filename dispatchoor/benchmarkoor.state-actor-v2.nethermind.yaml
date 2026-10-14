@@ -1,0 +1,49 @@
+# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+# Regenerate with: make config (or ./dispatchoor/generate.sh)
+# Source: configs/contexts/repricing/state-actor/v2/<subdir>/
+
+# --- Subdir: state-actor/v2/glamsterdam-devnet-8 ---
+
+- id: benchmarkoor-nethermind-repricing-state-actor-v2-glamsterdam-devnet-8-compute-nethermind-bal-full
+  name: "(Nethermind) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Compute - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    clients: '["nethermind"]'
+    instance-id: "nethermind-bal-full"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 360, "global": 720}'
+
+- id: benchmarkoor-nethermind-repricing-state-actor-v2-glamsterdam-devnet-8-stateful-nethermind-bal-full
+  name: "(Nethermind) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Stateful - nethermind-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "nethermind"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "nethermind-bal-full"
+  inputs:
+    clients: '["nethermind"]'
+    instance-id: "nethermind-bal-full"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
