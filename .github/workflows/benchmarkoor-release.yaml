@@ -425,7 +425,9 @@ jobs:
                 marker: .build_inputs.marker,
                 tests: .build_inputs.tests,
                 genesis_eips: (.build_inputs.genesis_eip_override.EIPs // .build_inputs.genesis_eip_override.eips),
-                prerun_source_release: (.prerun_source_release | select(. != "")),
+                # select() here would empty the whole object when the build
+                # has no pre-run source (""), so map "" to null instead.
+                prerun_source_release: (.prerun_source_release | if . == "" then null else . end),
                 prerun_payloads: .pre_run.payloads,
                 prerun_start_block: .pre_run.start_block_number,
                 prerun_start_hash: .pre_run.start_block_hash,
