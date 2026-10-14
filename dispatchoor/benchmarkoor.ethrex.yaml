@@ -1,11 +1,11 @@
 # AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
 # Regenerate with: make config (or ./dispatchoor/generate.sh)
-# Source: configs/contexts/repricing/v1/<subdir>/
+# Source: configs/contexts/repricing/state-actor/v1/<subdir>/
 
-# --- Subdir: v1/bal-devnet-7 ---
+# --- Subdir: state-actor/v1/bal-devnet-7 ---
 
-- id: benchmarkoor-ethrex-repricing-v1-bal-devnet-7-compute-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/bal-devnet-7 - Compute - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-bal-devnet-7-compute-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/bal-devnet-7 - Compute - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -13,7 +13,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/bal-devnet-7"
+    subdir: "state-actor/v1/bal-devnet-7"
     test-type: "compute"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -21,13 +21,13 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/bal-devnet-7"
+    subdir: "state-actor/v1/bal-devnet-7"
     test-type: "compute"
     context: "repricing"
     timeouts: '{"build": 360, "run": 360, "global": 720}'
 
-- id: benchmarkoor-ethrex-repricing-v1-bal-devnet-7-stateful-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/bal-devnet-7 - Stateful - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-bal-devnet-7-stateful-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/bal-devnet-7 - Stateful - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -35,7 +35,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/bal-devnet-7"
+    subdir: "state-actor/v1/bal-devnet-7"
     test-type: "stateful"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -43,15 +43,15 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/bal-devnet-7"
+    subdir: "state-actor/v1/bal-devnet-7"
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
 
-# --- Subdir: v1/glamsterdam-devnet-6 ---
+# --- Subdir: state-actor/v1/glamsterdam-devnet-6 ---
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-6-compute-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-6 - Compute - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-6-compute-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-6 - Compute - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -59,7 +59,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-6"
+    subdir: "state-actor/v1/glamsterdam-devnet-6"
     test-type: "compute"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -67,13 +67,13 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-6"
+    subdir: "state-actor/v1/glamsterdam-devnet-6"
     test-type: "compute"
     context: "repricing"
     timeouts: '{"build": 360, "run": 360, "global": 720}'
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-6-stateful-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-6 - Stateful - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-6-stateful-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-6 - Stateful - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -81,7 +81,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-6"
+    subdir: "state-actor/v1/glamsterdam-devnet-6"
     test-type: "stateful"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -89,15 +89,15 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-6"
+    subdir: "state-actor/v1/glamsterdam-devnet-6"
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
 
-# --- Subdir: v1/glamsterdam-devnet-7 ---
+# --- Subdir: state-actor/v1/glamsterdam-devnet-7 ---
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-7-compute-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-7 - Compute - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-7-compute-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-7 - Compute - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -105,7 +105,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7"
+    subdir: "state-actor/v1/glamsterdam-devnet-7"
     test-type: "compute"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -113,13 +113,13 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7"
+    subdir: "state-actor/v1/glamsterdam-devnet-7"
     test-type: "compute"
     context: "repricing"
     timeouts: '{"build": 360, "run": 360, "global": 720}'
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-7-stateful-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-7 - Stateful - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-7-stateful-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-7 - Stateful - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -127,7 +127,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7"
+    subdir: "state-actor/v1/glamsterdam-devnet-7"
     test-type: "stateful"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -135,15 +135,15 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7"
+    subdir: "state-actor/v1/glamsterdam-devnet-7"
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'
 
-# --- Subdir: v1/glamsterdam-devnet-7-full ---
+# --- Subdir: state-actor/v1/glamsterdam-devnet-7-full ---
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-7-full-compute-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-7-full - Compute - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-7-full-compute-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-7-full - Compute - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -151,7 +151,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7-full"
+    subdir: "state-actor/v1/glamsterdam-devnet-7-full"
     test-type: "compute"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -159,13 +159,13 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7-full"
+    subdir: "state-actor/v1/glamsterdam-devnet-7-full"
     test-type: "compute"
     context: "repricing"
     timeouts: '{"build": 360, "run": 360, "global": 720}'
 
-- id: benchmarkoor-ethrex-repricing-v1-glamsterdam-devnet-7-full-stateful-ethrex-bal-full
-  name: "(Ethrex) - Repricing - v1/glamsterdam-devnet-7-full - Stateful - ethrex-bal-full"
+- id: benchmarkoor-ethrex-repricing-state-actor-v1-glamsterdam-devnet-7-full-stateful-ethrex-bal-full
+  name: "(Ethrex) - Repricing - state-actor/v1/glamsterdam-devnet-7-full - Stateful - ethrex-bal-full"
   owner: ethpandaops
   repo: benchmarkoor-tests
   workflow_id: benchmarkoor-run.yaml
@@ -173,7 +173,7 @@
   labels:
     el-client: "ethrex"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7-full"
+    subdir: "state-actor/v1/glamsterdam-devnet-7-full"
     test-type: "stateful"
     context: "repricing"
     instance-id: "ethrex-bal-full"
@@ -181,7 +181,7 @@
     clients: '["ethrex"]'
     instance-id: "ethrex-bal-full"
     snapshot: "state-actor/v1"
-    subdir: "v1/glamsterdam-devnet-7-full"
+    subdir: "state-actor/v1/glamsterdam-devnet-7-full"
     test-type: "stateful"
     context: "repricing"
     timeouts: '{"build": 360, "run": 2160, "global": 2520}'

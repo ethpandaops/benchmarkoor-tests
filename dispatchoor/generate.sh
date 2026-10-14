@@ -9,8 +9,8 @@ CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 # dispatches, all with context=repricing. They differ in which snapshot they run
 # against, how the subdir input is spelled, and which files they land in:
 #
-#   contexts/repricing/v1/<name>            → snapshot=state-actor/v1, subdir=v1/<name>
-#   contexts/repricing/jochemnet/v1/<name>  → snapshot=jochemnet/v1,   subdir=jochemnet/v1/<name>
+#   contexts/repricing/state-actor/v1/<name> → snapshot=state-actor/v1, subdir=state-actor/v1/<name>
+#   contexts/repricing/jochemnet/v1/<name>   → snapshot=jochemnet/v1,   subdir=jochemnet/v1/<name>
 #   contexts/repricing/state-actor/v2/<name> → snapshot=state-actor/v2, subdir=state-actor/v2/<name>
 #
 # Fields: <dir>|<snapshot>|<subdir-prefix>|<file-infix>
@@ -23,7 +23,7 @@ CONTEXT="repricing"
 VERSION="v1"
 
 FAMILIES=(
-  "${CONTEXTS_DIR}/${CONTEXT}/${VERSION}|state-actor/${VERSION}|${VERSION}|"
+  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/${VERSION}|state-actor/${VERSION}|state-actor/${VERSION}|"
   "${CONTEXTS_DIR}/${CONTEXT}/jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet."
   "${CONTEXTS_DIR}/${CONTEXT}/state-actor/v2|state-actor/v2|state-actor/v2|state-actor-v2."
 )
@@ -80,7 +80,7 @@ for family in "${FAMILIES[@]}"; do
 
   # Entry ids must stay unique across families, which share subdir names. The
   # subdir prefix is what distinguishes them, so slug it into the id:
-  # v1 → "v1", jochemnet/v1 → "jochemnet-v1". state-actor's ids are unchanged.
+  # state-actor/v1 → "state-actor-v1", jochemnet/v1 → "jochemnet-v1".
   subdir_slug="${subdir_prefix//\//-}"
 
 for client in "${CLIENTS[@]}"; do
