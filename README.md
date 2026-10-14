@@ -123,7 +123,7 @@ the bucket. Each host needs ~55 GB free for the release's pre-run bundle (50 GB 
 
 The `dispatchoor/` directory holds generated job definitions for [dispatchoor](https://github.com/ethpandaops/dispatchoor) to trigger `benchmarkoor-run.yaml`.
 
-`dispatchoor/generate.sh` produces one file per client (`benchmarkoor.<client>.yaml`) by scanning `configs/contexts/repricing/v1/*`. `configs/contexts/repricing/jochemnet/v1/*` and `configs/contexts/repricing/state-actor/v2/*` go to `benchmarkoor.jochemnet.<client>.yaml` and `benchmarkoor.state-actor-v2.<client>.yaml`. For each subdir it emits a dispatch entry per test type (`stateful`, `compute`) for that client's `<client>-bal-full` instance, targeting `benchmarkoor-run.yaml`. Subdirs with a `.dispatchoor_ignore` file are skipped, and a family with no entries gets no file.
+`dispatchoor/generate.sh` produces one file per client (`benchmarkoor.<client>.yaml`) by scanning `configs/contexts/repricing/state-actor/v1/*`. `configs/contexts/repricing/jochemnet/v1/*` and `configs/contexts/repricing/state-actor/v2/*` go to `benchmarkoor.jochemnet.<client>.yaml` and `benchmarkoor.state-actor-v2.<client>.yaml`. For each subdir it emits a dispatch entry per test type (`stateful`, `compute`) for that client's `<client>-bal-full` instance, targeting `benchmarkoor-run.yaml`. Subdirs with a `.dispatchoor_ignore` file are skipped, and a family with no entries gets no file.
 
 Regenerate with:
 
