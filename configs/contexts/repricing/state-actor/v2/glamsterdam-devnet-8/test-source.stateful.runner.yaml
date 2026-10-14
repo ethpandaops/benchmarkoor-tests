@@ -11,10 +11,9 @@ runner:
           data-disk-type: schelk
       source:
         eest_fixtures:
-          # TODO: point at the benchmarkoor-release of the first green
-          # state-actor/v2 stateful build. Until then this subdir has a
-          # .dispatchoor_ignore, so dispatchoor does not schedule it.
-          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/TODO/eest-payloads-state-actor-v2-amsterdam-stateful-geth.tar.gz
+          # Promoted from build run 38500361486 (692 filled, 64 failed: the
+          # depth benchmarks and 12 sload cases, the same as jochemnet).
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-state-actor-v2-amsterdam-stateful-c4a18e34-20261014-021844/eest-payloads-state-actor-v2-amsterdam-stateful-geth.tar.gz
           fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
   container_runtime: podman
   client:
