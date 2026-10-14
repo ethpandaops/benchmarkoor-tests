@@ -11,13 +11,17 @@
 builder:
   ## Stage 1: Building the large repricing datadir using state-actor
   state_actor:
+    # ethereum/state-actor#153 makes the code_pattern runtimes on demand.
+    # main keeps all of them in memory (~19 GiB for this spec), and the
+    # nethermind, reth and besu builds were OOM-killed on 61 GB hosts.
+    # Move back to a main-<sha> tag when #153 is merged.
     images:
-      geth: ghcr.io/ethereum/state-actor:main-522ab4f
-      nethermind: ghcr.io/ethereum/state-actor-nethermind:main-522ab4f
-      ethrex: ghcr.io/ethereum/state-actor-ethrex:main-522ab4f
-      reth: ghcr.io/ethereum/state-actor-reth:main-522ab4f
-      besu: ghcr.io/ethereum/state-actor-besu:main-522ab4f
-      erigon: ghcr.io/ethereum/state-actor-erigon:main-522ab4f
+      geth: ghcr.io/ethereum/state-actor:pr-153-6bd7b89
+      nethermind: ghcr.io/ethereum/state-actor-nethermind:pr-153-6bd7b89
+      ethrex: ghcr.io/ethereum/state-actor-ethrex:pr-153-6bd7b89
+      reth: ghcr.io/ethereum/state-actor-reth:pr-153-6bd7b89
+      besu: ghcr.io/ethereum/state-actor-besu:pr-153-6bd7b89
+      erigon: ghcr.io/ethereum/state-actor-erigon:pr-153-6bd7b89
     pull_policy: always
     config:
       seed: 42
