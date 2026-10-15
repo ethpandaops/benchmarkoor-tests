@@ -24,7 +24,7 @@
     subdir: "state-actor/v2/glamsterdam-devnet-8"
     test-type: "compute"
     context: "repricing"
-    timeouts: '{"build": 360, "run": 360, "global": 720}'
+    timeouts: '{"build": 720, "run": 360, "global": 1080}'
 
 - id: benchmarkoor-nethermind-repricing-state-actor-v2-glamsterdam-devnet-8-stateful-nethermind-bal-full
   name: "(Nethermind) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Stateful - nethermind-bal-full"
@@ -46,4 +46,4 @@
     subdir: "state-actor/v2/glamsterdam-devnet-8"
     test-type: "stateful"
     context: "repricing"
-    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
+    timeouts: '{"build": 720, "run": 2160, "global": 2880}'
