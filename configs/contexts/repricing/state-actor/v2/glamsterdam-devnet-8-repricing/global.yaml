@@ -1,0 +1,17 @@
+global:
+  env:
+    EEST_FIXTURES_DIR: /tmp/benchmarkoor/eest-fixtures/state-actor-glamsterdam-devnet-8-repricing
+
+    # jochemnet/v1/glamsterdam-devnet-8's EEST source
+    # (fix/no-reset-reanchor-start-block) plus one fix, so both snapshots
+    # fill the same benchmarks. The fix lets fill-stateful build on a block 0
+    # head without a slotNumber: the state-actor genesis is an Osaka header,
+    # and without the fix every test fails at setup.
+    EEST_REPO: https://github.com/skylenet/execution-specs.git
+    EEST_REF: fix/genesis-head-slot-number
+
+    # The state-actor genesis has timestamp 0, so amsterdam activates at 1:
+    # every block after genesis is an amsterdam block. The builder and the
+    # runner both read this file, so the filled payloads and the run agree on
+    # the schedule.
+    AMSTERDAM_ACTIVATION_TS: "1"

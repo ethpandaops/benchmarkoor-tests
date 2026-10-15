@@ -1,0 +1,32 @@
+global:
+  env:
+    # Consumed by the geth-bal-full and nethermind-bal-full instances in
+    # clients.yaml. Compute runs use no rollback (see runner.client.config
+    # below), but geth OOMs without one, so both roll back with
+    # debug_setHead. The stateful runner file does not set these, so
+    # stateful runs keep container-recreate.
+    GETH_ROLLBACK_STRATEGY: rpc-debug-setHead
+    NETHERMIND_ROLLBACK_STRATEGY: rpc-debug-setHead
+
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: state-actor-glamsterdam-devnet-8-compute-full
+          block: "0"
+          test-type: compute
+          context: repricing
+          fork: amsterdam
+          data-disk-type: schelk
+      source:
+        eest_fixtures:
+          # Promoted from build run 38545215411 (2302 passed, 28 failed: the
+          # same 28 test IDs as the jochemnet compute build).
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/eest-payloads-state-actor-v2-amsterdam-compute-c4a18e34-20261014-094949/eest-payloads-state-actor-v2-amsterdam-compute-geth.tar.gz
+          fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: none
+      post_test_sleep_duration: 200ms

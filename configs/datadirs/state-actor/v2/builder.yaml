@@ -1,0 +1,212 @@
+# state-actor/v2: the v1 prestate plus the state the glamsterdam-devnet-8
+# benchmarks (skylenet/execution-specs fix/no-reset-reanchor-start-block)
+# read. Those benchmarks parametrize every CREATE2 receiver and the 7702
+# delegations over two code sizes: Osaka's 24 KiB and Amsterdam's 64 KiB
+# (EIP-7954). jochemnet deploys that state in a pre-run
+# (tests/benchmark/stateful/bloatnet/test_setup_contracts.py); here the
+# spec below writes it into the datadir directly.
+#
+# v1 stays as it is: the devnet-7 releases were filled against its state
+# root, so a change to v1 would orphan them.
+builder:
+  ## Stage 1: Building the large repricing datadir using state-actor
+  state_actor:
+    # f171c26 is the merge of ethereum/state-actor#153, which makes the
+    # code_pattern runtimes on demand. Before #153, state-actor kept all of
+    # them in memory (~19 GiB for this spec), and the nethermind, reth and
+    # besu builds were OOM-killed on 61 GB hosts. Do not go back before it.
+    images:
+      geth: ghcr.io/ethereum/state-actor:main-f171c26
+      nethermind: ghcr.io/ethereum/state-actor-nethermind:main-f171c26
+      ethrex: ghcr.io/ethereum/state-actor-ethrex:main-f171c26
+      reth: ghcr.io/ethereum/state-actor-reth:main-f171c26
+      besu: ghcr.io/ethereum/state-actor-besu:main-f171c26
+      erigon: ghcr.io/ethereum/state-actor-erigon:main-f171c26
+    pull_policy: always
+    config:
+      seed: 42
+      fork: osaka
+      chain: 1337
+      # 1 TGas, the same block gas limit as the jochemnet pre-run ramp. geth
+      # adds the gas limit of each transaction to the block total, so at
+      # 1 GGas the compute setup blocks failed with "gas limit reached"
+      # (197 failures in run 38468809541). v1 keeps 1 GGas.
+      gas_limit: 1000000000000
+      target_size: 350GB
+    spec:
+      entities:
+        # Pre-funded seed for fill-stateful — Hardhat/Anvil dev key #0
+        # (pkey 0xac0974…ff80). Pinned below via rpc_seed_key.
+        - kind: eoa
+          name: fill-stateful-seed
+          address: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+          balance: "0x33b2e3c91efc989409c0000"
+        # Sequential EOAs at 0x1000+ (test_account_access EXISTING_EOA).
+        - kind: contract
+          name: sequential-eoas-300m
+          template: sequential_eoas
+          address: 0x0000000000000000000000000000000000001000
+          parameters:
+            count: 150000
+            balance: "1000000000000000000"
+        # 10GB storage-pattern target at the bloated_eoa_10GB stub address
+        # (test_sload_bloated / test_sstore_bloated, existing_slots=True). ~73 GB.
+        - kind: contract
+          name: storage-pattern-10gb
+          template: storage_pattern
+          address: 0x87a6314da5ac8832f6e7a176c8fb133b19f5be04
+          nonce: 1
+          balance: "1000000000000000000"
+          parameters:
+            final: 335545082
+        # Arachnid CREATE2 factory (required by create2_deploys + EEST fill).
+        - kind: contract
+          name: create2-factory
+          template: create2_factory
+          address: 0x4e59b44847b379578588920cA78FbF26c0B4956C
+        # CREATE2 receivers, one entity per AccountMode initcode and code size.
+        #
+        # 24 KiB (Osaka max code size). These are the v1 entities, so the
+        # receivers keep their v1 addresses. The minimal
+        # initcode 0x60016000f3 (PUSH1 1, PUSH1 0, RETURN) deploys the 1-byte
+        # STOP runtime — byte-identical to EEST's MinimalContractInitcode. It
+        # has no code size, so the 64 KiB block below has no minimal entity.
+        - kind: contract
+          name: create2-minimal-300m
+          template: create2_deploys
+          parameters:
+            initcode: "0x60016000f3"
+            runtime: "0x00"
+            salt_count: 150000 # 150K
+        - kind: contract
+          name: create2-same-300m
+          template: create2_deploys
+          parameters:
+            code_pattern: max_same_pre_amsterdam
+            salt_count: 150000 # 150K
+        - kind: contract
+          name: create2-diff-300m
+          template: create2_deploys
+          parameters:
+            code_pattern: max_diff_pre_amsterdam
+            salt_count: 150000 # 150K
+        - kind: contract
+          name: create2-jumpdest-300m
+          template: create2_deploys
+          parameters:
+            code_pattern: unique_jumpdest_pre_amsterdam
+            salt_count: 150000 # 150K
+        # 64 KiB (Amsterdam max code size, EIP-7954). code_size makes
+        # state-actor build the same initcode as EEST's
+        # StopJumpdestInitcode / JochemnetPredeployContractInitcode at
+        # code_size=65536, so the CREATE2 addresses agree. 100K salts, the
+        # same count as the jochemnet pre-run (BLOATNET_RECEIVER_CONTRACT_COUNT)
+        # that filled the devnet-8 suites at 300M. Each unique runtime stays
+        # in memory during the build: 100K x 64 KiB ≈ 6.1 GiB for each of
+        # diff and jumpdest.
+        - kind: contract
+          name: create2-same-64kib
+          template: create2_deploys
+          parameters:
+            code_pattern: max_same
+            code_size: 65536
+            salt_count: 100000 # 100K
+        - kind: contract
+          name: create2-diff-64kib
+          template: create2_deploys
+          parameters:
+            code_pattern: max_diff
+            code_size: 65536
+            salt_count: 100000 # 100K
+        - kind: contract
+          name: create2-jumpdest-64kib
+          template: create2_deploys
+          parameters:
+            code_pattern: unique_jumpdest
+            code_size: 65536
+            salt_count: 100000 # 100K
+        # Sender pool for test_ether_transfers_onchain_receivers, which derives
+        # senders as EOA(key=SENDER_BASE_KEY + i) and assumes them pre-funded.
+        # SENDER_BASE_KEY = keccak256("gas-repricings-private-key") on this EEST
+        # branch (NOT the gist's 0x1111…, which left every sender unfunded); the
+        # first sender is 0x4e5e4cbb…377a. 150000 funded.
+        - kind: contract
+          name: sender-pool-300m
+          template: sequential_pkey_eoas
+          parameters:
+            start_pkey: "0xe1e1d3457c4e69b29cba0f7e1f92ce080d4db56d221bed913b09b2753bd97c7a"
+            count: 150000
+            balance: "1000000000000000000"
+        # Bittrex CREATE-preimage chain (test_account_access EXISTING_CONTRACT).
+        - kind: contract
+          name: bittrex-create-preimage-300m
+          template: create_preimage_deploys
+          parameters:
+            sender: "0xA3C1E324CA1CE40DB73ED6026C4A177F099B5770"
+            start_nonce: 2
+            count: 150000
+            runtime: "0x606060405236156100495763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416636ea056a98114610052578063c0ee0b8a14610092575b6100505b5b565b005b341561005a57fe5b61007e73ffffffffffffffffffffffffffffffffffffffff60043516602435610104565b604080519115158252519081900360200190f35b341561009a57fe5b604080516020600460443581810135601f810184900484028501840190955284845261005094823573ffffffffffffffffffffffffffffffffffffffff169460248035956064949293919092019181908401838280828437509496506101ef95505050505050565b005b6000805460408051602090810184905281517f3c18d31800000000000000000000000000000000000000000000000000000000815273ffffffffffffffffffffffffffffffffffffffff878116600483015292519290931692633c18d318926024808301939282900301818787803b151561017b57fe5b6102c65a03f1151561018957fe5b5050506040518051905073ffffffffffffffffffffffffffffffffffffffff1660003660006040516020015260405180838380828437820191505092505050602060405180830381856102c65a03f415156101e057fe5b50506040515190505b92915050565b5b5050505600a165627a7a723058204cdd69fdcf3cf6cbee9677fe380fa5f044048aa9e060ec5619a21ca5a5bd4cd10029"
+            storage_init:
+              "0x0": "0xa3c1e324ca1ce40db73ed6026c4a177f099b5770"
+        # EIP-7702 delegations: authority i delegates to the max_diff receiver i
+        # (EXISTING_CONTRACT_DIFF_MAX) of the same code size. An authority can
+        # carry only one delegation, so each code size has its own key range:
+        #   start_pkey = keccak256("gas-repricings-7702-delegate" ++ uint256(code_size))
+        # (execution-specs delegate_base_key). v1's single range,
+        # keccak256("gas-repricings-7702-delegate") = 0x959a…c64e, is not read
+        # by these benchmarks and is left out.
+        - kind: contract
+          name: delegations-24kib
+          template: sequential_pkey_delegations
+          parameters:
+            start_pkey: "0x12bfac886c352268c54211c3b5613fef58d4e559fd0891c0ca534e47efed694e"
+            code_pattern: max_diff_pre_amsterdam
+            count: 150000 # 150K, paired with create2-diff-300m
+            balance: "1000000000000000000"
+        - kind: contract
+          name: delegations-64kib
+          template: sequential_pkey_delegations
+          parameters:
+            start_pkey: "0x839457a98a77bfdf20fcb7ada1fed618bec69a4dc46d6811f60f2e4d41b59206"
+            code_pattern: max_diff
+            code_size: 65536
+            count: 100000 # 100K, paired with create2-diff-64kib
+            balance: "1000000000000000000"
+        # EIP-8282 builder-execution-request predeploys (system-called at end of
+        # every block since amsterdam). Strict clients (besu/nethermind/ethrex)
+        # reject a block if these have no code; predeploy the bytecode so
+        # the end-of-block system call returns empty requests (queue empty).
+        - kind: contract
+          name: eip8282-builder-deposit-requests-glamsterdam-devnet-6
+          address: 0x0000884d2AA32eAa155F59A2f24eFa73D9008282
+          nonce: 1
+          code: "0x3373fffffffffffffffffffffffffffffffffffffffe146101065760115f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1461023457600182026001905f5b5f82111560695781019083028483029004916001019190604e565b90939004925050503660b814608957366102345734610234575f5260205ff35b8034106102345760383567ffffffffffffffff1680633b9aca001161023457633b9aca00029034031061023457600154600101600155600354806006026004015f358155600101602035815560010160403581556001016060358155600101608035815560010160a035905560b85f5f3760b85fa0600101600355005b600354600254808203806101001161011d57506101005b5f5b8181146101c3578281016006026004018160b8028154815260200181600101548152602001816002015480825260401c67ffffffffffffffff16816010018160381c81600701538160301c81600601538160281c81600501538160201c81600401538160181c81600301538160101c81600201538160081c81600101535360200181600301548152602001816004015481526020019060050154905260010161011f565b91018092146101d557906002556101e0565b90505f6002555f6003555b5f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff141561020d57505f5b6001546020828201116102225750505f610228565b01602090035b5f555f60015560b8025ff35b5f5ffd"
+        - kind: contract
+          name: eip8282-builder-exit-requests-glamsterdam-devnet-6
+          address: 0x000014574A74c805590AFF9499fc7A690f008282
+          nonce: 1
+          code: "0x3373fffffffffffffffffffffffffffffffffffffffe1460cb5760115f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1461018857600182026001905f5b5f82111560685781019083028483029004916001019190604d565b909390049250505036603014608857366101885734610188575f5260205ff35b341061018857600154600101600155600354806003026004013381556001015f35815560010160203590553360601b5f5260305f60143760445fa0600101600355005b6003546002548082038060101160df575060105b5f5b8181146101175782810160030260040181604402815460601b8152601401816001015481526020019060020154905260010160e1565b91018092146101295790600255610134565b90505f6002555f6003555b5f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff141561016157505f5b6001546002828201116101765750505f61017c565b01600290035b5f555f6001556044025ff35b5f5ffd"
+        - kind: contract
+          name: eip8282-builder-deposit-requests-glamsterdam-devnet-7
+          address: 0x0000bff46984e3725691fa540a8c7589300d8282
+          nonce: 1
+          code: "0x3373fffffffffffffffffffffffffffffffffffffffe1461011c575f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146102705760015460088111605257506058565b60089003015b601190600182026001905f5b5f821115607f57810190830284830290049160010191906064565b90939004925050503660b814609f57366102705734610270575f5260205ff35b8034106102705760383567ffffffffffffffff1680633b9aca001161027057633b9aca00029034031061027057600154600101600155600354806006026004015f358155600101602035815560010160403581556001016060358155600101608035815560010160a035905560b85f5f3760b85fa0600101600355005b60035460025480820380604011610131575060405b5f5b8181146101d7578281016006026004018160b8028154815260200181600101548152602001816002015480825260401c67ffffffffffffffff16816010018160381c81600701538160301c81600601538160281c81600501538160201c81600401538160181c81600301538160101c81600201538160081c816001015353602001816003015481526020018160040154815260200190600501549052600101610133565b91018092146101e957906002556101f4565b90505f6002555f6003555b36610242575f54600154817fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff1461023057600882820111610238575b50505f610264565b0160089003610264565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5b5f555f60015560b8025ff35b5f5ffd"
+        - kind: contract
+          name: eip8282-builder-exit-requests-glamsterdam-devnet-7
+          address: 0x000064d678505ad48f8ccb093bc65613800e8282
+          nonce: 1
+          code: "0x3373fffffffffffffffffffffffffffffffffffffffe1460e1575f54807fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146101c65760015460028111605157506057565b60029003015b601190600182026001905f5b5f821115607e57810190830284830290049160010191906063565b909390049250505036603014609e57366101c657346101c6575f5260205ff35b34106101c657600154600101600155600354806003026004013381556001015f35815560010160203590553360601b5f5260305f60143760445fa0600101600355005b6003546002548082038060101160f5575060105b5f5b81811461012d5782810160030260040181604402815460601b8152601401816001015481526020019060020154905260010160f7565b910180921461013f579060025561014a565b90505f6002555f6003555b36610198575f54600154817fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff146101865760028282011161018e575b50505f6101ba565b01600290036101ba565b7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff5b5f555f6001556044025ff35b5f5ffd"
+
+    targets:
+      - client: geth
+        output_dir: ${STATE_DIR}/geth          # ~554 GB
+      - client: nethermind
+        output_dir: ${STATE_DIR}/nethermind    # ~520 GB
+      - client: ethrex
+        output_dir: ${STATE_DIR}/ethrex        # ~720 GB
+      - client: reth
+        output_dir: ${STATE_DIR}/reth          # ~588 GB
+      - client: besu
+        output_dir: ${STATE_DIR}/besu          # ~534 GB
+      - client: erigon
+        output_dir: ${STATE_DIR}/erigon        # ~517 GB

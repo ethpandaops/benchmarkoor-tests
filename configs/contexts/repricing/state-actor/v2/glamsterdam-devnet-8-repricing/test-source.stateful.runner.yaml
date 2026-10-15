@@ -1,0 +1,22 @@
+runner:
+  benchmark:
+    tests:
+      metadata:
+        labels:
+          name: state-actor-glamsterdam-devnet-8-stateful-repricing
+          block: "0"
+          test-type: stateful
+          context: repricing
+          fork: amsterdam
+          data-disk-type: schelk
+      source:
+        eest_fixtures:
+          # TODO: point at the benchmarkoor-release of the first green
+          # state-actor/v2 stateful repricing build. Until then this subdir has a
+          # .dispatchoor_ignore, so dispatchoor does not schedule it.
+          fixtures_url: https://github.com/ethpandaops/benchmarkoor-tests/releases/download/TODO/eest-payloads-state-actor-v2-amsterdam-stateful-geth.tar.gz
+          fixtures_subdir: benchmarkoor-build-artifacts/eest-payloads/geth/blockchain_tests_stateful_engine
+  container_runtime: podman
+  client:
+    config:
+      rollback_strategy: container-recreate

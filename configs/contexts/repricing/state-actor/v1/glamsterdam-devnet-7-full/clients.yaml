@@ -1,8 +1,8 @@
 runner:
   # Full-suite runs: one bal-full instance per client (no sequential/nobatchio
-  # variants — those comparisons live in v1/glamsterdam-devnet-7). Besu also
+  # variants — those comparisons live in state-actor/v1/glamsterdam-devnet-7). Besu also
   # carries its AOT twin so the full suite covers the JVM-warmup case.
-  # Instance configs match their v1/glamsterdam-devnet-7 counterparts.
+  # Instance configs match their state-actor/v1/glamsterdam-devnet-7 counterparts.
   instances:
     # Geth
     ### NOTE: Geth doesn't have the bal.* flags anymore in ethpandaops/geth:glamsterdam-devnet-7
@@ -22,7 +22,7 @@ runner:
     # 00d2f04 is the current head of the rolling glamsterdam-devnet-7 tag, and
     # digest-identical to it. Pinned per-commit so the AOT twin stays on the
     # exact jars its cache was generated against.
-    # Keep in step with v1/glamsterdam-devnet-7.
+    # Keep in step with state-actor/v1/glamsterdam-devnet-7.
     - id: besu-bal-full
       client: besu
       metadata:

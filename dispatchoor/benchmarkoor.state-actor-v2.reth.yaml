@@ -1,0 +1,49 @@
+# AUTO-GENERATED FILE - DO NOT EDIT MANUALLY
+# Regenerate with: make config (or ./dispatchoor/generate.sh)
+# Source: configs/contexts/repricing/state-actor/v2/<subdir>/
+
+# --- Subdir: state-actor/v2/glamsterdam-devnet-8 ---
+
+- id: benchmarkoor-reth-repricing-state-actor-v2-glamsterdam-devnet-8-compute-reth-bal-full
+  name: "(Reth) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Compute - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    clients: '["reth"]'
+    instance-id: "reth-bal-full"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "compute"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 900, "global": 1260}'
+
+- id: benchmarkoor-reth-repricing-state-actor-v2-glamsterdam-devnet-8-stateful-reth-bal-full
+  name: "(Reth) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Stateful - reth-bal-full"
+  owner: ethpandaops
+  repo: benchmarkoor-tests
+  workflow_id: benchmarkoor-run.yaml
+  ref: master
+  labels:
+    el-client: "reth"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    instance-id: "reth-bal-full"
+  inputs:
+    clients: '["reth"]'
+    instance-id: "reth-bal-full"
+    snapshot: "state-actor/v2"
+    subdir: "state-actor/v2/glamsterdam-devnet-8"
+    test-type: "stateful"
+    context: "repricing"
+    timeouts: '{"build": 360, "run": 2160, "global": 2520}'
