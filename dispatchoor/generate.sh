@@ -13,7 +13,7 @@ CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 #   contexts/repricing/jochemnet/v1/<name>   → snapshot=jochemnet/v1,   subdir=jochemnet/v1/<name>
 #   contexts/repricing/state-actor/v2/<name> → snapshot=state-actor/v2, subdir=state-actor/v2/<name>
 #
-# Fields: <dir>|<snapshot>|<subdir-prefix>|<file-infix>
+# Fields: <dir>|<snapshot>|<subdir-prefix>|<file-infix>|<build-timeout>
 # The file infix keeps the families in separate files — state-actor stays on the
 # historical benchmarkoor.<client>.yaml names, jochemnet gets
 # benchmarkoor.jochemnet.<client>.yaml — because both have a
@@ -22,10 +22,15 @@ CONTEXTS_DIR="${REPO_ROOT}/configs/contexts"
 CONTEXT="repricing"
 VERSION="v1"
 
+#
+# <build-timeout> is the build-phase timeout in minutes for the
+# benchmarkoor-run.yaml state-actor build step. 360 matches the workflow's own
+# default. A state-actor/v2 prestate rebuild takes longer (about 6 hours for
+# erigon), so that family gets 720.
 FAMILIES=(
-  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/${VERSION}|state-actor/${VERSION}|state-actor/${VERSION}|"
-  "${CONTEXTS_DIR}/${CONTEXT}/jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet."
-  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/v2|state-actor/v2|state-actor/v2|state-actor-v2."
+  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/${VERSION}|state-actor/${VERSION}|state-actor/${VERSION}||360"
+  "${CONTEXTS_DIR}/${CONTEXT}/jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet/${VERSION}|jochemnet.|360"
+  "${CONTEXTS_DIR}/${CONTEXT}/state-actor/v2|state-actor/v2|state-actor/v2|state-actor-v2.|720"
 )
 
 CLIENTS=(geth erigon nethermind besu reth ethrex)
@@ -52,10 +57,6 @@ get_run_timeout() {
   fi
 }
 
-# Build-phase timeout (minutes) for the benchmarkoor-run.yaml state-actor build
-# step. Matches the workflow's own default.
-BUILD_TIMEOUT=360
-
 # Print the dispatchable instance ids for a client, in clients.yaml order:
 # `<client>-bal-full` and its AOT twin `<client>-bal-full-aot`, when present.
 # Other variants (bal-sequential, bal-nobatchio, bare client name, …) are ignored.
@@ -74,7 +75,7 @@ get_dispatch_ids() {
 context_display="$(cap "$CONTEXT")"
 
 for family in "${FAMILIES[@]}"; do
-  IFS='|' read -r family_dir SNAPSHOT subdir_prefix file_infix <<<"$family"
+  IFS='|' read -r family_dir SNAPSHOT subdir_prefix file_infix BUILD_TIMEOUT <<<"$family"
 
   [[ -d "$family_dir" ]] || { echo "Skipping missing ${family_dir}"; continue; }
 

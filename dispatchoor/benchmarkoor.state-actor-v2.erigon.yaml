@@ -24,7 +24,7 @@
     subdir: "state-actor/v2/glamsterdam-devnet-8"
     test-type: "compute"
     context: "repricing"
-    timeouts: '{"build": 360, "run": 900, "global": 1260}'
+    timeouts: '{"build": 720, "run": 900, "global": 1620}'
 
 - id: benchmarkoor-erigon-repricing-state-actor-v2-glamsterdam-devnet-8-stateful-erigon-bal-full
   name: "(Erigon) - Repricing - state-actor/v2/glamsterdam-devnet-8 - Stateful - erigon-bal-full"
@@ -46,4 +46,4 @@
     subdir: "state-actor/v2/glamsterdam-devnet-8"
     test-type: "stateful"
     context: "repricing"
-    timeouts: '{"build": 360, "run": 4500, "global": 4860}'
+    timeouts: '{"build": 720, "run": 4500, "global": 5220}'
