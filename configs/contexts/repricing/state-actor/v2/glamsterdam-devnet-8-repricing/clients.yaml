@@ -2,6 +2,9 @@
 # snapshots compare the same client builds. AMSTERDAM_ACTIVATION_TS comes from
 # this context's global.yaml (1 here, the jochemnet activation there).
 # Keep the two files in step.
+#
+# One difference: no instance sets db_compaction here. The state-actor
+# datadirs are new, so they do not need a compaction.
 runner:
   # One bal-full instance per client. The sequential/nobatchio A/B variants are
   # retired — full BAL mode is the mode under analysis. Besu keeps its AOT twin
@@ -19,13 +22,6 @@ runner:
         - --engine.maxreorgdepth=1024
         - --override.amsterdam=${AMSTERDAM_ACTIVATION_TS}
         - --debug.logslowblock=0
-      db_compaction:
-        enabled: true
-        when: [before_benchmarks]
-        inspect: true
-        timeout: 60m
-        persist:
-          enabled: true
       # Set per test type, not here. test-source.compute.runner.yaml defines
       # GETH_ROLLBACK_STRATEGY=rpc-debug-setHead in global.env; the stateful
       # runner file leaves it unset, so the value expands to "" and the
@@ -151,14 +147,6 @@ runner:
         - --exec.no-prune=true
         - --exec.no-background-maintenance
         - --experimental.parallel-commitment
-      db_compaction:
-        enabled: true
-        when: [before_benchmarks]
-        prepare: [seg-retire]
-        inspect: true
-        timeout: 3h
-        persist:
-          enabled: true
       bootstrap_fcu:
         enabled: true
         max_retries: 120
