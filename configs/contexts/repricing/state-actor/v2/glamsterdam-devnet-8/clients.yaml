@@ -38,14 +38,12 @@ runner:
     # exact jars it was generated against, so a rolling tag moving would
     # silently unpair the A/B comparison.
     # Bump both together, and only once a matching AOT cache exists.
-    # TEMPORARY: EVM v2 PR build (ethpandaops/besu:39a09788b00678f15660cf2d33805149dae603d0-39a0978); re-pin to main-<sha> once the PR merges.
     - id: besu-bal-full
       client: besu
       metadata:
         labels:
           bal-mode: full
-          evm: v2
-      image: ethpandaops/besu:39a09788b00678f15660cf2d33805149dae603d0-39a0978
+      image: ethpandaops/besu:main-cf89071
       genesis_fork_override:
         amsterdam: ${AMSTERDAM_ACTIVATION_TS}
       environment:
