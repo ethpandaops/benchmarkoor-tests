@@ -1,7 +1,8 @@
 # Same instances as jochemnet/v1/glamsterdam-devnet-8/clients.yaml, so the two
 # snapshots compare the same client builds. AMSTERDAM_ACTIVATION_TS comes from
 # this context's global.yaml (1 here, the jochemnet activation there).
-# Keep the two files in step.
+# Keep the two files in step. (Exception: jochemnet's besu-bal-full currently
+# runs a temporary Besu EVM v2 PR build; this file stays on the baseline.)
 #
 # One difference: no instance sets db_compaction here. The state-actor
 # datadirs are new, so they do not need a compaction.
