@@ -52,6 +52,8 @@ runner:
         BESU_OPTS: "-Xms8g -Xmx8g -XX:+AlwaysPreTouch"
       extra_args:
         - --Xplugin-rocksdb-high-spec-enabled=true
+        # EVM v2 (the point of this image) — needs an explicit flag
+        - --Xevm-go-fast=true
         # Bal mode flags
         - --Xbal-perfect-parallelization-enabled=true
         - --Xbal-state-root-enabled=true
