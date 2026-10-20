@@ -152,7 +152,7 @@ jobs:
           upload-artifacts: "false"
           run-config-urls: >-
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/global.yaml,
-            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/resource-limits-eip-7870-fullnode.yaml,
+            https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/resource-limits-eip-7870-attester.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/s3-upload.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/datadirs/${{ inputs.snapshot }}/global.yaml,
             https://raw.githubusercontent.com/ethpandaops/benchmarkoor-tests/${{ github.sha }}/configs/datadirs/${{ inputs.snapshot }}/runner.yaml,
