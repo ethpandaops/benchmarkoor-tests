@@ -25,8 +25,11 @@ builder:
       # benchmark: it deploys the receivers and delegations that
       # state-actor/v2 already writes, so every CREATE2 deploy collides and
       # the receipts fail (4 failures in run 38439838358).
+      # The test_account_access cases with overhead_baseline=True measure
+      # only the CREATE2 address derivation, not the account access. Skip
+      # them. EEST renders the param id as `overhead_baseline_True`.
       filter: >-
-        not test_deploy_existing_contracts
+        not test_deploy_existing_contracts and not overhead_baseline_True
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes against pre-deployed
       # state (e.g. bloated_eoa_10GB → 0x87a6…be04).
