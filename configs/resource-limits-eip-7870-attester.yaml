@@ -9,5 +9,5 @@ runner:
         cpu_freq: "3600MHz"
         cpu_turboboost: false
         cpu_freq_governor: performance
-        memory: "55g" # Our machines are limited to 64GB. So let's allocate a bit less.
+        memory: "32g"
         swap_disabled: true
