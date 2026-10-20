@@ -155,6 +155,11 @@ builder:
       #  EXISTING_CONTRACT_DIFF_MAX)) or (test_ether_transfers_onchain_receivers
       #  and (diff_to_contract_same_max or diff_to_contract_diff_max or
       #  diff_to_delegated_contract_diff))
+      # The test_account_access cases with overhead_baseline=True measure
+      # only the CREATE2 address derivation, not the account access. Skip
+      # them. EEST renders the param id as `overhead_baseline_True`.
+      filter: >-
+        not overhead_baseline_True
       extract_opcode_count: true
       # Resolves @pytest.mark.stub_parametrize prefixes (e.g. bloated_eoa_10GB)
       # against pre-deployed state; without it those variants are skipped.
